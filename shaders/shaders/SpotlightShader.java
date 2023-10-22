@@ -8,10 +8,10 @@ import core.Shader;
  * @RegistrationNo 220186627
  * @date Created in 22/10/2023 01:04
  */
-public class BackdropShader extends Shader {
+public class SpotlightShader extends Shader {
 
-    public BackdropShader(GL3 gl) {
-        super(gl, "shaders/glsl/vertex/vs_skybox_1.glsl", "shaders/glsl/fragment/fs_skybox_1.glsl");
+    public SpotlightShader(GL3 gl) {
+        super(gl, "shaders/glsl/vertex/vs_sphere_04.glsl", "shaders/glsl/fragment/fs_sphere_04.glsl");
     }
 
 }

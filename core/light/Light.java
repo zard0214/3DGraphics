@@ -23,7 +23,7 @@ public class Light {
     material.setSpecular(0.8f, 0.8f, 0.8f);
     position = new Vec3(3f,2f,1f);
     model = new Mat4(1);
-    shader = new Shader(gl, "shaders/glsl/vs_light_01.glsl", "shaders/glsl/fs_light_01.glsl");
+    shader = new Shader(gl, "shaders/glsl/vertex/vs_light_01.glsl", "shaders/glsl/fragment/fs_light_01.glsl");
     fillBuffers(gl);
   }
   

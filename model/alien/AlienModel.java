@@ -13,6 +13,7 @@ import model.Mesh;
 import model.Model;
 import model.SGNode;
 import model.Sphere;
+import shaders.shaders.AlienShader;
 import utils.TextureLibrary;
 
 /**
@@ -20,7 +21,7 @@ import utils.TextureLibrary;
  * @RegistrationNo 220186627
  * @date Created in 20/10/2023 18:17
  */
-public class AlienModel {
+public class AlienModel{
 
     private SGNode alienNode;
     private Texture texture;
@@ -32,13 +33,12 @@ public class AlienModel {
     private Mat4 modelMatrix;
 
     public AlienModel(GL3 gl, Camera camera, Light light, Mat4 translate) {
-
         int[] textureId0 = TextureLibrary.loadTexture(gl, "textures/snow.jpg");
         int[] textureId1 = TextureLibrary.loadTexture(gl, "textures/snow_specular.jpg");
 
         /***********  sphere_body  ***************/
         Mesh m = new Mesh(gl, Sphere.vertices.clone(), Sphere.indices.clone());
-        Shader shader = new Shader(gl, "shaders/glsl/vs_sphere_04.glsl", "shaders/glsl/fs_sphere_04.glsl");
+        AlienShader shader = new AlienShader(gl);
         Material material = new Material(new Vec3(1.0f, 0.5f, 0.31f), new Vec3(1.0f, 0.5f, 0.31f), new Vec3(0.5f, 0.5f, 0.5f), 32.0f);
         modelMatrix = Mat4.multiply(Mat4Transform.scale(4,4,4), Mat4Transform.translate(0,0.5f,0));
 

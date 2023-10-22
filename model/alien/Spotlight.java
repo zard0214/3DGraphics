@@ -13,6 +13,7 @@ import model.Mesh;
 import model.Model;
 import model.SGNode;
 import model.Sphere;
+import shaders.shaders.SpotlightShader;
 import utils.TextureLibrary;
 
 /**
@@ -36,7 +37,7 @@ public class Spotlight {
 
         /***********  sphere_body  ***************/
         Mesh m = new Mesh(gl, Sphere.vertices.clone(), Sphere.indices.clone());
-        Shader shader = new Shader(gl, "shaders/glsl/vs_sphere_04.glsl", "shaders/glsl/fs_sphere_04.glsl");
+        SpotlightShader shader = new SpotlightShader(gl);
         Material material = new Material(new Vec3(1.0f, 0.5f, 0.31f), new Vec3(1.0f, 0.5f, 0.31f), new Vec3(0.5f, 0.5f, 0.5f), 32.0f);
         modelMatrix = Mat4.multiply(Mat4Transform.scale(0.5f,12,0.5f), Mat4Transform.translate(0,0.5f,0));
 
@@ -51,24 +52,12 @@ public class Spotlight {
         modelMatrix = Mat4.multiply(translate, modelMatrix);
         sphere_head = new Model(gl, camera, light, shader, material, modelMatrix, m, textureId0, textureId1);
 
-//        modelMatrix = Mat4.multiply(Mat4Transform.scale(1.0f,3,1.0f), Mat4Transform.translate(0,0.5f,0));
-//        modelMatrix = Mat4.multiply(Mat4Transform.translate(0f,12f,0), modelMatrix);
-//
-//        modelMatrix = Mat4.multiply(translate, modelMatrix);
-//        sphere_head = new Model(gl, camera, light, shader, material, modelMatrix, m, textureId0, textureId1);
-
         /***********  sphere_lamp  ***************/
         modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(60), Mat4Transform.scale(0.5f,1,0.5f));
         modelMatrix = Mat4.multiply(Mat4Transform.translate(1.7f,11.5f,0), modelMatrix);
 
         modelMatrix = Mat4.multiply(translate, modelMatrix);
         sphere_lamp = new Model(gl, camera, light, shader, material, modelMatrix, m, textureId0, textureId1);
-
-//        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.5f,1,0.5f), Mat4Transform.translate(0,0.5f,0));
-//        modelMatrix = Mat4.multiply(Mat4Transform.translate(0f,15f,0), modelMatrix);
-//
-//        modelMatrix = Mat4.multiply(translate, modelMatrix);
-//        sphere_lamp = new Model(gl, camera, light, shader, material, modelMatrix, m, textureId0, textureId1);
 
     }
 

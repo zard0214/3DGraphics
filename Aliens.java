@@ -120,11 +120,11 @@ public class Aliens extends JFrame implements ActionListener {
         switch (e.getActionCommand()){
             case "Rock Left Body":
                 System.out.println("Rock Left Body");
-                Context.leftAlien.rockBody();
+//                Context.leftAlien.rockBody();
                 break;
             case "Rock Right Body":
                 System.out.println("Rock Right Body");
-                Context.rightAlien.rockBody();
+//                Context.rightAlien.rockBody();
                 break;
             case "Turn Spotlight On":
                 System.out.println("Turn Spotlight On");

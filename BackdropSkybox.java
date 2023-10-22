@@ -3,6 +3,7 @@ import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL3;
 import core.camera.Camera;
 import gmaths.Mat4;
+import model.Model;
 import shaders.shaders.BackdropShader;
 import utils.TextureLibrary;
 
@@ -124,6 +125,45 @@ public class BackdropSkybox {
         return cubemap_id;
     }
 
+    public void render(GL3 gl, int cubemap_id, int snowing_texture_id, Camera camera, double startTime) {
+
+        gl.glGenVertexArrays(1, vertexArrayId, 0);
+        gl.glGenBuffers(1, vertexBufferId, 0);
+        gl.glBindVertexArray(vertexArrayId[0]);
+        gl.glBindBuffer(GL.GL_ARRAY_BUFFER, vertexBufferId[0]);
+        FloatBuffer fb = Buffers.newDirectFloatBuffer(skyboxVertices);
+        gl.glBufferData(GL.GL_ARRAY_BUFFER, Float.BYTES * skyboxVertices.length, fb, GL.GL_STATIC_DRAW);
+        gl.glEnableVertexAttribArray(0);
+        gl.glVertexAttribPointer(0, 3, GL.GL_FLOAT, false, 3 * Float.BYTES, 0);
+
+        gl.glDepthMask(false);
+        skyboxshader = new BackdropShader(gl);
+
+        Mat4 view = Mat4.noTranslation(camera.getViewMatrix());
+        Mat4 projection = camera.getPerspectiveMatrix();
+        skyboxshader.use(gl);
+        skyboxshader.setFloatArray(gl, "view", view.toFloatArrayForGLSL());
+        skyboxshader.setFloatArray(gl, "projection", projection.toFloatArrayForGLSL());
+
+        gl.glActiveTexture(GL.GL_TEXTURE0);
+        gl.glBindTexture(GL.GL_TEXTURE_CUBE_MAP, cubemap_id);
+
+//        gl.glActiveTexture(GL.GL_TEXTURE0);
+//        gl.glBindTexture(GL.GL_TEXTURE_CUBE_MAP, snowing_texture_id);
+
+//        skyboxshader.setInt(gl, "first_texture", 0);  // be careful to match these with GL_TEXTURE0 and GL_TEXTURE1
+//        gl.glActiveTexture(GL.GL_TEXTURE0);
+//        gl.glBindTexture(GL.GL_TEXTURE_CUBE_MAP, cubemap_id);
+//
+//        skyboxshader.setInt(gl, "second_texture", 1);  // be careful to match these with GL_TEXTURE0 and GL_TEXTURE1
+//        gl.glActiveTexture(GL.GL_TEXTURE1);
+//        gl.glBindTexture(GL.GL_TEXTURE_2D, snowing_texture_id);
+
+        gl.glDrawArrays(GL.GL_TRIANGLES, 0, 6 * 6);
+        gl.glDepthMask(true);
+
+    }
+
     public void render(GL3 gl, int cubemap_id, Camera camera, double startTime) {
 
         gl.glGenVertexArrays(1, vertexArrayId, 0);
@@ -135,7 +175,6 @@ public class BackdropSkybox {
         gl.glEnableVertexAttribArray(0);
         gl.glVertexAttribPointer(0, 3, GL.GL_FLOAT, false, 3 * Float.BYTES, 0);
 
-
         gl.glDepthMask(false);
         skyboxshader = new BackdropShader(gl);
         Mat4 view = Mat4.noTranslation(camera.getViewMatrix());
@@ -144,11 +183,9 @@ public class BackdropSkybox {
         skyboxshader.setFloatArray(gl, "view", view.toFloatArrayForGLSL());
         skyboxshader.setFloatArray(gl, "projection", projection.toFloatArrayForGLSL());
 
-        gl.glBindVertexArray(vertexArrayId[0]);
-        skyboxshader.setInt(gl, "skybox", 0);
-
         gl.glActiveTexture(GL.GL_TEXTURE0);
         gl.glBindTexture(GL.GL_TEXTURE_CUBE_MAP, cubemap_id);
+
         gl.glDrawArrays(GL.GL_TRIANGLES, 0, 36);
         gl.glDepthMask(true);
     }
