@@ -43,19 +43,32 @@ public class Spotlight {
         modelMatrix = Mat4.multiply(translate, modelMatrix);
         sphere_body = new Model(gl, camera, light, shader, material, modelMatrix, m, textureId0, textureId1);
 
-        /***********  sphere_lamp  ***************/
-        modelMatrix = Mat4.multiply(Mat4Transform.scale(1.0f,3,1.0f), Mat4Transform.translate(0,0.5f,0));
+        /***********  sphere_head  ***************/
+        modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(60), Mat4Transform.scale(1.0f,3,1.0f));
+        modelMatrix = Mat4.multiply(Mat4Transform.translate(0,0.5f,0), modelMatrix);
         modelMatrix = Mat4.multiply(Mat4Transform.translate(0f,12f,0), modelMatrix);
 
         modelMatrix = Mat4.multiply(translate, modelMatrix);
         sphere_head = new Model(gl, camera, light, shader, material, modelMatrix, m, textureId0, textureId1);
 
+//        modelMatrix = Mat4.multiply(Mat4Transform.scale(1.0f,3,1.0f), Mat4Transform.translate(0,0.5f,0));
+//        modelMatrix = Mat4.multiply(Mat4Transform.translate(0f,12f,0), modelMatrix);
+//
+//        modelMatrix = Mat4.multiply(translate, modelMatrix);
+//        sphere_head = new Model(gl, camera, light, shader, material, modelMatrix, m, textureId0, textureId1);
+
         /***********  sphere_lamp  ***************/
-        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.5f,1,0.5f), Mat4Transform.translate(0,0.5f,0));
-        modelMatrix = Mat4.multiply(Mat4Transform.translate(0f,15f,0), modelMatrix);
+        modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(60), Mat4Transform.scale(0.5f,1,0.5f));
+        modelMatrix = Mat4.multiply(Mat4Transform.translate(1.7f,11.5f,0), modelMatrix);
 
         modelMatrix = Mat4.multiply(translate, modelMatrix);
         sphere_lamp = new Model(gl, camera, light, shader, material, modelMatrix, m, textureId0, textureId1);
+
+//        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.5f,1,0.5f), Mat4Transform.translate(0,0.5f,0));
+//        modelMatrix = Mat4.multiply(Mat4Transform.translate(0f,15f,0), modelMatrix);
+//
+//        modelMatrix = Mat4.multiply(translate, modelMatrix);
+//        sphere_lamp = new Model(gl, camera, light, shader, material, modelMatrix, m, textureId0, textureId1);
 
     }
 
