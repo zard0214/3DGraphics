@@ -1,5 +1,4 @@
 import core.Material;
-import core.Shader;
 import core.camera.Camera;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL3;
@@ -14,6 +13,7 @@ import model.alien.AlienModel;
 import model.alien.FloorModel;
 import model.alien.Spotlight;
 import shaders.shaders.FloorShader;
+import shaders.shaders.BackgroundShader;
 import utils.TextureLibrary;
 import utils.TimeUtils;
 import utils.TwoTriangles;
@@ -69,17 +69,18 @@ public class Aliens_GLEventListener implements GLEventListener {
                 cubemap_directory + "posz.jpg", cubemap_directory + "negx.jpg",
                 cubemap_directory + "posy.jpg", cubemap_directory + "negz.jpg");
 
-        snowing_texture_id = TextureLibrary.loadTexture(gl, cubemap_directory + "posz.jpg")[0];
-        snowing_texture_id2 = TextureLibrary.loadTexture(gl, cubemap_directory + "posz.jpg");
-        int[] textureId0 = TextureLibrary.loadTexture(gl, cubemap_directory + "chequerboard.jpg");
+        snowing_texture_id = TextureLibrary.loadTexture(gl, cubemap_directory + "snowing.jpg")[0];
+        snowing_texture_id2 = TextureLibrary.loadTexture(gl, cubemap_directory + "snowing.jpg");
+        int[] textureId0 = TextureLibrary.loadTexture(gl, cubemap_directory + "snow2.jpg");
 //        int[] textureId0 = TextureLibrary.loadTexturePNG(gl, cubemap_directory + "snow_heavy.png");
 //        Texture textureId0 = TextureLibrary.loadPNGTexture(gl, cubemap_directory + "snow_heavy.png");
 
         Mesh mesh = new Mesh(gl, TwoTriangles.vertices.clone(), TwoTriangles.indices.clone());
-        FloorShader shader = new FloorShader(gl);
+//        FloorShader shader = new FloorShader(gl);
+        BackgroundShader shader = new BackgroundShader(gl);
         Material material = new Material(new Vec3(1.0f, 1.0f, 1.0f), new Vec3(1.0f, 1.0f, 1.0f), new Vec3(1.0f, 1.0f, 1.0f), 1.0f);
         Mat4 modelMatrix = Mat4Transform.scale(16,1f,16);
-//        floor = new Model(gl, camera, light, shader, material, modelMatrix, mesh, textureId0);
+//        floor = new FloorModel(gl, camera, light, shader, material, modelMatrix, mesh, textureId0);
         floor = new FloorModel(gl, camera, light, shader, material, modelMatrix, mesh, textureId0, snowing_texture_id2, startTime);
 
 
