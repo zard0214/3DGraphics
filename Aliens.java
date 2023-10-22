@@ -128,11 +128,11 @@ public class Aliens extends JFrame implements ActionListener {
                 break;
             case "Turn Spotlight On":
                 System.out.println("Turn Spotlight On");
-                Context.spotlight.turnOn();
+//                Context.spotlight.turnOn();
                 break;
             case "Turn Spotlight Off":
                 System.out.println("Turn Spotlight Off");
-                Context.spotlight.turnOff();
+//                Context.spotlight.turnOff();
                 break;
             case "Turn General Light On":
                 System.out.println("Turn General Light On");

@@ -11,6 +11,7 @@ import gmaths.Vec3;
 import model.*;
 import core.light.Light;
 import model.alien.AlienModel;
+import model.alien.Spotlight;
 import utils.TextureLibrary;
 import utils.TimeUtils;
 import utils.TwoTriangles;
@@ -25,8 +26,9 @@ public class Aliens_GLEventListener implements GLEventListener {
     private static final boolean DISPLAY_SHADERS = false;
     private BackdropSkybox skybox;
     private int cubemap_id;
-    private Model sphere1, sphere2, floor;
+    private Model floor;
     private AlienModel alien1, alien2;
+    private Spotlight spotlight;
     private Light light;
     private Camera camera;
     private double startTime;
@@ -73,11 +75,14 @@ public class Aliens_GLEventListener implements GLEventListener {
         floor = new Model(gl, camera, light, shader, material, modelMatrix, mesh, textureId0);
 
 
-        modelMatrix = Mat4Transform.translate(-4,0,0);
+        modelMatrix = Mat4Transform.translate(0,0,0);
         alien1 = new AlienModel(gl, camera, light, modelMatrix);
 
-        modelMatrix = Mat4Transform.translate(4,0,0);
+        modelMatrix = Mat4Transform.translate(8,0,0);
         alien2 = new AlienModel(gl, camera, light, modelMatrix);
+
+        modelMatrix = Mat4Transform.translate(-12,0,0);
+        spotlight = new Spotlight(gl, camera, light, modelMatrix);
 
     }
 
@@ -85,6 +90,11 @@ public class Aliens_GLEventListener implements GLEventListener {
     public void dispose(GLAutoDrawable drawable) {
         GL3 gl = drawable.getGL().getGL3();
 
+        floor.dispose(gl);
+        alien1.dispose(gl);
+        alien2.dispose(gl);
+
+        spotlight.dispose(gl);
     }
 
     @Override
@@ -103,6 +113,8 @@ public class Aliens_GLEventListener implements GLEventListener {
 
         alien1.render(gl);
         alien2.render(gl);
+
+        spotlight.render(gl);
     }
 
     @Override

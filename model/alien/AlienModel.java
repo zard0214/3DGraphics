@@ -81,15 +81,17 @@ public class AlienModel {
         sphere_righteye = new Model(gl, camera, light, shader, material, modelMatrix, m, textureId0, textureId1);
 
         /***********  sphere_leftarm  ***************/
-        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.5f,1.5f,0.5f), Mat4Transform.translate(0,0.5f,0));
-        modelMatrix = Mat4.multiply(Mat4Transform.translate(-2f,2.2f,0.5f), modelMatrix);
+        modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(45), Mat4Transform.scale(0.5f,1.5f,0.5f));
+        modelMatrix = Mat4.multiply(Mat4Transform.translate(0,0.5f,0), modelMatrix);
+        modelMatrix = Mat4.multiply(Mat4Transform.translate(-2.5f,2.2f,0.5f), modelMatrix);
 
         modelMatrix = Mat4.multiply(translate, modelMatrix);
         sphere_leftarm = new Model(gl, camera, light, shader, material, modelMatrix, m, textureId0, textureId1);
 
-        /***********  sphere_righteye  ***************/
-        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.5f,1.5f,0.5f), Mat4Transform.translate(0,0.5f,0));
-        modelMatrix = Mat4.multiply(Mat4Transform.translate(2f,2.2f,0.5f), modelMatrix);
+        /***********  sphere_rightarm  ***************/
+        modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(-45), Mat4Transform.scale(0.5f,1.5f,0.5f));
+        modelMatrix = Mat4.multiply(Mat4Transform.translate(0,0.5f,0), modelMatrix);
+        modelMatrix = Mat4.multiply(Mat4Transform.translate(2.5f,2.2f,0.5f), modelMatrix);
 
         modelMatrix = Mat4.multiply(translate, modelMatrix);
         sphere_rightarm = new Model(gl, camera, light, shader, material, modelMatrix, m, textureId0, textureId1);
@@ -101,7 +103,7 @@ public class AlienModel {
         modelMatrix = Mat4.multiply(translate, modelMatrix);
         sphere_leftear = new Model(gl, camera, light, shader, material, modelMatrix, m, textureId0, textureId1);
 
-        /***********  sphere_righteye  ***************/
+        /***********  sphere_rightear  ***************/
         modelMatrix = Mat4.multiply(Mat4Transform.scale(0.5f,1.5f,0.5f), Mat4Transform.translate(0,0.5f,0));
         modelMatrix = Mat4.multiply(Mat4Transform.translate(1.5f,5.5f,0.5f), modelMatrix);
 
@@ -131,5 +133,22 @@ public class AlienModel {
 
         sphere_antenna_bottom.render(gl);
         sphere_antenna_top.render(gl);
+    }
+
+    public void dispose(GL3 gl) {
+        sphere_body.dispose(gl);
+        sphere_head.dispose(gl);
+
+        sphere_lefteye.dispose(gl);
+        sphere_righteye.dispose(gl);
+
+        sphere_leftarm.dispose(gl);
+        sphere_rightarm.dispose(gl);
+
+        sphere_leftear.dispose(gl);
+        sphere_rightear.dispose(gl);
+
+        sphere_antenna_bottom.dispose(gl);
+        sphere_antenna_top.dispose(gl);
     }
 }
