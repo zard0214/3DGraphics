@@ -1,15 +1,19 @@
+import core.Material;
+import core.Shader;
 import core.camera.Camera;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL3;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
+import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;
 import model.*;
 import core.light.Light;
 import model.alien.AlienModel;
-import model.alien.Spotlight;
+import utils.TextureLibrary;
 import utils.TimeUtils;
+import utils.TwoTriangles;
 
 /**
  * @author Zhecheng Zhao
@@ -19,11 +23,10 @@ import utils.TimeUtils;
 public class Aliens_GLEventListener implements GLEventListener {
 
     private static final boolean DISPLAY_SHADERS = false;
-    //should be change
-    private Model tt1;
     private BackdropSkybox skybox;
-
     private int cubemap_id;
+    private Model sphere1, sphere2, floor;
+    private AlienModel alien1, alien2;
     private Light light;
     private Camera camera;
     private double startTime;
@@ -60,6 +63,22 @@ public class Aliens_GLEventListener implements GLEventListener {
         cubemap_id = skybox.loadCubemap(cubemap_directory + "posx.jpg", cubemap_directory + "negy.jpg",
                 cubemap_directory + "posz.jpg", cubemap_directory + "negx.jpg",
                 cubemap_directory + "posy.jpg", cubemap_directory + "negz.jpg");
+
+        int[] textureId0 = TextureLibrary.loadTexture(gl, "textures/snow.jpg");
+
+        Mesh mesh = new Mesh(gl, TwoTriangles.vertices.clone(), TwoTriangles.indices.clone());
+        Shader shader = new Shader(gl, "vs_tt_05.txt", "fs_tt_05.txt");
+        Material material = new Material(new Vec3(1.0f, 1.0f, 1.0f), new Vec3(1.0f, 1.0f, 1.0f), new Vec3(1.0f, 1.0f, 1.0f), 32.0f);
+        Mat4 modelMatrix = Mat4Transform.scale(16,1f,16);
+        floor = new Model(gl, camera, light, shader, material, modelMatrix, mesh, textureId0);
+
+
+        modelMatrix = Mat4Transform.translate(0,0,0);
+        alien1 = new AlienModel(gl, camera, light, modelMatrix);
+
+//        modelMatrix = Mat4Transform.translate(1,0,0);
+//        alien2 = new AlienModel(gl, camera, light, modelMatrix);
+
     }
 
     @Override
@@ -80,9 +99,11 @@ public class Aliens_GLEventListener implements GLEventListener {
 
         skybox.render(gl, cubemap_id, camera, startTime);
 
-        Context.spotlight = new Spotlight(gl, camera, startTime);
-        Context.leftAlien = new AlienModel(gl, camera, startTime, 0);
-        Context.rightAlien = new AlienModel(gl, camera, startTime, 1);
+        floor.render(gl);
+
+        alien1.render(gl);
+//        alien2.render(gl);
+
     }
 
     @Override

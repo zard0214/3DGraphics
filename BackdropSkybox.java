@@ -26,6 +26,8 @@ public class BackdropSkybox {
     public int[] vertexArrayId = new int[1];
     private GL3 gl;
 
+    private BackdropShader skyboxshader;
+
     private final float SIZE = 1f;
 
     private float[] skyboxVertices = new float[]{
@@ -133,11 +135,11 @@ public class BackdropSkybox {
         gl.glEnableVertexAttribArray(0);
         gl.glVertexAttribPointer(0, 3, GL.GL_FLOAT, false, 3 * Float.BYTES, 0);
 
+
         gl.glDepthMask(false);
-        BackdropShader skyboxshader = new BackdropShader(gl);
+        skyboxshader = new BackdropShader(gl);
         Mat4 view = Mat4.noTranslation(camera.getViewMatrix());
         Mat4 projection = camera.getPerspectiveMatrix();
-
         skyboxshader.use(gl);
         skyboxshader.setFloatArray(gl, "view", view.toFloatArrayForGLSL());
         skyboxshader.setFloatArray(gl, "projection", projection.toFloatArrayForGLSL());
