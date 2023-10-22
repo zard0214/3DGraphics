@@ -13,6 +13,7 @@ import core.light.Light;
 import model.alien.AlienModel;
 import model.alien.FloorModel;
 import model.alien.Spotlight;
+import shaders.shaders.FloorShader;
 import utils.TextureLibrary;
 import utils.TimeUtils;
 import utils.TwoTriangles;
@@ -75,7 +76,7 @@ public class Aliens_GLEventListener implements GLEventListener {
 //        Texture textureId0 = TextureLibrary.loadPNGTexture(gl, cubemap_directory + "snow_heavy.png");
 
         Mesh mesh = new Mesh(gl, TwoTriangles.vertices.clone(), TwoTriangles.indices.clone());
-        Shader shader = new Shader(gl, "shaders/glsl/vertex/vs_tt_05.glsl", "shaders/glsl/fragment/fs_tt_05.glsl");
+        FloorShader shader = new FloorShader(gl);
         Material material = new Material(new Vec3(1.0f, 1.0f, 1.0f), new Vec3(1.0f, 1.0f, 1.0f), new Vec3(1.0f, 1.0f, 1.0f), 1.0f);
         Mat4 modelMatrix = Mat4Transform.scale(16,1f,16);
 //        floor = new Model(gl, camera, light, shader, material, modelMatrix, mesh, textureId0);

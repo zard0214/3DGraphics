@@ -3,8 +3,7 @@ import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL3;
 import core.camera.Camera;
 import gmaths.Mat4;
-import model.Model;
-import shaders.shaders.BackdropShader;
+import shaders.shaders.SkyboxShader;
 import utils.TextureLibrary;
 
 import java.nio.ByteBuffer;
@@ -27,7 +26,7 @@ public class BackdropSkybox {
     public int[] vertexArrayId = new int[1];
     private GL3 gl;
 
-    private BackdropShader skyboxshader;
+    private SkyboxShader skyboxshader;
 
     private final float SIZE = 1f;
 
@@ -137,7 +136,7 @@ public class BackdropSkybox {
         gl.glVertexAttribPointer(0, 3, GL.GL_FLOAT, false, 3 * Float.BYTES, 0);
 
         gl.glDepthMask(false);
-        skyboxshader = new BackdropShader(gl);
+        skyboxshader = new SkyboxShader(gl);
 
         Mat4 view = Mat4.noTranslation(camera.getViewMatrix());
         Mat4 projection = camera.getPerspectiveMatrix();
@@ -176,7 +175,7 @@ public class BackdropSkybox {
         gl.glVertexAttribPointer(0, 3, GL.GL_FLOAT, false, 3 * Float.BYTES, 0);
 
         gl.glDepthMask(false);
-        skyboxshader = new BackdropShader(gl);
+        skyboxshader = new SkyboxShader(gl);
         Mat4 view = Mat4.noTranslation(camera.getViewMatrix());
         Mat4 projection = camera.getPerspectiveMatrix();
         skyboxshader.use(gl);
