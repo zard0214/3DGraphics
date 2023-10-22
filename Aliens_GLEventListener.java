@@ -67,17 +67,17 @@ public class Aliens_GLEventListener implements GLEventListener {
         int[] textureId0 = TextureLibrary.loadTexture(gl, "textures/snow.jpg");
 
         Mesh mesh = new Mesh(gl, TwoTriangles.vertices.clone(), TwoTriangles.indices.clone());
-        Shader shader = new Shader(gl, "vs_tt_05.txt", "fs_tt_05.txt");
+        Shader shader = new Shader(gl, "shaders/glsl/vs_tt_05.glsl", "shaders/glsl/fs_tt_05.glsl");
         Material material = new Material(new Vec3(1.0f, 1.0f, 1.0f), new Vec3(1.0f, 1.0f, 1.0f), new Vec3(1.0f, 1.0f, 1.0f), 32.0f);
         Mat4 modelMatrix = Mat4Transform.scale(16,1f,16);
         floor = new Model(gl, camera, light, shader, material, modelMatrix, mesh, textureId0);
 
 
-        modelMatrix = Mat4Transform.translate(0,0,0);
+        modelMatrix = Mat4Transform.translate(-4,0,0);
         alien1 = new AlienModel(gl, camera, light, modelMatrix);
 
-//        modelMatrix = Mat4Transform.translate(1,0,0);
-//        alien2 = new AlienModel(gl, camera, light, modelMatrix);
+        modelMatrix = Mat4Transform.translate(4,0,0);
+        alien2 = new AlienModel(gl, camera, light, modelMatrix);
 
     }
 
@@ -102,8 +102,7 @@ public class Aliens_GLEventListener implements GLEventListener {
         floor.render(gl);
 
         alien1.render(gl);
-//        alien2.render(gl);
-
+        alien2.render(gl);
     }
 
     @Override
