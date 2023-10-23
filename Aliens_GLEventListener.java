@@ -56,8 +56,8 @@ public class Aliens_GLEventListener implements GLEventListener {
         gl.glEnable(GL.GL_CULL_FACE); // default is 'not enabled'
         gl.glCullFace(GL.GL_BACK);   // default is 'back', assuming CCW
 
+        this.startTime = TimeUtils.getCurrentTime();
         initialise(gl);
-        startTime = TimeUtils.getCurrentTime();
     }
 
     private void initialise(GL3 gl) {
@@ -69,11 +69,10 @@ public class Aliens_GLEventListener implements GLEventListener {
                 cubemap_directory + "posz.jpg", cubemap_directory + "negx.jpg",
                 cubemap_directory + "posy.jpg", cubemap_directory + "negz.jpg");
 
+
         snowing_texture_id = TextureLibrary.loadTexture(gl, cubemap_directory + "snowing.jpg")[0];
         snowing_texture_id2 = TextureLibrary.loadTexture(gl, cubemap_directory + "snowing.jpg");
         int[] textureId0 = TextureLibrary.loadTexture(gl, cubemap_directory + "snow2.jpg");
-//        int[] textureId0 = TextureLibrary.loadTexturePNG(gl, cubemap_directory + "snow_heavy.png");
-//        Texture textureId0 = TextureLibrary.loadPNGTexture(gl, cubemap_directory + "snow_heavy.png");
 
         Mesh mesh = new Mesh(gl, TwoTriangles.vertices.clone(), TwoTriangles.indices.clone());
 //        FloorShader shader = new FloorShader(gl);
@@ -118,9 +117,10 @@ public class Aliens_GLEventListener implements GLEventListener {
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 
         skybox.render(gl, cubemap_id, camera, startTime);
-//        skybox.render(gl, cubemap_id, snowing_texture_id, camera, startTime);
 
         floor.render(gl);
+        floor.render(gl, getMforTT2());
+
         alien1.render(gl);
         alien2.render(gl);
 
@@ -133,6 +133,16 @@ public class Aliens_GLEventListener implements GLEventListener {
         gl.glViewport(x, y, width, height);
         float aspect = (float)width / (float)height;
         camera.setPerspectiveMatrix(Mat4Transform.perspective(45, aspect));
+    }
+
+    // As the transforms do not change over time for this object, they could be stored once rather than continually being calculated
+    private Mat4 getMforTT2() {
+        float size = 16f;
+        Mat4 modelMatrix = new Mat4(1);
+        modelMatrix = Mat4.multiply(Mat4Transform.scale(size,1f,size), modelMatrix);
+        modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundX(90), modelMatrix);
+        modelMatrix = Mat4.multiply(Mat4Transform.translate(0,size*0.5f,-size*0.5f), modelMatrix);
+        return modelMatrix;
     }
 
 }

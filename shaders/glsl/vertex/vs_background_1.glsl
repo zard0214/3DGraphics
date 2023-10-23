@@ -16,7 +16,10 @@ uniform vec2 offset;
 void main() {
   gl_Position = mvpMatrix * vec4(position, 0.5);
   aPos = vec3(model*vec4(position, 1.0f));
-  aNormal = mat3(transpose(inverse(model))) * normal;  
+  mat4 normalMatrix = transpose(inverse(model));
+  vec3 norm = normalize(normal);
+  aNormal = mat3(normalMatrix) * norm;
+
   aTexCoord = texCoord;
   movingTexCoord = texCoord + offset;
 }
