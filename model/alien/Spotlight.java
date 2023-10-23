@@ -26,9 +26,10 @@ public class Spotlight {
 
     private SGNode alienNode;
     private Texture texture;
+
     //left: 0, right: 1
     private Model sphere_body, sphere_head, sphere_lamp;
-
+    private Light sphere_light;
     private Mat4 modelMatrix;
 
     public Spotlight(GL3 gl, Camera camera, Light light, Mat4 translate) {
@@ -57,9 +58,14 @@ public class Spotlight {
         modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(60), Mat4Transform.scale(0.5f,1,0.5f));
         modelMatrix = Mat4.multiply(Mat4Transform.translate(1.7f,11.5f,0), modelMatrix);
 
+        material = new Material(new Vec3(0.5f, 0.5f, 0.5f), new Vec3(0.8f, 0.8f, 0.8f), new Vec3(0.8f, 0.8f, 0.8f), 32.0f);
         modelMatrix = Mat4.multiply(translate, modelMatrix);
-        sphere_lamp = new Model(gl, camera, light, shader, material, modelMatrix, m, textureId0, textureId1);
+        Shader shader1 = new Shader(gl, Constant.LIGHT_GLSL_VS, Constant.LIGHT_GLSL_FS);
+        sphere_lamp = new Model(gl, camera, light, shader1, material, modelMatrix, m, textureId0, textureId1);
 
+//        sphere_light = new Light(gl, modelMatrix);
+//        sphere_light.setModelMatrix(modelMatrix);
+//        sphere_light.setCamera(camera);
     }
 
 
@@ -68,6 +74,10 @@ public class Spotlight {
     }
 
     public void render(GL3 gl) {
+
+//        sphere_light.setPosition(getLightPosition());  // changing light position each frame
+//        sphere_light.render(gl);
+
         sphere_body.render(gl);
         sphere_head.render(gl);
         sphere_lamp.render(gl);
@@ -80,4 +90,22 @@ public class Spotlight {
         sphere_lamp.dispose(gl);
 
     }
+
+//
+//    // The light's postion is continually being changed, so needs to be calculated for each frame.
+//    private Vec3 getLightPosition() {
+//        double elapsedTime = getSeconds()-startTime;
+//        float x = 3.0f*(float)(Math.sin(Math.toRadians(elapsedTime*50)));
+//        float y = 2.4f;
+//        float z = 3.0f*(float)(Math.cos(Math.toRadians(elapsedTime*50)));
+//        return new Vec3(x,y,z);
+//    }
+//
+//
+//    private double startTime;
+//
+//    private double getSeconds() {
+//        return System.currentTimeMillis()/1000.0;
+//    }
+
 }

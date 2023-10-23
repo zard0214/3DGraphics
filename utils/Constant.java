@@ -23,6 +23,8 @@ public class Constant {
     public static final String ALIEN_GLSL_FS = "shaders/glsl/fragment/fs_sphere_04.glsl";
     public static final String BG_GLSL_VS = "shaders/glsl/vertex/vs_background_1.glsl";
     public static final String BG_GLSL_FS = "shaders/glsl/fragment/fs_background_1.glsl";
+    public static final String LIGHT_GLSL_VS = "shaders/glsl/vertex/vs_light_01.glsl";
+    public static final String LIGHT_GLSL_FS = "shaders/glsl/fragment/fs_light_01.glsl";
     public static final String FLOOR_TEXTURE_1 = "textures/snow.jpg";
     public static final String FLOOR_TEXTURE_2 = "textures/snow_specular.jpg";
     public static final String SPOTLIGHT_TEXTURE_1 = "textures/snow.jpg";

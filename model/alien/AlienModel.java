@@ -98,14 +98,14 @@ public class AlienModel{
         sphere_rightarm = new Model(gl, camera, light, shader, material, modelMatrix, m, textureId0, textureId1);
 
         /***********  sphere_leftear  ***************/
-        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.5f,1.5f,0.5f), Mat4Transform.translate(0,0.5f,0));
+        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.45f,1.5f,0.65f), Mat4Transform.translate(0,0.5f,0));
         modelMatrix = Mat4.multiply(Mat4Transform.translate(-1.5f,5.5f,0.5f), modelMatrix);
 
         modelMatrix = Mat4.multiply(translate, modelMatrix);
         sphere_leftear = new Model(gl, camera, light, shader, material, modelMatrix, m, textureId0, textureId1);
 
         /***********  sphere_rightear  ***************/
-        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.5f,1.5f,0.5f), Mat4Transform.translate(0,0.5f,0));
+        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.45f,1.5f,0.65f), Mat4Transform.translate(0,0.5f,0));
         modelMatrix = Mat4.multiply(Mat4Transform.translate(1.5f,5.5f,0.5f), modelMatrix);
 
         modelMatrix = Mat4.multiply(translate, modelMatrix);
