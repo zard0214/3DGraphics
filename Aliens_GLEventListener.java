@@ -14,6 +14,7 @@ import model.alien.FloorModel;
 import model.alien.Spotlight;
 import shaders.shaders.FloorShader;
 import shaders.shaders.BackgroundShader;
+import utils.Constant;
 import utils.TextureLibrary;
 import utils.TimeUtils;
 import utils.TwoTriangles;
@@ -29,14 +30,12 @@ public class Aliens_GLEventListener implements GLEventListener {
     private BackdropSkybox skybox;
     private int cubemap_id, snowing_texture_id;
     private int[] snowing_texture_id2;
-    private FloorModel floor;
+    private FloorModel floor, floor2;
     private AlienModel alien1, alien2;
     private Spotlight spotlight;
     private Light light;
     private Camera camera;
     private double startTime;
-
-    private final String cubemap_directory = "textures/";
 
     /* The constructor is not used to initialise anything */
     public Aliens_GLEventListener(Camera camera) {
@@ -65,23 +64,24 @@ public class Aliens_GLEventListener implements GLEventListener {
         light.setCamera(camera);
 
         skybox = new BackdropSkybox(gl);
-        cubemap_id = skybox.loadCubemap(cubemap_directory + "posx.jpg", cubemap_directory + "negy.jpg",
-                cubemap_directory + "posz.jpg", cubemap_directory + "negx.jpg",
-                cubemap_directory + "posy.jpg", cubemap_directory + "negz.jpg");
+        cubemap_id = skybox.loadCubemap(Constant.SKYBOX_TEXTURE_PX, Constant.SKYBOX_TEXTURE_NY,
+                Constant.SKYBOX_TEXTURE_PZ, Constant.SKYBOX_TEXTURE_NX,
+                Constant.SKYBOX_TEXTURE_PY, Constant.SKYBOX_TEXTURE_NZ);
 
 
-        snowing_texture_id = TextureLibrary.loadTexture(gl, cubemap_directory + "snowing.jpg")[0];
-        snowing_texture_id2 = TextureLibrary.loadTexture(gl, cubemap_directory + "snowing.jpg");
-        int[] textureId0 = TextureLibrary.loadTexture(gl, cubemap_directory + "snow2.jpg");
+        snowing_texture_id = TextureLibrary.loadTexture(gl, Constant.TEXTURE_SNOWING)[0];
+        snowing_texture_id2 = TextureLibrary.loadTexture(gl, Constant.TEXTURE_SNOWING);
+        int[] textureId0 = TextureLibrary.loadTexture(gl, Constant.TEXTURE_SNOW2);
+        int[] textureId1 = TextureLibrary.loadTexture(gl, Constant.TEXTURE_SNOW);
 
         Mesh mesh = new Mesh(gl, TwoTriangles.vertices.clone(), TwoTriangles.indices.clone());
-//        FloorShader shader = new FloorShader(gl);
+
         BackgroundShader shader = new BackgroundShader(gl);
         Material material = new Material(new Vec3(1.0f, 1.0f, 1.0f), new Vec3(1.0f, 1.0f, 1.0f), new Vec3(1.0f, 1.0f, 1.0f), 1.0f);
         Mat4 modelMatrix = Mat4Transform.scale(16,1f,16);
-//        floor = new FloorModel(gl, camera, light, shader, material, modelMatrix, mesh, textureId0);
-        floor = new FloorModel(gl, camera, light, shader, material, modelMatrix, mesh, textureId0, snowing_texture_id2, startTime);
 
+        floor = new FloorModel(gl, camera, light, shader, material, modelMatrix, mesh, textureId1);
+        floor2 = new FloorModel(gl, camera, light, shader, material, modelMatrix, mesh, textureId0, snowing_texture_id2, startTime);
 
         Mat4 modelsMatrix = Mat4Transform.translate(0,0,0);
         alien1 = new AlienModel(gl, camera, light, modelsMatrix);
@@ -99,6 +99,7 @@ public class Aliens_GLEventListener implements GLEventListener {
         GL3 gl = drawable.getGL().getGL3();
 
         floor.dispose(gl);
+        floor2.dispose(gl);
 
         alien1.dispose(gl);
         alien2.dispose(gl);
@@ -119,7 +120,9 @@ public class Aliens_GLEventListener implements GLEventListener {
         skybox.render(gl, cubemap_id, camera, startTime);
 
         floor.render(gl);
-        floor.render(gl, getMforTT2());
+
+        floor2.setElapsedTime(startTime - TimeUtils.getCurrentTime());
+        floor2.render(gl, getMforTT2());
 
         alien1.render(gl);
         alien2.render(gl);

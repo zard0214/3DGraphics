@@ -2,6 +2,7 @@ package shaders.shaders;
 
 import com.jogamp.opengl.GL3;
 import core.Shader;
+import utils.Constant;
 
 /**
  * @author Zhecheng Zhao
@@ -11,8 +12,7 @@ import core.Shader;
 public class FloorShader extends Shader {
 
     public FloorShader(GL3 gl) {
-//        super(gl, "shaders/glsl/vertex/vs_tt_05.glsl", "shaders/glsl/fragment/fs_tt_05.glsl");
-        super(gl, "shaders/glsl/vertex/vs_tt_06.glsl", "shaders/glsl/fragment/fs_tt_06.glsl");
+        super(gl, Constant.FLOOR_GLSL_VS, Constant.FLOOR_GLSL_FS);
     }
 
 }

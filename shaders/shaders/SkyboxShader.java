@@ -2,6 +2,7 @@ package shaders.shaders;
 
 import com.jogamp.opengl.GL3;
 import core.Shader;
+import utils.Constant;
 
 /**
  * @author Zhecheng Zhao
@@ -11,7 +12,7 @@ import core.Shader;
 public class SkyboxShader extends Shader {
 
     public SkyboxShader(GL3 gl) {
-        super(gl, "shaders/glsl/vertex/vs_skybox_1.glsl", "shaders/glsl/fragment/fs_skybox_1.glsl");
+        super(gl, Constant.SKYBOX_GLSL_VS, Constant.SKYBOX_GLSL_FS);
     }
 
 }

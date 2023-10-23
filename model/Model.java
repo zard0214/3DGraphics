@@ -17,7 +17,8 @@ public class Model {
   private Mat4 modelMatrix;
   private Camera camera;
   private Light light;
-  
+  private float offset;
+
   public Model(GL3 gl, Camera camera, Light light, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh, int[] textureId1, int[] textureId2) {
     this.mesh = mesh;
     this.material = material;
@@ -52,9 +53,10 @@ public class Model {
   public void render(GL3 gl, Mat4 modelMatrix) {
     Mat4 mvpMatrix = Mat4.multiply(camera.getPerspectiveMatrix(), Mat4.multiply(camera.getViewMatrix(), modelMatrix));
     shader.use(gl);
+
     shader.setFloatArray(gl, "model", modelMatrix.toFloatArrayForGLSL());
     shader.setFloatArray(gl, "mvpMatrix", mvpMatrix.toFloatArrayForGLSL());
-    
+
     shader.setVec3(gl, "viewPos", camera.getPosition());
 
     shader.setVec3(gl, "light.position", light.getPosition());
@@ -77,9 +79,19 @@ public class Model {
       gl.glActiveTexture(GL.GL_TEXTURE1);
       gl.glBindTexture(GL.GL_TEXTURE_2D, textureId2[0]);
     }
+
+    if(offset != 0){
+        shader.setFloat(gl, "offset", offset, 0);
+    }
+
     mesh.render(gl);
-  } 
-  
+  }
+
+
+  public void setOffSet(float offset) {
+    this.offset = offset;
+  }
+
   public void render(GL3 gl) {
     render(gl, modelMatrix);
   }

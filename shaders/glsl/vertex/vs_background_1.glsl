@@ -7,7 +7,7 @@ layout (location = 2) in vec2 texCoord;
 out vec3 aPos;
 out vec3 aNormal;
 out vec2 aTexCoord;
-out vec2 movingTexCoord;
+out vec2 aOffsetTexCoord;
 
 uniform mat4 model;
 uniform mat4 mvpMatrix;
@@ -21,5 +21,7 @@ void main() {
   aNormal = mat3(normalMatrix) * norm;
 
   aTexCoord = texCoord;
-  movingTexCoord = texCoord + offset;
+
+  aOffsetTexCoord = texCoord + offset;
+
 }

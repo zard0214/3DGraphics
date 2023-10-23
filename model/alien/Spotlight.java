@@ -14,6 +14,7 @@ import model.Model;
 import model.SGNode;
 import model.Sphere;
 import shaders.shaders.SpotlightShader;
+import utils.Constant;
 import utils.TextureLibrary;
 
 /**
@@ -32,8 +33,8 @@ public class Spotlight {
 
     public Spotlight(GL3 gl, Camera camera, Light light, Mat4 translate) {
 
-        int[] textureId0 = TextureLibrary.loadTexture(gl, "textures/snow.jpg");
-        int[] textureId1 = TextureLibrary.loadTexture(gl, "textures/snow_specular.jpg");
+        int[] textureId0 = TextureLibrary.loadTexture(gl, Constant.SPOTLIGHT_TEXTURE_1);
+        int[] textureId1 = TextureLibrary.loadTexture(gl, Constant.SPOTLIGHT_TEXTURE_2);
 
         /***********  sphere_body  ***************/
         Mesh m = new Mesh(gl, Sphere.vertices.clone(), Sphere.indices.clone());

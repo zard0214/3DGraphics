@@ -2,6 +2,7 @@ package shaders.shaders;
 
 import com.jogamp.opengl.GL3;
 import core.Shader;
+import utils.Constant;
 
 /**
  * @author Zhecheng Zhao
@@ -11,7 +12,7 @@ import core.Shader;
 public class BackgroundShader extends Shader {
 
     public BackgroundShader(GL3 gl) {
-        super(gl, "shaders/glsl/vertex/vs_background_1.glsl", "shaders/glsl/fragment/fs_background_1.glsl");
+        super(gl, Constant.BG_GLSL_VS, Constant.BG_GLSL_FS);
     }
 
 }

@@ -2,6 +2,7 @@ package shaders.shaders;
 
 import com.jogamp.opengl.GL3;
 import core.Shader;
+import utils.Constant;
 
 /**
  * @author Zhecheng Zhao
@@ -11,7 +12,7 @@ import core.Shader;
 public class AlienShader extends Shader {
 
     public AlienShader(GL3 gl) {
-        super(gl, "shaders/glsl/vertex/vs_sphere_04.glsl", "shaders/glsl/fragment/fs_sphere_04.glsl");
+        super(gl, Constant.ALIEN_GLSL_VS, Constant.ALIEN_GLSL_FS);
     }
 
 }

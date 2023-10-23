@@ -25,7 +25,7 @@ public class Aliens extends JFrame implements ActionListener {
     private Aliens_GLEventListener backdropGlEventListener;
     private FPSAnimator animator;
     private JPanel soutPanel;
-    private JButton rockLeftbody, rockRightbody, turnSpotlightOn, turnSpotlightOff, turnGenerallightOn, turnGenerallightOff;
+    private JButton rockLeftbody, rockRightbody, turnSpotlightOnOff, turnGenerallightOnOff;
 
     public static void main(String[] args) {
         Aliens aliens = new Aliens("COM6503 assignment1");
@@ -84,18 +84,14 @@ public class Aliens extends JFrame implements ActionListener {
         rockLeftbody = new JButton("Rock Left Body");
         rockRightbody = new JButton("Rock Right Body");
 
-        turnSpotlightOn = new JButton("Turn Spotlight On");
-        turnSpotlightOff = new JButton("Turn Spotlight Off");
+        turnSpotlightOnOff = new JButton("Turn Spotlight On/Off");
 
-        turnGenerallightOn = new JButton("Turn General Light On");
-        turnGenerallightOff = new JButton("Turn General Light Off");
+        turnGenerallightOnOff = new JButton("Turn General Light On/Off");
 
         soutPanel.add(rockLeftbody);
         soutPanel.add(rockRightbody);
-        soutPanel.add(turnSpotlightOn);
-        soutPanel.add(turnSpotlightOff);
-        soutPanel.add(turnGenerallightOn);
-        soutPanel.add(turnGenerallightOff);
+        soutPanel.add(turnSpotlightOnOff);
+        soutPanel.add(turnGenerallightOnOff);
 
         getContentPane().add(soutPanel, BorderLayout.SOUTH);
     }
@@ -104,10 +100,8 @@ public class Aliens extends JFrame implements ActionListener {
 
         rockLeftbody.addActionListener(this);
         rockRightbody.addActionListener(this);
-        turnSpotlightOn.addActionListener(this);
-        turnSpotlightOff.addActionListener(this);
-        turnGenerallightOn.addActionListener(this);
-        turnGenerallightOff.addActionListener(this);
+        turnSpotlightOnOff.addActionListener(this);
+        turnGenerallightOnOff.addActionListener(this);
 
     }
 
@@ -120,25 +114,15 @@ public class Aliens extends JFrame implements ActionListener {
         switch (e.getActionCommand()){
             case "Rock Left Body":
                 System.out.println("Rock Left Body");
-//                Context.leftAlien.rockBody();
                 break;
             case "Rock Right Body":
                 System.out.println("Rock Right Body");
-//                Context.rightAlien.rockBody();
                 break;
-            case "Turn Spotlight On":
-                System.out.println("Turn Spotlight On");
-//                Context.spotlight.turnOn();
+            case "Turn Spotlight On/Off":
+                System.out.println("Turn Spotlight On/Off");
                 break;
-            case "Turn Spotlight Off":
-                System.out.println("Turn Spotlight Off");
-//                Context.spotlight.turnOff();
-                break;
-            case "Turn General Light On":
+            case "Turn General Light On/Off":
                 System.out.println("Turn General Light On");
-                break;
-            case "Turn General Light Off":
-                System.out.println("Turn General Light Off");
                 break;
             case "Quit":
                 System.exit(0);

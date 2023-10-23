@@ -1,6 +1,5 @@
 package model.alien;
 
-import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL3;
 import core.Material;
 import core.Shader;
@@ -29,14 +28,21 @@ public class FloorModel extends Model {
         this.textureId1 = textureId1;
         this.textureId2 = textureId2;
     }
+    public FloorModel(GL3 gl, Camera camera, Light light, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh, int[] textureId1) {
+        super(gl, camera, light, shader, material, modelMatrix, mesh, textureId1);
+        this.shader = shader;
+        this.textureId1 = textureId1;
+    }
+
+    public void setElapsedTime(double elapsedTime) {
+        this.elapsedTime = elapsedTime;
+        final double SPEED = 0.05;
+        double increment = elapsedTime * SPEED;
+        setOffSet((float)(increment - Math.floor(increment)));
+    }
 
     @Override
     public void render(GL3 gl, Mat4 modelMatrix) {
         super.render(gl, modelMatrix);
-
-        final double SPEED = 0.2;
-        double increment = elapsedTime * SPEED;
-
-
     }
 }
