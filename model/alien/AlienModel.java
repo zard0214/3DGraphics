@@ -6,6 +6,7 @@ import core.Material;
 import core.Shader;
 import core.camera.Camera;
 import core.light.Light;
+import core.light.SpotLight;
 import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;
@@ -33,7 +34,7 @@ public class AlienModel{
 
     private Mat4 modelMatrix;
 
-    public AlienModel(GL3 gl, Camera camera, Light light, Light light_2, Mat4 translate, int[] textureId0, int[] textureId1) {
+    public AlienModel(GL3 gl, Camera camera, Light light, Light light_2, SpotLight spotLight, Mat4 translate, int[] textureId0, int[] textureId1) {
 
         /***********  sphere_body  ***************/
         Mesh m = new Mesh(gl, Sphere.vertices.clone(), Sphere.indices.clone());

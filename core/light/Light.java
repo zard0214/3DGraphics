@@ -73,11 +73,9 @@ public class Light {
     public void render(GL3 gl) {
         if (model == null) {
             Mat4 model = new Mat4(1);
-            model = Mat4.multiply(Mat4Transform.scale(0.3f, 0.3f, 0.3f), model);
-            model = Mat4.multiply(Mat4Transform.rotateAroundZ(60), Mat4Transform.scale(0.5f, 1, 0.5f));
+            this.model = Mat4.multiply(Mat4Transform.scale(0.3f, 0.3f, 0.3f), model);
+            this.model = Mat4.multiply(Mat4Transform.rotateAroundZ(60), Mat4Transform.scale(0.5f, 1, 0.5f));
         }
-
-
         if (modelMatrix != null) {
             model = Mat4.multiply(modelMatrix, model);
         } else {

@@ -11,7 +11,7 @@ import model.*;
 import core.light.Light;
 import model.alien.AlienModel;
 import model.alien.FloorModel;
-import model.alien.Spotlight;
+import model.alien.SpotlightModel;
 
 import shaders.shaders.BackgroundShader;
 import utils.Constant;
@@ -31,11 +31,13 @@ public class Aliens_GLEventListener implements GLEventListener {
     private int[] snowing_texture_id2;
     private FloorModel floor, floor2;
     private AlienModel alien1, alien2;
-    private Spotlight spotlight;
+    private SpotlightModel spotlight;
     private Light light;
     private Light light_2;
+    private Light light_3;
     private Camera camera;
     private double startTime;
+    private boolean rockLeftBody  = false, rockRightBody  = false, rollLeftHead  = false, rollRightHead  = false;
 
     /* The constructor is not used to initialise anything */
     public Aliens_GLEventListener(Camera camera) {
@@ -70,6 +72,11 @@ public class Aliens_GLEventListener implements GLEventListener {
         light_2.setIntensity(0.45f);
         light_2.setPosition(-50f, -5f, -3f);
 
+        light_3 = new Light(gl);
+        light_3.setCamera(camera);
+        light_3.setIntensity(0.25f);
+        light_3.setPosition(10f, 1f, 0f);
+
         skybox = new BackdropSkybox(gl);
         cubemap_id = skybox.loadCubemap(Constant.SKYBOX_TEXTURE_PX, Constant.SKYBOX_TEXTURE_NY,
                 Constant.SKYBOX_TEXTURE_PZ, Constant.SKYBOX_TEXTURE_NX,
@@ -83,30 +90,34 @@ public class Aliens_GLEventListener implements GLEventListener {
         int[] textureId0 = TextureLibrary.loadTexture(gl, Constant.TEXTURE_SNOW2);
         Mesh mesh = new Mesh(gl, TwoTriangles.vertices.clone(), TwoTriangles.indices.clone());
 
+
+        Mat4 modelsMatrix = Mat4Transform.translate(-12,0,0);
+        spotlight = new SpotlightModel(gl, camera, light, light_2, modelsMatrix);
+
         BackgroundShader shader = new BackgroundShader(gl);
         Material material = new Material(new Vec3(1.0f, 1.0f, 1.0f), new Vec3(1.0f, 1.0f, 1.0f), new Vec3(1.0f, 1.0f, 1.0f), 1.0f);
         Mat4 modelMatrix = Mat4Transform.scale(16,1f,16);
 
         modelMatrix = Mat4.multiply(Mat4Transform.translate(0.0f,-8.0f,8.0f), modelMatrix);
-        floor = new FloorModel(gl, camera, light, light_2, shader, material, modelMatrix, mesh, textureId1);
+        floor = new FloorModel(gl, camera, light, light_2, spotlight.getSpotLight(), shader, material, modelMatrix, mesh, textureId1);
 //        floor = new FloorModel(gl, camera, light, light_2, shader, material, modelMatrix, mesh, textureId0, snowing_texture_id2, startTime);
 
         modelMatrix = Mat4Transform.scale(16,1f,16);
-        floor2 = new FloorModel(gl, camera, light, light_2, shader, material, modelMatrix, mesh, textureId0, snowing_texture_id2, startTime);
+        floor2 = new FloorModel(gl, camera, light, light_2, spotlight.getSpotLight(), shader, material, modelMatrix, mesh, textureId0, snowing_texture_id2, startTime);
 
-        Mat4 modelsMatrix = Mat4Transform.translate(0,0,0);
+        modelsMatrix = Mat4Transform.translate(0,0,0);
         int[] alientextureId0 = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
         int[] alientextureId1 = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
-        alien1 = new AlienModel(gl, camera, light, light_2, modelsMatrix, alientextureId0, alientextureId1);
+        alien1 = new AlienModel(gl, camera, light, light_2, spotlight.getSpotLight(), modelsMatrix, alientextureId0, alientextureId1);
 
         modelsMatrix = Mat4Transform.translate(8,0,0);
         alientextureId0 = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY_2);
         alientextureId1 = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY_2);
-        alien2 = new AlienModel(gl, camera, light, light_2, modelsMatrix, alientextureId0, alientextureId1);
+        alien2 = new AlienModel(gl, camera, light, light_2, spotlight.getSpotLight(), modelsMatrix, alientextureId0, alientextureId1);
 
-        modelsMatrix = Mat4Transform.translate(-12,0,0);
-        spotlight = new Spotlight(gl, camera, light, light_2, modelsMatrix);
 
+//        spotlight.setIntensity(0.45f);
+//        spotlight.setIntensity(0.5f);
     }
 
     @Override
@@ -123,6 +134,7 @@ public class Aliens_GLEventListener implements GLEventListener {
 
         light.dispose(gl);
         light_2.dispose(gl);
+        light_3.dispose(gl);
 
     }
 
@@ -147,6 +159,10 @@ public class Aliens_GLEventListener implements GLEventListener {
         alien2.render(gl);
 
         spotlight.render(gl);
+
+        light.render(gl);
+        light_2.render(gl);
+        light_3.render(gl);
     }
 
     @Override
@@ -173,5 +189,13 @@ public class Aliens_GLEventListener implements GLEventListener {
 
     public Light getLight_2() {
         return light_2;
+    }
+
+    public SpotlightModel getSpotlight() {
+        return spotlight;
+    }
+
+    public void setSpotlight(SpotlightModel spotlight) {
+        this.spotlight = spotlight;
     }
 }

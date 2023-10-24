@@ -4,8 +4,10 @@ import core.camera.Camera;
 import core.Material;
 import core.Shader;
 import core.light.Light;
+import core.light.SpotLight;
 import gmaths.*;
 import com.jogamp.opengl.*;
+import model.alien.SpotlightModel;
 
 public class Model {
   
@@ -18,6 +20,7 @@ public class Model {
   private Camera camera;
   private Light light;
   private Light light_2;
+  private SpotLight spotlight;
   private float offset;
 
   public Model(GL3 gl, Camera camera, Light light, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh, int[] textureId1, int[] textureId2) {
@@ -42,9 +45,25 @@ public class Model {
     this.textureId1 = textureId1;
     this.textureId2 = textureId2;
   }
-  
+
+  public Model(GL3 gl, Camera camera, Light light, Light light_2, SpotLight spotlight, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh, int[] textureId1, int[] textureId2) {
+    this.mesh = mesh;
+    this.material = material;
+    this.modelMatrix = modelMatrix;
+    this.shader = shader;
+    this.camera = camera;
+    this.light = light;
+    this.light_2 = light_2;
+    this.spotlight = spotlight;
+    this.textureId1 = textureId1;
+    this.textureId2 = textureId2;
+  }
+
   public Model(GL3 gl, Camera camera, Light light, Light light_2, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh, int[] textureId1) {
     this(gl, camera, light, light_2, shader, material, modelMatrix, mesh, textureId1, null);
+  }
+  public Model(GL3 gl, Camera camera, Light light, Light light_2, SpotLight spotlight, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh, int[] textureId1) {
+    this(gl, camera, light, light_2, spotlight, shader, material, modelMatrix, mesh, textureId1, null);
   }
 
   public Model(GL3 gl, Camera camera, Light light, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh, int[] textureId1) {
@@ -86,6 +105,13 @@ public class Model {
         shader.setVec3(gl, "light_2.ambient", light_2.getMaterial().getAmbient());
         shader.setVec3(gl, "light_2.diffuse", light_2.getMaterial().getDiffuse());
         shader.setVec3(gl, "light_2.specular", light_2.getMaterial().getSpecular());
+    }
+
+    if(spotlight != null){
+        shader.setVec3(gl, "spotlight.position", light_2.getPosition());
+        shader.setVec3(gl, "spotlight.ambient", light_2.getMaterial().getAmbient());
+        shader.setVec3(gl, "spotlight.diffuse", light_2.getMaterial().getDiffuse());
+        shader.setVec3(gl, "spotlight.specular", light_2.getMaterial().getSpecular());
     }
 
     shader.setVec3(gl, "material.ambient", material.getAmbient());

@@ -135,6 +135,12 @@ public class Aliens extends JFrame implements ActionListener {
                 break;
             case "Turn Spotlight On/Off":
                 System.out.println("Turn Spotlight On/Off");
+                intensity = backdropGlEventListener.getSpotlight().getIntensity();
+                if(intensity == 0){
+                    backdropGlEventListener.getSpotlight().setIntensity(0.45f);
+                }else {
+                    backdropGlEventListener.getSpotlight().setIntensity(0.0f);
+                }
                 break;
             case "Turn General Light On/Off":
                 System.out.println("Turn General Light On");
