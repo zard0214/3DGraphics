@@ -74,6 +74,9 @@ public class Aliens_GLEventListener implements GLEventListener {
         cubemap_id = skybox.loadCubemap(Constant.SKYBOX_TEXTURE_PX, Constant.SKYBOX_TEXTURE_NY,
                 Constant.SKYBOX_TEXTURE_PZ, Constant.SKYBOX_TEXTURE_NX,
                 Constant.SKYBOX_TEXTURE_PY, Constant.SKYBOX_TEXTURE_NZ);
+//        cubemap_id = skybox.loadCubemap(Constant.SKYBOX_TEXTURE_PX, Constant.SKYBOX_TEXTURE_PY,
+//                Constant.SKYBOX_TEXTURE_PZ, Constant.SKYBOX_TEXTURE_NX,
+//                Constant.SKYBOX_TEXTURE_NY, Constant.SKYBOX_TEXTURE_NZ);
 
         snowing_texture_id2 = TextureLibrary.loadTexture(gl, Constant.TEXTURE_SNOWING);
         int[] textureId1 = TextureLibrary.loadTexture(gl, Constant.TEXTURE_SNOW_FLOOR);

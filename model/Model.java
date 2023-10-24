@@ -105,12 +105,10 @@ public class Model {
     }
 
     if(offset != 0){
-        shader.setFloat(gl, "offset", offset, 0);
+        shader.setFloat(gl, "offset", 0, offset);
     }
-
     mesh.render(gl);
   }
-
 
   public void setOffSet(float offset) {
     this.offset = offset;

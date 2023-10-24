@@ -22,6 +22,6 @@ void main() {
 
   aTexCoord = texCoord;
 
-  aOffsetTexCoord = texCoord + offset;
+  aOffsetTexCoord = texCoord - offset;
 
 }
