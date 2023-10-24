@@ -2,6 +2,8 @@
 
 Main class: Aliens.java
 
+Some texture from https://www.freepik.com/
+
 ## Project Structure
 
 

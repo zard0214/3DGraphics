@@ -95,10 +95,14 @@ public class Aliens_GLEventListener implements GLEventListener {
         floor2 = new FloorModel(gl, camera, light, light_2, shader, material, modelMatrix, mesh, textureId0, snowing_texture_id2, startTime);
 
         Mat4 modelsMatrix = Mat4Transform.translate(0,0,0);
-        alien1 = new AlienModel(gl, camera, light, light_2, modelsMatrix);
+        int[] alientextureId0 = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
+        int[] alientextureId1 = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
+        alien1 = new AlienModel(gl, camera, light, light_2, modelsMatrix, alientextureId0, alientextureId1);
 
         modelsMatrix = Mat4Transform.translate(8,0,0);
-        alien2 = new AlienModel(gl, camera, light, light_2, modelsMatrix);
+        alientextureId0 = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY_2);
+        alientextureId1 = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY_2);
+        alien2 = new AlienModel(gl, camera, light, light_2, modelsMatrix, alientextureId0, alientextureId1);
 
         modelsMatrix = Mat4Transform.translate(-12,0,0);
         spotlight = new Spotlight(gl, camera, light, light_2, modelsMatrix);

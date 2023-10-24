@@ -25,7 +25,7 @@ public class Aliens extends JFrame implements ActionListener {
     private Aliens_GLEventListener backdropGlEventListener;
     private FPSAnimator animator;
     private JPanel soutPanel;
-    private JButton rockLeftbody, rockRightbody, turnSpotlightOnOff, turnGenerallightOnOff, turnGenerallight2OnOff;
+    private JButton rockLeftbody, rockRightbody, rollLeftHead, rollRightHead, turnSpotlightOnOff, turnGenerallightOnOff, turnGenerallight2OnOff;
 
     public static void main(String[] args) {
         Aliens aliens = new Aliens("COM6503 assignment1");
@@ -84,6 +84,9 @@ public class Aliens extends JFrame implements ActionListener {
         rockLeftbody = new JButton("Rock Left Body");
         rockRightbody = new JButton("Rock Right Body");
 
+        rollLeftHead = new JButton("Roll Left Head");
+        rollRightHead = new JButton("Roll Right Head");
+
         turnSpotlightOnOff = new JButton("Turn Spotlight On/Off");
 
         turnGenerallightOnOff = new JButton("Turn General Light On/Off");
@@ -91,6 +94,8 @@ public class Aliens extends JFrame implements ActionListener {
 
         soutPanel.add(rockLeftbody);
         soutPanel.add(rockRightbody);
+        soutPanel.add(rollLeftHead);
+        soutPanel.add(rollRightHead);
         soutPanel.add(turnSpotlightOnOff);
         soutPanel.add(turnGenerallightOnOff);
         soutPanel.add(turnGenerallight2OnOff);
@@ -121,6 +126,12 @@ public class Aliens extends JFrame implements ActionListener {
                 break;
             case "Rock Right Body":
                 System.out.println("Rock Right Body");
+                break;
+            case "Roll Left Head":
+                System.out.println("Roll Left Head");
+                break;
+            case "Roll Right Head":
+                System.out.println("Roll Right Head");
                 break;
             case "Turn Spotlight On/Off":
                 System.out.println("Turn Spotlight On/Off");
