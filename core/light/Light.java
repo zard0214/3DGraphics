@@ -19,6 +19,7 @@ public class Light {
     private Mat4 model;
     private Shader shader;
     private Camera camera;
+    private float intensity;
 
     public Light(GL3 gl) {
         material = new Material();
@@ -175,5 +176,16 @@ public class Light {
 
     public void setModelMatrix(Mat4 modelMatrix) {
         this.modelMatrix = modelMatrix;
+    }
+
+    public void setIntensity(float intensity){
+        this.intensity = intensity;
+        material.setAmbient(intensity * 0.5f, intensity * 0.5f, intensity * 0.5f);
+        material.setDiffuse(intensity, intensity, intensity);
+        material.setSpecular(intensity, intensity, intensity);
+    }
+
+    public float getIntensity() {
+        return intensity;
     }
 }

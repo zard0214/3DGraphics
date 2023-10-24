@@ -7,6 +7,8 @@ package utils;
  */
 public class Constant {
 
+    public static final String TEXTURE_FLOOR = "textures/chequerboard.jpg";
+    public static final String TEXTURE_SNOW_FLOOR = "textures/snow_floor.jpg";
     public static final String TEXTURE_SNOWING = "textures/snowing.jpg";
     public static final String TEXTURE_SNOW = "textures/snow.jpg";
     public static final String TEXTURE_SNOW2 = "textures/snow2.jpg";

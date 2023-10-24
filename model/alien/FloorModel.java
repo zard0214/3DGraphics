@@ -21,15 +21,15 @@ public class FloorModel extends Model {
     private int[] textureId1;
     private int[] textureId2;
 
-    public FloorModel(GL3 gl, Camera camera, Light light, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh, int[] textureId1, int[] textureId2, double elapsedTime) {
-        super(gl, camera, light, shader, material, modelMatrix, mesh, textureId1, textureId2);
+    public FloorModel(GL3 gl, Camera camera, Light light, Light light_2, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh, int[] textureId1, int[] textureId2, double elapsedTime) {
+        super(gl, camera, light, light_2, shader, material, modelMatrix, mesh, textureId1, textureId2);
         this.shader = shader;
         this.elapsedTime = elapsedTime;
         this.textureId1 = textureId1;
         this.textureId2 = textureId2;
     }
-    public FloorModel(GL3 gl, Camera camera, Light light, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh, int[] textureId1) {
-        super(gl, camera, light, shader, material, modelMatrix, mesh, textureId1);
+    public FloorModel(GL3 gl, Camera camera, Light light, Light light_2, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh, int[] textureId1) {
+        super(gl, camera, light, light_2, shader, material, modelMatrix, mesh, textureId1);
         this.shader = shader;
         this.textureId1 = textureId1;
     }

@@ -32,7 +32,7 @@ public class Spotlight {
     private Light sphere_light;
     private Mat4 modelMatrix;
 
-    public Spotlight(GL3 gl, Camera camera, Light light, Mat4 translate) {
+    public Spotlight(GL3 gl, Camera camera, Light light, Light light_2, Mat4 translate) {
 
         int[] textureId0 = TextureLibrary.loadTexture(gl, Constant.SPOTLIGHT_TEXTURE_1);
         int[] textureId1 = TextureLibrary.loadTexture(gl, Constant.SPOTLIGHT_TEXTURE_2);
@@ -44,7 +44,8 @@ public class Spotlight {
         modelMatrix = Mat4.multiply(Mat4Transform.scale(0.5f,12,0.5f), Mat4Transform.translate(0,0.5f,0));
 
         modelMatrix = Mat4.multiply(translate, modelMatrix);
-        sphere_body = new Model(gl, camera, light, shader, material, modelMatrix, m, textureId0, textureId1);
+        modelMatrix = Mat4.multiply(Mat4Transform.translate(0.0f,-8.0f,5.0f), modelMatrix);
+        sphere_body = new Model(gl, camera, light, light_2, shader, material, modelMatrix, m, textureId0, textureId1);
 
         /***********  sphere_head  ***************/
         modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(60), Mat4Transform.scale(1.0f,3,1.0f));
@@ -52,20 +53,20 @@ public class Spotlight {
         modelMatrix = Mat4.multiply(Mat4Transform.translate(0f,12f,0), modelMatrix);
 
         modelMatrix = Mat4.multiply(translate, modelMatrix);
-        sphere_head = new Model(gl, camera, light, shader, material, modelMatrix, m, textureId0, textureId1);
+        modelMatrix = Mat4.multiply(Mat4Transform.translate(0.0f,-8.0f,5.0f), modelMatrix);
+        sphere_head = new Model(gl, camera, light, light_2, shader, material, modelMatrix, m, textureId0, textureId1);
 
         /***********  sphere_lamp  ***************/
         modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(60), Mat4Transform.scale(0.5f,1,0.5f));
         modelMatrix = Mat4.multiply(Mat4Transform.translate(1.7f,11.5f,0), modelMatrix);
 
         material = new Material(new Vec3(0.5f, 0.5f, 0.5f), new Vec3(0.8f, 0.8f, 0.8f), new Vec3(0.8f, 0.8f, 0.8f), 32.0f);
-        modelMatrix = Mat4.multiply(translate, modelMatrix);
-        Shader shader1 = new Shader(gl, Constant.LIGHT_GLSL_VS, Constant.LIGHT_GLSL_FS);
-        sphere_lamp = new Model(gl, camera, light, shader1, material, modelMatrix, m, textureId0, textureId1);
 
-//        sphere_light = new Light(gl, modelMatrix);
-//        sphere_light.setModelMatrix(modelMatrix);
-//        sphere_light.setCamera(camera);
+        modelMatrix = Mat4.multiply(translate, modelMatrix);
+        modelMatrix = Mat4.multiply(Mat4Transform.translate(0.0f,-8.0f,5.0f), modelMatrix);
+        Shader shader1 = new Shader(gl, Constant.LIGHT_GLSL_VS, Constant.LIGHT_GLSL_FS);
+        sphere_lamp = new Model(gl, camera, light, light_2, shader1, material, modelMatrix, m, textureId0, textureId1);
+
     }
 
 
@@ -74,14 +75,9 @@ public class Spotlight {
     }
 
     public void render(GL3 gl) {
-
-//        sphere_light.setPosition(getLightPosition());  // changing light position each frame
-//        sphere_light.render(gl);
-
         sphere_body.render(gl);
         sphere_head.render(gl);
         sphere_lamp.render(gl);
-
     }
 
     public void dispose(GL3 gl) {
@@ -90,22 +86,5 @@ public class Spotlight {
         sphere_lamp.dispose(gl);
 
     }
-
-//
-//    // The light's postion is continually being changed, so needs to be calculated for each frame.
-//    private Vec3 getLightPosition() {
-//        double elapsedTime = getSeconds()-startTime;
-//        float x = 3.0f*(float)(Math.sin(Math.toRadians(elapsedTime*50)));
-//        float y = 2.4f;
-//        float z = 3.0f*(float)(Math.cos(Math.toRadians(elapsedTime*50)));
-//        return new Vec3(x,y,z);
-//    }
-//
-//
-//    private double startTime;
-//
-//    private double getSeconds() {
-//        return System.currentTimeMillis()/1000.0;
-//    }
 
 }

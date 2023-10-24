@@ -17,6 +17,7 @@ public class Model {
   private Mat4 modelMatrix;
   private Camera camera;
   private Light light;
+  private Light light_2;
   private float offset;
 
   public Model(GL3 gl, Camera camera, Light light, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh, int[] textureId1, int[] textureId2) {
@@ -29,11 +30,27 @@ public class Model {
     this.textureId1 = textureId1;
     this.textureId2 = textureId2;
   }
+
+  public Model(GL3 gl, Camera camera, Light light, Light light_2, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh, int[] textureId1, int[] textureId2) {
+    this.mesh = mesh;
+    this.material = material;
+    this.modelMatrix = modelMatrix;
+    this.shader = shader;
+    this.camera = camera;
+    this.light = light;
+    this.light_2 = light_2;
+    this.textureId1 = textureId1;
+    this.textureId2 = textureId2;
+  }
   
+  public Model(GL3 gl, Camera camera, Light light, Light light_2, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh, int[] textureId1) {
+    this(gl, camera, light, light_2, shader, material, modelMatrix, mesh, textureId1, null);
+  }
+
   public Model(GL3 gl, Camera camera, Light light, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh, int[] textureId1) {
     this(gl, camera, light, shader, material, modelMatrix, mesh, textureId1, null);
   }
-  
+
   public Model(GL3 gl, Camera camera, Light light, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh) {
     this(gl, camera, light, shader, material, modelMatrix, mesh, null, null);
   }
@@ -63,6 +80,13 @@ public class Model {
     shader.setVec3(gl, "light.ambient", light.getMaterial().getAmbient());
     shader.setVec3(gl, "light.diffuse", light.getMaterial().getDiffuse());
     shader.setVec3(gl, "light.specular", light.getMaterial().getSpecular());
+
+    if(light_2 != null){
+        shader.setVec3(gl, "light_2.position", light_2.getPosition());
+        shader.setVec3(gl, "light_2.ambient", light_2.getMaterial().getAmbient());
+        shader.setVec3(gl, "light_2.diffuse", light_2.getMaterial().getDiffuse());
+        shader.setVec3(gl, "light_2.specular", light_2.getMaterial().getSpecular());
+    }
 
     shader.setVec3(gl, "material.ambient", material.getAmbient());
     shader.setVec3(gl, "material.diffuse", material.getDiffuse());

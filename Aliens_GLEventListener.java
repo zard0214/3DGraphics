@@ -12,7 +12,7 @@ import core.light.Light;
 import model.alien.AlienModel;
 import model.alien.FloorModel;
 import model.alien.Spotlight;
-import shaders.shaders.FloorShader;
+
 import shaders.shaders.BackgroundShader;
 import utils.Constant;
 import utils.TextureLibrary;
@@ -26,14 +26,14 @@ import utils.TwoTriangles;
  */
 public class Aliens_GLEventListener implements GLEventListener {
 
-    private static final boolean DISPLAY_SHADERS = false;
     private BackdropSkybox skybox;
-    private int cubemap_id, snowing_texture_id;
+    private int cubemap_id;
     private int[] snowing_texture_id2;
     private FloorModel floor, floor2;
     private AlienModel alien1, alien2;
     private Spotlight spotlight;
     private Light light;
+    private Light light_2;
     private Camera camera;
     private double startTime;
 
@@ -62,35 +62,43 @@ public class Aliens_GLEventListener implements GLEventListener {
     private void initialise(GL3 gl) {
         light = new Light(gl);
         light.setCamera(camera);
+        light.setIntensity(0.15f);
+        light.setPosition(10f, 10f, 10f);
+
+        light_2 = new Light(gl);
+        light_2.setCamera(camera);
+        light_2.setIntensity(0.45f);
+        light_2.setPosition(-50f, -5f, -3f);
 
         skybox = new BackdropSkybox(gl);
         cubemap_id = skybox.loadCubemap(Constant.SKYBOX_TEXTURE_PX, Constant.SKYBOX_TEXTURE_NY,
                 Constant.SKYBOX_TEXTURE_PZ, Constant.SKYBOX_TEXTURE_NX,
                 Constant.SKYBOX_TEXTURE_PY, Constant.SKYBOX_TEXTURE_NZ);
 
-
-        snowing_texture_id = TextureLibrary.loadTexture(gl, Constant.TEXTURE_SNOWING)[0];
         snowing_texture_id2 = TextureLibrary.loadTexture(gl, Constant.TEXTURE_SNOWING);
+        int[] textureId1 = TextureLibrary.loadTexture(gl, Constant.TEXTURE_SNOW_FLOOR);
         int[] textureId0 = TextureLibrary.loadTexture(gl, Constant.TEXTURE_SNOW2);
-        int[] textureId1 = TextureLibrary.loadTexture(gl, Constant.TEXTURE_SNOW);
-
         Mesh mesh = new Mesh(gl, TwoTriangles.vertices.clone(), TwoTriangles.indices.clone());
 
         BackgroundShader shader = new BackgroundShader(gl);
         Material material = new Material(new Vec3(1.0f, 1.0f, 1.0f), new Vec3(1.0f, 1.0f, 1.0f), new Vec3(1.0f, 1.0f, 1.0f), 1.0f);
         Mat4 modelMatrix = Mat4Transform.scale(16,1f,16);
 
-        floor = new FloorModel(gl, camera, light, shader, material, modelMatrix, mesh, textureId1);
-        floor2 = new FloorModel(gl, camera, light, shader, material, modelMatrix, mesh, textureId0, snowing_texture_id2, startTime);
+        modelMatrix = Mat4.multiply(Mat4Transform.translate(0.0f,-8.0f,8.0f), modelMatrix);
+        floor = new FloorModel(gl, camera, light, light_2, shader, material, modelMatrix, mesh, textureId1);
+//        floor = new FloorModel(gl, camera, light, light_2, shader, material, modelMatrix, mesh, textureId0, snowing_texture_id2, startTime);
+
+        modelMatrix = Mat4Transform.scale(16,1f,16);
+        floor2 = new FloorModel(gl, camera, light, light_2, shader, material, modelMatrix, mesh, textureId0, snowing_texture_id2, startTime);
 
         Mat4 modelsMatrix = Mat4Transform.translate(0,0,0);
-        alien1 = new AlienModel(gl, camera, light, modelsMatrix);
+        alien1 = new AlienModel(gl, camera, light, light_2, modelsMatrix);
 
         modelsMatrix = Mat4Transform.translate(8,0,0);
-        alien2 = new AlienModel(gl, camera, light, modelsMatrix);
+        alien2 = new AlienModel(gl, camera, light, light_2, modelsMatrix);
 
         modelsMatrix = Mat4Transform.translate(-12,0,0);
-        spotlight = new Spotlight(gl, camera, light, modelsMatrix);
+        spotlight = new Spotlight(gl, camera, light, light_2, modelsMatrix);
 
     }
 
@@ -105,6 +113,10 @@ public class Aliens_GLEventListener implements GLEventListener {
         alien2.dispose(gl);
 
         spotlight.dispose(gl);
+
+        light.dispose(gl);
+        light_2.dispose(gl);
+
     }
 
     @Override
@@ -148,4 +160,11 @@ public class Aliens_GLEventListener implements GLEventListener {
         return modelMatrix;
     }
 
+    public Light getLight() {
+        return light;
+    }
+
+    public Light getLight_2() {
+        return light_2;
+    }
 }

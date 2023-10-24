@@ -25,7 +25,7 @@ public class Aliens extends JFrame implements ActionListener {
     private Aliens_GLEventListener backdropGlEventListener;
     private FPSAnimator animator;
     private JPanel soutPanel;
-    private JButton rockLeftbody, rockRightbody, turnSpotlightOnOff, turnGenerallightOnOff;
+    private JButton rockLeftbody, rockRightbody, turnSpotlightOnOff, turnGenerallightOnOff, turnGenerallight2OnOff;
 
     public static void main(String[] args) {
         Aliens aliens = new Aliens("COM6503 assignment1");
@@ -87,11 +87,13 @@ public class Aliens extends JFrame implements ActionListener {
         turnSpotlightOnOff = new JButton("Turn Spotlight On/Off");
 
         turnGenerallightOnOff = new JButton("Turn General Light On/Off");
+        turnGenerallight2OnOff = new JButton("Turn General Light2 On/Off");
 
         soutPanel.add(rockLeftbody);
         soutPanel.add(rockRightbody);
         soutPanel.add(turnSpotlightOnOff);
         soutPanel.add(turnGenerallightOnOff);
+        soutPanel.add(turnGenerallight2OnOff);
 
         getContentPane().add(soutPanel, BorderLayout.SOUTH);
     }
@@ -102,6 +104,7 @@ public class Aliens extends JFrame implements ActionListener {
         rockRightbody.addActionListener(this);
         turnSpotlightOnOff.addActionListener(this);
         turnGenerallightOnOff.addActionListener(this);
+        turnGenerallight2OnOff.addActionListener(this);
 
     }
 
@@ -111,6 +114,7 @@ public class Aliens extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        float intensity = 0;
         switch (e.getActionCommand()){
             case "Rock Left Body":
                 System.out.println("Rock Left Body");
@@ -123,6 +127,21 @@ public class Aliens extends JFrame implements ActionListener {
                 break;
             case "Turn General Light On/Off":
                 System.out.println("Turn General Light On");
+                intensity = backdropGlEventListener.getLight().getIntensity();
+                if(intensity == 0){
+                    backdropGlEventListener.getLight().setIntensity(0.15f);
+                }else {
+                    backdropGlEventListener.getLight().setIntensity(0.0f);
+                }
+                break;
+            case "Turn General Light2 On/Off":
+                System.out.println("Turn General Light2 On");
+                intensity = backdropGlEventListener.getLight_2().getIntensity();
+                if(intensity == 0){
+                    backdropGlEventListener.getLight_2().setIntensity(0.45f);
+                }else {
+                    backdropGlEventListener.getLight_2().setIntensity(0.0f);
+                }
                 break;
             case "Quit":
                 System.exit(0);
