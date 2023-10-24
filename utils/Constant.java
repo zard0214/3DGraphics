@@ -19,6 +19,7 @@ public class Constant {
     public static final String SKYBOX_TEXTURE_NY = "textures/negy.jpg";
     public static final String SKYBOX_TEXTURE_NZ = "textures/negz.jpg";
 
+    public static final String ALIEN_TEXTURE_GRAY = "textures/gray.jpg";
     public static final String ALIEN_TEXTURE_1 = "textures/snow.jpg";
     public static final String ALIEN_TEXTURE_2 = "textures/snow_specular.jpg";
     public static final String ALIEN_GLSL_VS = "shaders/glsl/vertex/vs_sphere_04.glsl";

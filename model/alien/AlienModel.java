@@ -34,8 +34,9 @@ public class AlienModel{
     private Mat4 modelMatrix;
 
     public AlienModel(GL3 gl, Camera camera, Light light, Light light_2, Mat4 translate) {
-        int[] textureId0 = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_1);
-        int[] textureId1 = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_2);
+
+        int[] textureId0 = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
+        int[] textureId1 = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
 
         /***********  sphere_body  ***************/
         Mesh m = new Mesh(gl, Sphere.vertices.clone(), Sphere.indices.clone());
