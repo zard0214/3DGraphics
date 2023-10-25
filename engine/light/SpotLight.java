@@ -21,14 +21,12 @@ import java.nio.IntBuffer;
  */
 public class SpotLight {
 
-    //左右 上下 前后
     private Vec3 direction = new Vec3(1f, -1.25f, 0.0f);
     private float cutOff = 1.0f;
     private float outerCutOff = 0.95f;
     private float constant = 1.0f;
     private float linear = 0.0014f;
     private float quadratic = 0.000007f;
-
     private Vec3 ambient = new Vec3(0.1f, 0.1f, 0.1f);
     private Vec3 diffuse = new Vec3(0.2f, 0.2f, 0.2f);
     private Vec3 specular = new Vec3(0.3f, 0.3f, 0.3f);
@@ -48,8 +46,6 @@ public class SpotLight {
         material.setSpecular(0.7f, 0.7f, 0.7f);
         position = new Vec3(3f, 2f, 1f);
         model = new Mat4(1);
-//        shader = new Shader(gl, "vs_light_01.txt", "fs_light_01.txt");
-//        spotLightShader = new SpotLightShader(gl, "engine/shaders/vertex/vs_texture.glsl", "engine/shaders/fragment/fs_texture.glsl");
         shader = new SpotLightShader(gl, "engine/shaders/vertex/vs_texture.glsl", "engine/shaders/fragment/fs_texture.glsl");
         fillBuffers(gl);
     }
@@ -58,8 +54,6 @@ public class SpotLight {
         this.material = material;
         position = new Vec3(3f, 2f, 1f);
         model = new Mat4(1);
-//        shader = new Shader(gl, "vs_light_01.txt", "fs_light_01.txt");
-//        spotLightShader = new SpotLightShader(gl, "engine/shaders/vertex/vs_texture.glsl", "engine/shaders/fragment/fs_texture.glsl");
         shader = new SpotLightShader(gl, "engine/shaders/vertex/vs_texture.glsl", "engine/shaders/fragment/fs_texture.glsl");
         fillBuffers(gl);
     }
@@ -268,64 +262,6 @@ public class SpotLight {
     public Camera getCamera() {
         return camera;
     }
-
-    public float[] getVertices() {
-        return vertices;
-    }
-
-    public void setVertices(float[] vertices) {
-        this.vertices = vertices;
-    }
-
-    public int[] getIndices() {
-        return indices;
-    }
-
-    public void setIndices(int[] indices) {
-        this.indices = indices;
-    }
-
-    public int getVertexStride() {
-        return vertexStride;
-    }
-
-    public void setVertexStride(int vertexStride) {
-        this.vertexStride = vertexStride;
-    }
-
-    public int getVertexXYZFloats() {
-        return vertexXYZFloats;
-    }
-
-    public void setVertexXYZFloats(int vertexXYZFloats) {
-        this.vertexXYZFloats = vertexXYZFloats;
-    }
-
-    public int[] getVertexBufferId() {
-        return vertexBufferId;
-    }
-
-    public void setVertexBufferId(int[] vertexBufferId) {
-        this.vertexBufferId = vertexBufferId;
-    }
-
-    public int[] getVertexArrayId() {
-        return vertexArrayId;
-    }
-
-    public void setVertexArrayId(int[] vertexArrayId) {
-        this.vertexArrayId = vertexArrayId;
-    }
-
-    public int[] getElementBufferId() {
-        return elementBufferId;
-    }
-
-    public void setElementBufferId(int[] elementBufferId) {
-        this.elementBufferId = elementBufferId;
-    }
-
-
 
     public void setIntensity(float intensity){
         this.intensity = intensity;

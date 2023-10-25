@@ -2,7 +2,6 @@ import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL3;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
-import engine.Shader;
 import engine.camera.Camera;
 import engine.camera.Material;
 import engine.light.Light;
@@ -103,7 +102,7 @@ public class Aliens_GLEventListener implements GLEventListener {
         transition = Mat4Transform.translate(2,0,0);
         alien_2 = new AlienModel(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
 
-        SpotLightShader spotLightShader = new SpotLightShader(gl, "vs_cube_03.txt", "fs_cube_033.txt");
+        SpotLightShader spotLightShader = new SpotLightShader(gl, "engine/shaders/vertex/vs_cube_03.txt", "engine/shaders/fragment/fs_cube_033.txt");
         spotLightModel = new SpotLightModel(gl, camera, light_1, light_2, spotLight, spotLightShader, new Mat4(1), m);
     }
 
@@ -134,25 +133,18 @@ public class Aliens_GLEventListener implements GLEventListener {
         skybox.render(gl, cubemap_id, camera, startTime);
 
         spotLight.setPosition( getLightPosition2());  // changing light position each frame
-//        spotLight.setPosition(new Vec3(-7.1f, 7.8f, 0.0f));  // changing light position each frame
-//        spotLight.render(gl);
 
         light_1.setPosition(new Vec3(-7.0f, 7.0f, 0.0f));  // changing light position each frame
         light_1.setPosition(getLightPosition2());  // changing light position each frame
-//        light_1.render(gl);
-
         light_2.setPosition(new Vec3(7.0f, 7.0f, 0.0f));  // changing light position each frame
-//        light_2.render(gl);
-
         light_3.setPosition(new Vec3(1f, -1.25f, 0.0f));  // changing light position each frame
-//        light_3.render(gl);
+
         plane_1.setModelMatrix(getMforTT1());       // change transform
         plane_1.render(gl);
 
         plane_2.setModelMatrix(getMforTT2());       // change transform
         plane_2.setElapsedTime(startTime - TimeUtils.getCurrentTime());
         plane_2.render(gl);
-
 
         alien_1.render(gl);
         alien_2.render(gl);
