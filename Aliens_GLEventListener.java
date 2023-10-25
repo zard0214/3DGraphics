@@ -133,14 +133,17 @@ public class Aliens_GLEventListener implements GLEventListener {
 
         skybox.render(gl, cubemap_id, camera, startTime);
 
-        spotLight.setPosition(getLightPosition2());  // changing light position each frame
-        spotLight.setPosition(-6.5f, 7.3f, 0.0f);  // changing light position each frame
+        spotLight.setPosition(getLightPosition3());  // changing light position each frame
+//        spotLight.setPosition(-6.5f, 7.3f, 0.0f);  // changing light position each frame
         spotLight.render(gl);
 
-        light_1.setPosition(new Vec3(-7.0f, 7.0f, 0.0f));  // changing light position each frame
+//        light_1.setPosition(new Vec3(-7.0f, 7.0f, 0.0f));  // changing light position each frame
         light_1.setPosition(getLightPosition2());  // changing light position each frame
-        light_2.setPosition(new Vec3(7.0f, 7.0f, 0.0f));  // changing light position each frame
-        light_3.setPosition(new Vec3(1f, -1.25f, 0.0f));  // changing light position each frame
+//        light_2.setPosition(new Vec3(7.0f, 7.0f, 0.0f));  // changing light position each frame
+        light_2.setPosition(getLightPosition1());  // changing light position each frame
+//        light_3.setPosition(new Vec3(1f, -1.25f, 0.0f));  // changing light position each frame
+        light_1.render(gl);
+        light_2.render(gl);
 
         plane_1.setModelMatrix(getMforTT1());       // change transform
         plane_1.render(gl);
@@ -163,7 +166,24 @@ public class Aliens_GLEventListener implements GLEventListener {
     }
 
     // The light's postion is continually being changed, so needs to be calculated for each frame.
+    private Vec3 getLightPosition1() {
+        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
+        float x = -6.1f * (float) (Math.sin(Math.toRadians(elapsedTime * 30)));
+        float y = 3.8f;
+        float z = 4.0f * (float) (Math.cos(Math.toRadians(elapsedTime * 30)));
+        return new Vec3(x, y, z);
+    }
+
+    // The light's postion is continually being changed, so needs to be calculated for each frame.
     private Vec3 getLightPosition2() {
+        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
+        float x = -8.1f * (float) (Math.sin(Math.toRadians(elapsedTime * 50)));
+        float y = 7.8f;
+        float z = -2.0f * (float) (Math.cos(Math.toRadians(elapsedTime * 50)));
+        return new Vec3(x, y, z);
+    }
+    // The light's postion is continually being changed, so needs to be calculated for each frame.
+    private Vec3 getLightPosition3() {
         double elapsedTime = TimeUtils.getCurrentTime() - startTime;
         float x = -12.1f * (float) (Math.sin(Math.toRadians(elapsedTime * 50)));
         float y = 7.8f;

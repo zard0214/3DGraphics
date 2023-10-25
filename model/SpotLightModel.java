@@ -22,12 +22,9 @@ import util.TextureLibrary;
 public class SpotLightModel{
 
     private Model sphere_body, sphere_head, sphere_lamp;
-    private SpotLight spotLight;
 
     private Mat4 modelMatrix;
     public SpotLightModel(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, SpotLightShader spotLightShader, Mat4 mat4, Mesh m) {
-
-        this.spotLight = spotLight;
 
         int[] textureId0 = TextureLibrary.loadTexture(gl, Constant.SPOTLIGHT_TEXTURE_1);
         int[] textureId1 = TextureLibrary.loadTexture(gl, Constant.SPOTLIGHT_TEXTURE_3);
@@ -53,8 +50,6 @@ public class SpotLightModel{
 
         Material bodyMaterial = new Material(new Vec3(0.5f, 0.5f, 0.5f), new Vec3(0.8f, 0.8f, 0.8f), new Vec3(0.8f, 0.8f, 0.8f), 32.0f);
         sphere_body = new Model(gl, camera, light_1, light_2, spotLight, spotLightShader, bodyMaterial, modelMatrix, m, textureId0);
-        //左右 上下 前后
-
     }
 
     public void render(GL3 gl) {

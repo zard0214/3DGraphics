@@ -49,19 +49,22 @@ void main() {
   // ambient
   vec3 ambient_2 = light_2.ambient * texture(first_texture, aTexCoord).rgb;
 
+  // diffuse
+  norm = normalize(aNormal);
   lightDir = normalize(light_2.position - aPos);
   diff = max(dot(norm, lightDir), 0.0);
   vec3 diffuse_2 = light_2.diffuse * (diff) * texture(first_texture, aTexCoord).rgb;
 
+  // specular
   viewDir = normalize(viewPos - aPos);
   reflectDir = reflect(-lightDir, norm);
   spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
-
   vec3 specular_2 = light_2.specular * (spec * material.specular);
+
 
   vec4 first = texture(first_texture, aTexCoord);
   vec4 second = texture(second_texture,  aOffsetTexCoord * -1);
-  vec3 result = mix(first, second, 0.3f).rgb + ambient + diffuse + specular + ambient_2 + diffuse_2 + specular_2;
 
-  fragColor = vec4(result, 1.0f);
+  fragColor = vec4(mix(first,
+                       second, 1.0f).rgb  + ambient + diffuse + specular + ambient_2 + diffuse_2 + specular_2, 1.0f);
 }
