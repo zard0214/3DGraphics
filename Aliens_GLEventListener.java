@@ -86,6 +86,7 @@ public class Aliens_GLEventListener implements GLEventListener {
         Material planeMaterial = new Material(new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.3f, 0.3f, 0.3f), 4.0f);
         plane_1 = new Model(gl, camera, light_1, light_2, spotLight, planeShader, planeMaterial, new Mat4(1), m, textureId1);
 
+        planeShader = new PlaneShader(gl, "engine/shaders/vertex/vs_texture.glsl", "engine/shaders/fragment/fs_background_1.glsl");
         planeShader = new PlaneShader(gl, "engine/shaders/vertex/vs_texture.glsl", "engine/shaders/fragment/fs_texture2.glsl");
         int[] textureId0 = TextureLibrary.loadTexture(gl, "textures/snow2.jpg");
         int[] textureId2 = TextureLibrary.loadTexture(gl, "textures/snowing.jpg");
@@ -132,7 +133,9 @@ public class Aliens_GLEventListener implements GLEventListener {
 
         skybox.render(gl, cubemap_id, camera, startTime);
 
-        spotLight.setPosition( getLightPosition2());  // changing light position each frame
+        spotLight.setPosition(getLightPosition2());  // changing light position each frame
+        spotLight.setPosition(-6.5f, 7.3f, 0.0f);  // changing light position each frame
+        spotLight.render(gl);
 
         light_1.setPosition(new Vec3(-7.0f, 7.0f, 0.0f));  // changing light position each frame
         light_1.setPosition(getLightPosition2());  // changing light position each frame

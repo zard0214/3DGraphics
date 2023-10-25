@@ -21,12 +21,12 @@ import java.nio.IntBuffer;
  */
 public class SpotLight {
 
-    private Vec3 direction = new Vec3(1f, -1.25f, 0.0f);
-    private float cutOff = 1.0f;
-    private float outerCutOff = 0.95f;
+    private Vec3 direction = new Vec3(1.0f, -1.25f, 0.0f);
+    private float cutOff = (float) Math.cos(Math.toRadians(0.953));
+    private float outerCutOff = (float) Math.cos(Math.toRadians(17.5));
     private float constant = 1.0f;
-    private float linear = 0.0014f;
-    private float quadratic = 0.000007f;
+    private float linear = 0.09f;
+    private float quadratic = 0.0028f;
     private Vec3 ambient = new Vec3(0.1f, 0.1f, 0.1f);
     private Vec3 diffuse = new Vec3(0.2f, 0.2f, 0.2f);
     private Vec3 specular = new Vec3(0.3f, 0.3f, 0.3f);
@@ -44,6 +44,8 @@ public class SpotLight {
         material.setAmbient(0.3f, 0.3f, 0.3f);
         material.setDiffuse(0.5f, 0.5f, 0.5f);
         material.setSpecular(0.7f, 0.7f, 0.7f);
+
+        turnOnLight(true, 0.80f);
         position = new Vec3(3f, 2f, 1f);
         model = new Mat4(1);
         shader = new SpotLightShader(gl, "engine/shaders/vertex/vs_texture.glsl", "engine/shaders/fragment/fs_texture.glsl");
@@ -175,24 +177,12 @@ public class SpotLight {
         return direction;
     }
 
-    public void setDirection(Vec3 direction) {
-        this.direction = direction;
-    }
-
     public float getCutOff() {
         return cutOff;
     }
 
-    public void setCutOff(float cutOff) {
-        this.cutOff = cutOff;
-    }
-
     public float getOuterCutOff() {
         return outerCutOff;
-    }
-
-    public void setOuterCutOff(float outerCutOff) {
-        this.outerCutOff = outerCutOff;
     }
 
     public float getConstant() {
@@ -207,24 +197,12 @@ public class SpotLight {
         return linear;
     }
 
-    public void setLinear(float linear) {
-        this.linear = linear;
-    }
-
     public float getQuadratic() {
         return quadratic;
     }
 
-    public void setQuadratic(float quadratic) {
-        this.quadratic = quadratic;
-    }
-
     public Vec3 getAmbient() {
         return ambient;
-    }
-
-    public void setAmbient(Vec3 ambient) {
-        this.ambient = ambient;
     }
 
     public Vec3 getDiffuse() {
