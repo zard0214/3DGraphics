@@ -87,8 +87,8 @@ public class Aliens_GLEventListener implements GLEventListener {
         plane_1 = new Model(gl, camera, light_1, light_2, spotLight, planeShader, planeMaterial, new Mat4(1), m, textureId1);
 
         planeShader = new PlaneShader(gl, "engine/shaders/vertex/vs_texture.glsl", "engine/shaders/fragment/fs_background_1.glsl");
-        planeShader = new PlaneShader(gl, "engine/shaders/vertex/vs_texture.glsl", "engine/shaders/fragment/fs_texture2.glsl");
-        int[] textureId0 = TextureLibrary.loadTexture(gl, "textures/snow2.jpg");
+        planeShader = new PlaneShader(gl, "engine/shaders/vertex/vs_background_1.glsl", "engine/shaders/fragment/fs_background_1.glsl");
+        int[] textureId0 = TextureLibrary.loadTexture(gl, "textures/snow3.jpg");
         int[] textureId2 = TextureLibrary.loadTexture(gl, "textures/snowing.jpg");
         plane_2 = new Model(gl, camera, light_1, light_2, spotLight, planeShader, planeMaterial, new Mat4(1), m, textureId0, textureId2);
 
