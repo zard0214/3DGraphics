@@ -1,8 +1,8 @@
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL3;
-import engine.camera.Camera;
-import engine.shaders.SkyboxShader;
+import core.camera.Camera;
+import core.shaders.SkyboxShader;
 import gmaths.Mat4;
 import util.Constant;
 import util.TextureLibrary;

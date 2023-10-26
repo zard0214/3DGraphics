@@ -2,11 +2,11 @@ package model;
 
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL3;
-import engine.Shader;
-import engine.camera.Camera;
-import engine.camera.Material;
-import engine.light.Light;
-import engine.light.SpotLight;
+import core.Shader;
+import core.camera.Camera;
+import core.camera.Material;
+import core.light.Light;
+import core.light.SpotLight;
 import gmaths.Mat4;
 
 public class Model {

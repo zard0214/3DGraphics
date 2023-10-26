@@ -1,11 +1,11 @@
-package engine.light;
+package core.light;
 
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL3;
-import engine.Shader;
-import engine.camera.Camera;
-import engine.camera.Material;
+import core.Shader;
+import core.camera.Camera;
+import core.camera.Material;
 import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;
@@ -29,7 +29,7 @@ public class Light {
         material.setSpecular(0.7f, 0.7f, 0.7f);
         position = new Vec3(3f, 2f, 1f);
         model = new Mat4(1);
-        shader = new Shader(gl, "engine/shaders/vertex/vs_light_01.txt", "engine/shaders/fragment/fs_light_01.txt");
+        shader = new Shader(gl, "core/shaders/vertex/vs_light_01.txt", "core/shaders/fragment/fs_light_01.txt");
         fillBuffers(gl);
     }
 

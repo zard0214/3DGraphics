@@ -1,4 +1,4 @@
-package engine;
+package core;
 
 import com.jogamp.opengl.GL3;
 import com.jogamp.opengl.util.glsl.ShaderCode;

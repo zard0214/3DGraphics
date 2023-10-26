@@ -2,11 +2,9 @@ import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.FPSAnimator;
-import engine.camera.Camera;
-import engine.camera.KeyboardAdapter;
-import engine.camera.Material;
-import engine.camera.MouseAdapter;
-import gmaths.Vec3;
+import core.camera.Camera;
+import core.camera.KeyboardAdapter;
+import core.camera.MouseAdapter;
 
 import javax.swing.*;
 import java.awt.*;

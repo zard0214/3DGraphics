@@ -1,7 +1,7 @@
-package engine.shaders;
+package core.shaders;
 
 import com.jogamp.opengl.GL3;
-import engine.Shader;
+import core.Shader;
 import util.Constant;
 
 /**

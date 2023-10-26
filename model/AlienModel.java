@@ -1,12 +1,11 @@
 package model;
 
 import com.jogamp.opengl.GL3;
-import engine.Shader;
-import engine.camera.Camera;
-import engine.camera.Material;
-import engine.light.Light;
-import engine.light.SpotLight;
-import engine.shaders.AlienShader;
+import core.camera.Camera;
+import core.camera.Material;
+import core.light.Light;
+import core.light.SpotLight;
+import core.shaders.AlienShader;
 import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;

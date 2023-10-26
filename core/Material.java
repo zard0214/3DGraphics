@@ -1,4 +1,4 @@
-package engine.camera;
+package core.camera;
 
 import gmaths.Vec3;
 

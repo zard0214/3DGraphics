@@ -1,4 +1,4 @@
-package engine.camera;
+package core.camera;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

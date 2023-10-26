@@ -1,12 +1,12 @@
-package engine.light;
+package core.light;
 
 import com.jogamp.common.nio.Buffers;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL3;
-import engine.Shader;
-import engine.camera.Camera;
-import engine.camera.Material;
-import engine.shaders.SpotLightShader;
+import core.Shader;
+import core.camera.Camera;
+import core.camera.Material;
+import core.shaders.SpotLightShader;
 import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;
@@ -48,7 +48,7 @@ public class SpotLight {
         turnOnLight(true, 0.80f);
         position = new Vec3(3f, 2f, 1f);
         model = new Mat4(1);
-        shader = new SpotLightShader(gl, "engine/shaders/vertex/vs_texture.glsl", "engine/shaders/fragment/fs_texture.glsl");
+        shader = new SpotLightShader(gl, "core/shaders/vertex/vs_texture.glsl", "core/shaders/fragment/fs_texture.glsl");
         fillBuffers(gl);
     }
 
@@ -56,7 +56,7 @@ public class SpotLight {
         this.material = material;
         position = new Vec3(3f, 2f, 1f);
         model = new Mat4(1);
-        shader = new SpotLightShader(gl, "engine/shaders/vertex/vs_texture.glsl", "engine/shaders/fragment/fs_texture.glsl");
+        shader = new SpotLightShader(gl, "core/shaders/vertex/vs_texture.glsl", "core/shaders/fragment/fs_texture.glsl");
         fillBuffers(gl);
     }
 

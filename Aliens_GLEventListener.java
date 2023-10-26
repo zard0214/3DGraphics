@@ -2,13 +2,13 @@ import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL3;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
-import engine.camera.Camera;
-import engine.camera.Material;
-import engine.light.Light;
-import engine.light.SpotLight;
-import engine.shaders.AlienShader;
-import engine.shaders.PlaneShader;
-import engine.shaders.SpotLightShader;
+import core.camera.Camera;
+import core.camera.Material;
+import core.light.Light;
+import core.light.SpotLight;
+import core.shaders.AlienShader;
+import core.shaders.PlaneShader;
+import core.shaders.SpotLightShader;
 import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;
@@ -81,18 +81,18 @@ public class Aliens_GLEventListener implements GLEventListener {
                 Constant.SKYBOX_TEXTURE_PY, Constant.SKYBOX_TEXTURE_NZ);
 
         Mesh m = new Mesh(gl, TwoTriangles.vertices.clone(), TwoTriangles.indices.clone());
-        PlaneShader planeShader = new PlaneShader(gl, "engine/shaders/vertex/vs_texture.glsl", "engine/shaders/fragment/fs_texture.glsl");
+        PlaneShader planeShader = new PlaneShader(gl, "core/shaders/vertex/vs_texture.glsl", "core/shaders/fragment/fs_texture.glsl");
         int[] textureId1 = TextureLibrary.loadTexture(gl, "textures/snow_floor2.jpg");
         Material planeMaterial = new Material(new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.3f, 0.3f, 0.3f), 4.0f);
         plane_1 = new Model(gl, camera, light_1, light_2, spotLight, planeShader, planeMaterial, new Mat4(1), m, textureId1);
 
-        planeShader = new PlaneShader(gl, "engine/shaders/vertex/vs_background_1.glsl", "engine/shaders/fragment/fs_background_1.glsl");
+        planeShader = new PlaneShader(gl, "core/shaders/vertex/vs_background_1.glsl", "core/shaders/fragment/fs_background_1.glsl");
         int[] textureId0 = TextureLibrary.loadTexture(gl, "textures/snow3.jpg");
         int[] textureId2 = TextureLibrary.loadTexture(gl, "textures/snowing.jpg");
         plane_2 = new Model(gl, camera, light_1, light_2, spotLight, planeShader, planeMaterial, new Mat4(1), m, textureId0, textureId2);
 
         m = new Mesh(gl, Sphere.vertices.clone(), Sphere.indices.clone());
-        AlienShader alienShader = new AlienShader(gl, "engine/shaders/vertex/vs_default.glsl", "engine/shaders/fragment/fs_texture.glsl");
+        AlienShader alienShader = new AlienShader(gl, "core/shaders/vertex/vs_default.glsl", "core/shaders/fragment/fs_texture.glsl");
         int[] alienTexture = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
         Material alienMaterial = new Material(new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.3f, 0.3f, 0.3f), 4.0f);
 
@@ -104,7 +104,7 @@ public class Aliens_GLEventListener implements GLEventListener {
         transition = Mat4Transform.translate(2.5f, 0.0f, 0.7f);
         alien_2 = new AlienModel(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
 
-        SpotLightShader spotLightShader = new SpotLightShader(gl, "engine/shaders/vertex/vs_cube_03.txt", "engine/shaders/fragment/fs_cube_033.txt");
+        SpotLightShader spotLightShader = new SpotLightShader(gl, "core/shaders/vertex/vs_cube_03.txt", "core/shaders/fragment/fs_cube_033.txt");
         spotLightModel = new SpotLightModel(gl, camera, light_1, light_2, spotLight, spotLightShader, new Mat4(1), m);
     }
 

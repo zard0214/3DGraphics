@@ -23,24 +23,24 @@ public class Constant {
     public static final String ALIEN_TEXTURE_GRAY_2 = "textures/gray_2.jpg";
     public static final String ALIEN_TEXTURE_1 = "textures/snow.jpg";
     public static final String ALIEN_TEXTURE_2 = "textures/snow_specular.jpg";
-    public static final String ALIEN_GLSL_VS = "engine/shaders/glsl/vertex/vs_sphere_04.glsl";
-    public static final String ALIEN_GLSL_FS = "engine/shaders/glsl/fragment/fs_sphere_04.glsl";
-    public static final String BG_GLSL_VS = "engine/shaders/glsl/vertex/vs_background_1.glsl";
-    public static final String BG_GLSL_FS = "engine/shaders/glsl/fragment/fs_background_1.glsl";
-    public static final String LIGHT_GLSL_VS = "engine/shaders/vertex/vs_light_01.glsl";
-    public static final String LIGHT_GLSL_FS = "engine/shaders/fragment/fs_light_01.glsl";
-    public static final String LIGHT_GLSL_FS_2 = "engine/shaders/fragment/fs_light_02.glsl";
+    public static final String ALIEN_GLSL_VS = "core/shaders/glsl/vertex/vs_sphere_04.glsl";
+    public static final String ALIEN_GLSL_FS = "core/shaders/glsl/fragment/fs_sphere_04.glsl";
+    public static final String BG_GLSL_VS = "core/shaders/glsl/vertex/vs_background_1.glsl";
+    public static final String BG_GLSL_FS = "core/shaders/glsl/fragment/fs_background_1.glsl";
+    public static final String LIGHT_GLSL_VS = "core/shaders/vertex/vs_light_01.glsl";
+    public static final String LIGHT_GLSL_FS = "core/shaders/fragment/fs_light_01.glsl";
+    public static final String LIGHT_GLSL_FS_2 = "core/shaders/fragment/fs_light_02.glsl";
     public static final String FLOOR_TEXTURE_1 = "textures/snow.jpg";
     public static final String FLOOR_TEXTURE_2 = "textures/snow_specular.jpg";
     public static final String SPOTLIGHT_TEXTURE_1 = "textures/snow.jpg";
     public static final String SPOTLIGHT_TEXTURE_2 = "textures/snow_specular.jpg";
     public static final String SPOTLIGHT_TEXTURE_3 = "textures/yellow.jpg";
-    public static final String FLOOR_GLSL_VS = "engine/shaders/vertex/vs_tt_06.glsl";
-    public static final String FLOOR_GLSL_FS = "engine/shaders/fragment/fs_tt_06.glsl";
-    public static final String SKYBOX_GLSL_VS = "engine/shaders/vertex/vs_skybox_1.glsl";
-    public static final String SKYBOX_GLSL_FS = "engine/shaders/fragment/fs_skybox_1.glsl";
-    public static final String SPOTLIGHT_GLSL_VS = "engine/shaders/vertex/vs_sphere_04.glsl";
-    public static final String SPOTLIGHT_GLSL_FS = "engine/shaders/fragment/fs_sphere_04.glsl";
+    public static final String FLOOR_GLSL_VS = "core/shaders/vertex/vs_tt_06.glsl";
+    public static final String FLOOR_GLSL_FS = "core/shaders/fragment/fs_tt_06.glsl";
+    public static final String SKYBOX_GLSL_VS = "core/shaders/vertex/vs_skybox_1.glsl";
+    public static final String SKYBOX_GLSL_FS = "core/shaders/fragment/fs_skybox_1.glsl";
+    public static final String SPOTLIGHT_GLSL_VS = "core/shaders/vertex/vs_sphere_04.glsl";
+    public static final String SPOTLIGHT_GLSL_FS = "core/shaders/fragment/fs_sphere_04.glsl";
 
 
     public static final float[] SKYBOX_VS = new float[]{
