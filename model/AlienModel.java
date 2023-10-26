@@ -35,7 +35,7 @@ public class AlienModel {
         modelMatrix = Mat4.multiply(transition, modelMatrix);
         sphere_body = new Model(gl, camera, light_1, light_2, spotLight, alienShader, material, modelMatrix, m, alientextureId0);
         /***********  sphere_head  ***************/
-        modelMatrix = Mat4.multiply(Mat4Transform.scale(1.3f,1.3f,1.3f), Mat4Transform.translate(0f, 1.81f, 0f));
+        modelMatrix = Mat4.multiply(Mat4Transform.scale(1.3f,1.3f,1.3f), Mat4Transform.translate(0f, 1.80f, 0f));
 
         modelMatrix = Mat4.multiply(transition, modelMatrix);
         sphere_head = new Model(gl, camera, light_1, light_2, spotLight, alienShader, material, modelMatrix, m, alientextureId0);

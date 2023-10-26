@@ -134,7 +134,7 @@ public class Aliens_GLEventListener implements GLEventListener {
 
 //        spotLight.setPosition(getLightPosition3());  // changing light position each frame
         spotLight.setPosition(-6.5f, 7.3f, 0.0f);  // changing light position each frame
-        spotLight.render(gl);
+//        spotLight.render(gl);
 
 //        light_1.setPosition(new Vec3(-7.0f, 7.0f, 0.0f));  // changing light position each frame
         light_1.setPosition(getLightPosition2());  // changing light position each frame
