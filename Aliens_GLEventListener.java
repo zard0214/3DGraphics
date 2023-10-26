@@ -96,10 +96,12 @@ public class Aliens_GLEventListener implements GLEventListener {
         int[] alienTexture = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
         Material alienMaterial = new Material(new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.3f, 0.3f, 0.3f), 4.0f);
 
-        Mat4 transition = Mat4Transform.translate(-2,0,0);
+//        Mat4 transition = Mat4Transform.translate(-2,0,0);
+        Mat4 transition = Mat4Transform.translate(-2.5f,0.0f,-1.0f);
         alien_1 = new AlienModel(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
 
-        transition = Mat4Transform.translate(2,0,0);
+//        transition = Mat4Transform.translate(2,0,0);
+        transition = Mat4Transform.translate(2.5f,0.0f,0.7f);
         alien_2 = new AlienModel(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
 
         SpotLightShader spotLightShader = new SpotLightShader(gl, "engine/shaders/vertex/vs_cube_03.txt", "engine/shaders/fragment/fs_cube_033.txt");
@@ -184,9 +186,9 @@ public class Aliens_GLEventListener implements GLEventListener {
     // The light's postion is continually being changed, so needs to be calculated for each frame.
     private Vec3 getLightPosition3() {
         double elapsedTime = TimeUtils.getCurrentTime() - startTime;
-        float x = -12.1f * (float) (Math.sin(Math.toRadians(elapsedTime * 50)));
-        float y = 7.8f;
-        float z = 0.0f * (float) (Math.cos(Math.toRadians(elapsedTime * 50)));
+        float x = -8.1f * (float) (Math.sin(Math.toRadians(elapsedTime * 25)));
+        float y = 3.8f;
+        float z = 0.0f * (float) (Math.cos(Math.toRadians(elapsedTime * 25)));
         return new Vec3(x, y, z);
     }
 
@@ -221,4 +223,11 @@ public class Aliens_GLEventListener implements GLEventListener {
         return spotLight;
     }
 
+    public SpotLightModel getSpotLightModel() {
+        return spotLightModel;
+    }
+
+    public void setSpotLightModel(SpotLightModel spotLightModel) {
+        this.spotLightModel = spotLightModel;
+    }
 }

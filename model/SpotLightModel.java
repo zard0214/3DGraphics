@@ -33,9 +33,10 @@ public class SpotLightModel{
         modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(60), Mat4Transform.scale(0.3f,0.70f,0.3f));
         modelMatrix = Mat4.multiply(Mat4Transform.translate(-6.7f, 7.5f, 0f), modelMatrix);
 
-        Material lampMaterial = new Material(new Vec3(0.5f, 0.5f, 0.5f), new Vec3(0.8f, 0.8f, 0.8f), new Vec3(0.8f, 0.8f, 0.8f), 32.0f);
+        Material lampMaterial = new Material(new Vec3(1.0f, 1.0f, 0.31f), new Vec3(1.0f, 1.0f, 0.31f), new Vec3(0.5f, 0.5f, 0.5f), 32.0f);
+//        Material lampMaterial = new Material(new Vec3(0.0f, 0.0f, 0.0f), new Vec3(0.0f, 0.0f, 0.0f), new Vec3(0.0f, 0.0f, 0.0f), 32.0f);
         LampShader lampShader = new LampShader(gl, Constant.LIGHT_GLSL_VS, Constant.LIGHT_GLSL_FS);
-        sphere_lamp = new Model(gl, camera, light_1, light_2, spotLight, lampShader, lampMaterial, modelMatrix, m, textureId1);
+        sphere_lamp = new Model(gl, camera, light_1, light_2, spotLight, spotLightShader, lampMaterial, modelMatrix, m, textureId1);
 
         /***********  sphere_head  ***************/
         modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(60), Mat4Transform.scale(0.5f,1.2f,0.5f));
@@ -64,5 +65,13 @@ public class SpotLightModel{
         sphere_head.dispose(gl);
         sphere_lamp.dispose(gl);
 
+    }
+
+    public Model getSphere_lamp() {
+        return sphere_lamp;
+    }
+
+    public void setSphere_lamp(Model sphere_lamp) {
+        this.sphere_lamp = sphere_lamp;
     }
 }

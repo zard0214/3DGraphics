@@ -184,4 +184,11 @@ public class Model {
     }
 
 
+    public Material getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Material material) {
+        this.material = material;
+    }
 }

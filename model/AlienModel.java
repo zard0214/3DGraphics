@@ -50,12 +50,12 @@ public class AlienModel {
         modelMatrix = Mat4.multiply(transition, modelMatrix);
         sphere_antenna_top = new Model(gl, camera, light_1, light_2, spotLight, alienShader, material, modelMatrix, m, alientextureId0);
         /***********  sphere_lefteye  ***************/
-        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.18f,0.18f,0.18f), Mat4Transform.translate(-1.5f,14.5f,3.7f));
+        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.18f,0.18f,0.18f), Mat4Transform.translate(-1.5f,14.5f,3.4f));
 
         modelMatrix = Mat4.multiply(transition, modelMatrix);
         sphere_lefteye = new Model(gl, camera, light_1, light_2, spotLight, alienShader, material, modelMatrix, m, alientextureId0);
         /***********  sphere_righteye  ***************/
-        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.18f,0.18f,0.18f), Mat4Transform.translate(1.5f,14.5f,3.7f));
+        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.18f,0.18f,0.18f), Mat4Transform.translate(1.5f,14.5f,3.4f));
 
         modelMatrix = Mat4.multiply(transition, modelMatrix);
         sphere_righteye = new Model(gl, camera, light_1, light_2, spotLight, alienShader, material, modelMatrix, m, alientextureId0);
