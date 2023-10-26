@@ -30,58 +30,58 @@ public class AlienModel {
         int[] alientextureId0 = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
         /***********  sphere_body  ***************/
         Material material = new Material(new Vec3(1.0f, 0.5f, 0.31f), new Vec3(1.0f, 0.5f, 0.31f), new Vec3(0.5f, 0.5f, 0.5f), 32.0f);
-        modelMatrix = Mat4.multiply(Mat4Transform.scale(1.7f,1.7f,1.7f), Mat4Transform.translate(0f, 0.5f, 0f));
+        modelMatrix = Mat4.multiply(Mat4Transform.scale(1.7f, 1.7f, 1.7f), Mat4Transform.translate(0f, 0.5f, 0f));
 
         modelMatrix = Mat4.multiply(transition, modelMatrix);
         sphere_body = new Model(gl, camera, light_1, light_2, spotLight, alienShader, material, modelMatrix, m, alientextureId0);
         /***********  sphere_head  ***************/
-        modelMatrix = Mat4.multiply(Mat4Transform.scale(1.3f,1.3f,1.3f), Mat4Transform.translate(0f, 1.80f, 0f));
+        modelMatrix = Mat4.multiply(Mat4Transform.scale(1.3f, 1.3f, 1.3f), Mat4Transform.translate(0f, 1.80f, 0f));
 
         modelMatrix = Mat4.multiply(transition, modelMatrix);
         sphere_head = new Model(gl, camera, light_1, light_2, spotLight, alienShader, material, modelMatrix, m, alientextureId0);
         /***********  sphere_antenna_bottom  ***************/
-        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.125f,0.5f,0.125f), Mat4Transform.translate(0f,6.5f,0f));
+        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.125f, 0.5f, 0.125f), Mat4Transform.translate(0f, 6.5f, 0f));
 
         modelMatrix = Mat4.multiply(transition, modelMatrix);
         sphere_antenna_bottom = new Model(gl, camera, light_1, light_2, spotLight, alienShader, material, modelMatrix, m, alientextureId0);
         /***********  sphere_antenna_top  ***************/
-        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.18f,0.18f,0.18f), Mat4Transform.translate(0f,19.9f,0f));
+        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.18f, 0.18f, 0.18f), Mat4Transform.translate(0f, 19.9f, 0f));
 
         modelMatrix = Mat4.multiply(transition, modelMatrix);
         sphere_antenna_top = new Model(gl, camera, light_1, light_2, spotLight, alienShader, material, modelMatrix, m, alientextureId0);
         /***********  sphere_lefteye  ***************/
-        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.18f,0.18f,0.18f), Mat4Transform.translate(-1.5f,14.5f,3.4f));
+        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.18f, 0.18f, 0.18f), Mat4Transform.translate(-1.5f, 14.5f, 3.4f));
 
         modelMatrix = Mat4.multiply(transition, modelMatrix);
         sphere_lefteye = new Model(gl, camera, light_1, light_2, spotLight, alienShader, material, modelMatrix, m, alientextureId0);
         /***********  sphere_righteye  ***************/
-        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.18f,0.18f,0.18f), Mat4Transform.translate(1.5f,14.5f,3.4f));
+        modelMatrix = Mat4.multiply(Mat4Transform.scale(0.18f, 0.18f, 0.18f), Mat4Transform.translate(1.5f, 14.5f, 3.4f));
 
         modelMatrix = Mat4.multiply(transition, modelMatrix);
         sphere_righteye = new Model(gl, camera, light_1, light_2, spotLight, alienShader, material, modelMatrix, m, alientextureId0);
         /***********  sphere_leftarm  ***************/
-        modelMatrix = Mat4Transform.scale(0.18f,1.0f,0.18f);
+        modelMatrix = Mat4Transform.scale(0.18f, 1.0f, 0.18f);
         modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(45), modelMatrix);
         modelMatrix = Mat4.multiply(Mat4Transform.translate(-1.15f, 1.2f, 0.0f), modelMatrix);
 
         modelMatrix = Mat4.multiply(transition, modelMatrix);
         sphere_leftarm = new Model(gl, camera, light_1, light_2, spotLight, alienShader, material, modelMatrix, m, alientextureId0);
         /***********  sphere_rightarm  ***************/
-        modelMatrix = Mat4Transform.scale(0.18f,1.0f,0.18f);
+        modelMatrix = Mat4Transform.scale(0.18f, 1.0f, 0.18f);
         modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(-45), modelMatrix);
         modelMatrix = Mat4.multiply(Mat4Transform.translate(1.15f, 1.2f, 0.0f), modelMatrix);
 
         modelMatrix = Mat4.multiply(transition, modelMatrix);
         sphere_rightarm = new Model(gl, camera, light_1, light_2, spotLight, alienShader, material, modelMatrix, m, alientextureId0);
         /***********  sphere_leftear  ***************/
-        modelMatrix = Mat4Transform.scale(0.18f,1.0f,0.18f);
+        modelMatrix = Mat4Transform.scale(0.18f, 1.0f, 0.18f);
         modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(0), modelMatrix);
         modelMatrix = Mat4.multiply(Mat4Transform.translate(-0.65f, 3.0f, 0.0f), modelMatrix);
 
         modelMatrix = Mat4.multiply(transition, modelMatrix);
         sphere_leftear = new Model(gl, camera, light_1, light_2, spotLight, alienShader, material, modelMatrix, m, alientextureId0);
 //        /***********  sphere_rightear  ***************/
-        modelMatrix = Mat4Transform.scale(0.18f,1.0f,0.18f);
+        modelMatrix = Mat4Transform.scale(0.18f, 1.0f, 0.18f);
         modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(0), modelMatrix);
         modelMatrix = Mat4.multiply(Mat4Transform.translate(0.65f, 3.0f, 0.0f), modelMatrix);
 

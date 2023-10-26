@@ -29,6 +29,7 @@ public class Constant {
     public static final String BG_GLSL_FS = "engine/shaders/glsl/fragment/fs_background_1.glsl";
     public static final String LIGHT_GLSL_VS = "engine/shaders/vertex/vs_light_01.glsl";
     public static final String LIGHT_GLSL_FS = "engine/shaders/fragment/fs_light_01.glsl";
+    public static final String LIGHT_GLSL_FS_2 = "engine/shaders/fragment/fs_light_02.glsl";
     public static final String FLOOR_TEXTURE_1 = "textures/snow.jpg";
     public static final String FLOOR_TEXTURE_2 = "textures/snow_specular.jpg";
     public static final String SPOTLIGHT_TEXTURE_1 = "textures/snow.jpg";
@@ -42,49 +43,48 @@ public class Constant {
     public static final String SPOTLIGHT_GLSL_FS = "engine/shaders/fragment/fs_sphere_04.glsl";
 
 
-
     public static final float[] SKYBOX_VS = new float[]{
             // positions
-            -1,  1, -1,
+            -1, 1, -1,
             -1, -1, -1,
             1, -1, -1,
             1, -1, -1,
-            1,  1, -1,
-            -1,  1, -1,
+            1, 1, -1,
+            -1, 1, -1,
 
-            -1, -1,  1,
+            -1, -1, 1,
             -1, -1, -1,
-            -1,  1, -1,
-            -1,  1, -1,
-            -1,  1,  1,
-            -1, -1,  1,
+            -1, 1, -1,
+            -1, 1, -1,
+            -1, 1, 1,
+            -1, -1, 1,
 
             1, -1, -1,
-            1, -1,  1,
-            1,  1,  1,
-            1,  1,  1,
-            1,  1, -1,
+            1, -1, 1,
+            1, 1, 1,
+            1, 1, 1,
+            1, 1, -1,
             1, -1, -1,
 
-            -1, -1,  1,
-            -1,  1,  1,
-            1,  1,  1,
-            1,  1,  1,
-            1, -1,  1,
-            -1, -1,  1,
+            -1, -1, 1,
+            -1, 1, 1,
+            1, 1, 1,
+            1, 1, 1,
+            1, -1, 1,
+            -1, -1, 1,
 
-            -1,  1, -1,
-            1,  1, -1,
-            1,  1,  1,
-            1,  1,  1,
-            -1,  1,  1,
-            -1,  1, -1,
+            -1, 1, -1,
+            1, 1, -1,
+            1, 1, 1,
+            1, 1, 1,
+            -1, 1, 1,
+            -1, 1, -1,
 
             -1, -1, -1,
-            -1, -1,  1,
+            -1, -1, 1,
             1, -1, -1,
             1, -1, -1,
-            -1, -1,  1,
-            1, -1,  1
+            -1, -1, 1,
+            1, -1, 1
     };
 }

@@ -21,15 +21,15 @@ public class MouseAdapter extends MouseMotionAdapter {
     /**
      * mouse is used to control core.camera position
      *
-     * @param e  instance of MouseEvent
+     * @param e instance of MouseEvent
      */
     public void mouseDragged(MouseEvent e) {
         Point ms = e.getPoint();
         float sensitivity = 0.001f;
-        float dx=(float) (ms.x-lastpoint.x)*sensitivity;
-        float dy=(float) (ms.y-lastpoint.y)*sensitivity;
+        float dx = (float) (ms.x - lastpoint.x) * sensitivity;
+        float dy = (float) (ms.y - lastpoint.y) * sensitivity;
         //System.out.println("dy,dy: "+dx+","+dy);
-        if (e.getModifiers()==MouseEvent.BUTTON1_MASK)
+        if (e.getModifiers() == MouseEvent.BUTTON1_MASK)
             camera.updateYawPitch(dx, -dy);
         lastpoint = ms;
     }
@@ -37,7 +37,7 @@ public class MouseAdapter extends MouseMotionAdapter {
     /**
      * mouse is used to control core.camera position
      *
-     * @param e  instance of MouseEvent
+     * @param e instance of MouseEvent
      */
     public void mouseMoved(MouseEvent e) {
         lastpoint = e.getPoint();

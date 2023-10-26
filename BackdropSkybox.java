@@ -32,7 +32,7 @@ public class BackdropSkybox {
     }
 
     public int loadCubemap(String px, String py, String pz, String nx, String ny,
-                              String nz){
+                           String nz) {
         String[] filePath = new String[6];
 
         filePath[0] = px;

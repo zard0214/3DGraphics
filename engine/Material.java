@@ -22,6 +22,7 @@ public class Material {
  private Vec3 specular;
  private Vec3 emission;
  private float shininess;
+ private float brightness;
 
  /**
   * Constructor. Sets attributes to default initial values.
@@ -202,4 +203,11 @@ public class Material {
    return "a:"+ambient+", d:"+diffuse+", s:"+specular+", e:"+emission+", shininess:"+shininess;
  }
 
+    public float getBrightness() {
+        return brightness;
+    }
+
+    public void setBrightness(float brightness) {
+        this.brightness = brightness;
+    }
 }

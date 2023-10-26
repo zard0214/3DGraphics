@@ -151,24 +151,24 @@ public class Light {
     }
 
 
-
-    public void setIntensity(float intensity){
+    public void setIntensity(float intensity) {
         this.intensity = intensity;
         material.setAmbient(intensity * 0.5f, intensity * 0.5f, intensity * 0.5f);
         material.setDiffuse(intensity, intensity, intensity);
         material.setSpecular(intensity, intensity, intensity);
     }
+
     public float getIntensity() {
         return intensity;
     }
 
     public void turnOnLight(boolean turnon, float intensity) {
-        if(turnon){
+        if (turnon) {
             this.intensity = intensity;
             material.setAmbient(intensity * 0.5f, intensity * 0.5f, intensity * 0.5f);
             material.setDiffuse(intensity, intensity, intensity);
             material.setSpecular(intensity, intensity, intensity);
-        }else{
+        } else {
             this.intensity = 0;
             material.setAmbient(intensity * 0.5f, intensity * 0.5f, intensity * 0.5f);
             material.setDiffuse(intensity, intensity, intensity);

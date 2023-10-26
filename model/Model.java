@@ -116,19 +116,19 @@ public class Model {
 
         shader.setVec3(gl, "viewPos", camera.getPosition());
 
-        if(light != null){
+        if (light != null) {
             shader.setVec3(gl, "light.position", light.getPosition());
             shader.setVec3(gl, "light.ambient", light.getMaterial().getAmbient());
             shader.setVec3(gl, "light.diffuse", light.getMaterial().getDiffuse());
             shader.setVec3(gl, "light.specular", light.getMaterial().getSpecular());
         }
-        if(light2 != null){
+        if (light2 != null) {
             shader.setVec3(gl, "light2.position", light2.getPosition());
             shader.setVec3(gl, "light2.ambient", light2.getMaterial().getAmbient());
             shader.setVec3(gl, "light2.diffuse", light2.getMaterial().getDiffuse());
             shader.setVec3(gl, "light2.specular", light2.getMaterial().getSpecular());
         }
-        if(spotLight != null){
+        if (spotLight != null) {
             shader.setVec3(gl, "spotLight.position", spotLight.getPosition());
             shader.setVec3(gl, "spotLight.direction", spotLight.getDirection());
             shader.setFloat(gl, "spotLight.cutOff", spotLight.getCutOff());
@@ -145,6 +145,7 @@ public class Model {
         shader.setVec3(gl, "material.diffuse", material.getDiffuse());
         shader.setVec3(gl, "material.specular", material.getSpecular());
         shader.setFloat(gl, "material.shininess", material.getShininess());
+        shader.setFloat(gl, "material.brightness", material.getBrightness());
 
         if (textureId1 != null) {
             shader.setInt(gl, "first_texture", 0);  // be careful to match these with GL_TEXTURE0 and GL_TEXTURE1
@@ -156,7 +157,7 @@ public class Model {
             gl.glActiveTexture(GL.GL_TEXTURE1);
             gl.glBindTexture(GL.GL_TEXTURE_2D, textureId2[0]);
         }
-        if(offset != 0){
+        if (offset != 0) {
             shader.setFloat(gl, "offset", 0, offset);
         }
         mesh.render(gl);
@@ -180,7 +181,7 @@ public class Model {
         this.elapsedTime = elapsedTime;
         final double SPEED = 0.05;
         double increment = elapsedTime * SPEED;
-        this.setOffSet((float)(increment - Math.floor(increment)));
+        this.setOffSet((float) (increment - Math.floor(increment)));
     }
 
 

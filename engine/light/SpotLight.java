@@ -241,31 +241,26 @@ public class SpotLight {
         return camera;
     }
 
-    public void setIntensity(float intensity){
+    public void setIntensity(float intensity) {
         this.intensity = intensity;
         material.setAmbient(intensity * 0.5f, intensity * 0.5f, intensity * 0.5f);
         material.setDiffuse(intensity, intensity, intensity);
         material.setSpecular(intensity, intensity, intensity);
     }
+
     public float getIntensity() {
         return intensity;
     }
 
     public void turnOnLight(boolean turnon, float intensity) {
-        if(turnon){
+        if (turnon) {
             this.intensity = intensity;
-            this.material.setAmbient(1.0f, 0.5f, 0.31f);
-            this.material.setDiffuse(1.0f, 0.5f, 0.31f);
-            this.material.setSpecular(0.5f, 0.5f, 0.5f);
 
             this.ambient = new Vec3(intensity * 0.5f, intensity * 0.5f, intensity * 0.5f);
             this.diffuse = new Vec3(intensity, intensity, intensity);
             this.specular = new Vec3(intensity, intensity, intensity);
-        }else{
+        } else {
             this.intensity = 0;
-            this.material.setAmbient(0.0f, 0.0f, 0.0f);
-            this.material.setDiffuse(0.0f, 0.0f, 0.0f);
-            this.material.setSpecular(0.0f, 0.0f, 0.0f);
 
             this.ambient = new Vec3(0f, 0f, 0f);
             this.diffuse = new Vec3(0f, 0f, 0f);

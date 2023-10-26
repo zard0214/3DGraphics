@@ -19,34 +19,35 @@ import util.TextureLibrary;
  * @RegistrationNo 220186627
  * @date Created in 25/10/2023 08:20
  */
-public class SpotLightModel{
+public class SpotLightModel {
 
     private Model sphere_body, sphere_head, sphere_lamp;
 
     private Mat4 modelMatrix;
+
     public SpotLightModel(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, SpotLightShader spotLightShader, Mat4 mat4, Mesh m) {
 
         int[] textureId0 = TextureLibrary.loadTexture(gl, Constant.SPOTLIGHT_TEXTURE_1);
         int[] textureId1 = TextureLibrary.loadTexture(gl, Constant.SPOTLIGHT_TEXTURE_3);
 
         /***********  sphere_lamp  ***************/
-        modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(60), Mat4Transform.scale(0.3f,0.70f,0.3f));
+        modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(60), Mat4Transform.scale(0.3f, 0.70f, 0.3f));
         modelMatrix = Mat4.multiply(Mat4Transform.translate(-6.7f, 7.5f, 0f), modelMatrix);
 
-        Material lampMaterial = new Material(new Vec3(1.0f, 1.0f, 0.31f), new Vec3(1.0f, 1.0f, 0.31f), new Vec3(0.5f, 0.5f, 0.5f), 32.0f);
-//        Material lampMaterial = new Material(new Vec3(0.0f, 0.0f, 0.0f), new Vec3(0.0f, 0.0f, 0.0f), new Vec3(0.0f, 0.0f, 0.0f), 32.0f);
-        LampShader lampShader = new LampShader(gl, Constant.LIGHT_GLSL_VS, Constant.LIGHT_GLSL_FS);
-        sphere_lamp = new Model(gl, camera, light_1, light_2, spotLight, spotLightShader, lampMaterial, modelMatrix, m, textureId1);
+        Material lampMaterial = new Material(new Vec3(0.5f, 0.5f, 0.5f), new Vec3(0.8f, 0.8f, 0.8f), new Vec3(0.8f, 0.8f, 0.8f), 32.0f);
+        lampMaterial.setBrightness(1.0f);
+        LampShader lampShader = new LampShader(gl, Constant.LIGHT_GLSL_VS, Constant.LIGHT_GLSL_FS_2);
+        sphere_lamp = new Model(gl, camera, light_1, light_2, spotLight, lampShader, lampMaterial, modelMatrix, m, textureId1);
 
         /***********  sphere_head  ***************/
-        modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(60), Mat4Transform.scale(0.5f,1.2f,0.5f));
+        modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(60), Mat4Transform.scale(0.5f, 1.2f, 0.5f));
         modelMatrix = Mat4.multiply(Mat4Transform.translate(-7.5f, 8.0f, 0f), modelMatrix);
 
         Material headMaterial = new Material(new Vec3(0.5f, 0.5f, 0.5f), new Vec3(0.8f, 0.8f, 0.8f), new Vec3(0.8f, 0.8f, 0.8f), 32.0f);
         sphere_head = new Model(gl, camera, light_1, light_2, spotLight, spotLightShader, headMaterial, modelMatrix, m, textureId0);
 
         /***********  sphere_body  ***************/
-        modelMatrix = Mat4Transform.scale(0.30f,8,0.30f);
+        modelMatrix = Mat4Transform.scale(0.30f, 8, 0.30f);
         modelMatrix = Mat4.multiply(Mat4Transform.translate(-7.5f, 4.0f, 0f), modelMatrix);
 
         Material bodyMaterial = new Material(new Vec3(0.5f, 0.5f, 0.5f), new Vec3(0.8f, 0.8f, 0.8f), new Vec3(0.8f, 0.8f, 0.8f), 32.0f);

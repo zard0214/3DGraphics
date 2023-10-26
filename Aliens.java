@@ -120,11 +120,10 @@ public class Aliens extends JFrame implements ActionListener {
             case "Turn Spotlight On/Off":
                 intensity = backdropGlEventListener.getSpotLight().getIntensity();
                 if(intensity == 0){
-                    backdropGlEventListener.getSpotLightModel().getSphere_lamp().setMaterial(new Material(new Vec3(1.0f, 1.0f, 0.31f), new Vec3(1.0f, 1.0f, 0.31f), new Vec3(0.5f, 0.5f, 0.5f), 32.0f));
+                    backdropGlEventListener.getSpotLightModel().getSphere_lamp().getMaterial().setBrightness(1.0f);
                     backdropGlEventListener.getSpotLight().turnOnLight(true, 0.15f);
                 }else {
-                    backdropGlEventListener.getSpotLightModel().getSphere_lamp().setMaterial(new Material(new Vec3(0.5f, 0.5f, 0.5f), new Vec3(0.8f, 0.8f, 0.8f), new Vec3(0.8f, 0.8f, 0.8f), 32.0f));
-                    backdropGlEventListener.getSpotLight().turnOnLight(false, 0);
+                    backdropGlEventListener.getSpotLightModel().getSphere_lamp().getMaterial().setBrightness(0.5f);
                     backdropGlEventListener.getSpotLight().turnOnLight(false, 0);
                 }
                 break;

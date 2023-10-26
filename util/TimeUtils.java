@@ -8,6 +8,6 @@ package util;
 public class TimeUtils {
 
     public static double getCurrentTime() {
-        return System.currentTimeMillis()/1000.0;
+        return System.currentTimeMillis() / 1000.0;
     }
 }
