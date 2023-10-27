@@ -10,11 +10,9 @@ import core.shaders.SpotLightShader;
 import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;
-import model.node.NameNode;
-import model.node.SGNode;
-import model.node.TransformNode;
 import util.Constant;
 import util.TextureLibrary;
+import util.TimeUtils;
 
 /**
  * @author Zhecheng Zhao
@@ -23,11 +21,19 @@ import util.TextureLibrary;
  */
 public class SpotLightModel {
 
+    private boolean animation = false;
+
+    private double startTime;
+
+    private double savedTime = 0;
+
     private Model sphere_body, sphere_head, sphere_lamp;
 
     private Mat4 modelMatrix;
 
-    public SpotLightModel(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, SpotLightShader spotLightShader, Mat4 mat4, Mesh m) {
+    public SpotLightModel(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, SpotLightShader spotLightShader, Mat4 mat4, Mesh m, double startTime) {
+
+        this.startTime = startTime;
 
         int[] textureId0 = TextureLibrary.loadTexture(gl, Constant.SPOTLIGHT_TEXTURE_1);
         int[] textureId1 = TextureLibrary.loadTexture(gl, Constant.SPOTLIGHT_TEXTURE_3);
@@ -60,14 +66,24 @@ public class SpotLightModel {
         sphere_body.render(gl);
         sphere_head.render(gl);
         sphere_lamp.render(gl);
-
     }
 
     public void dispose(GL3 gl) {
         sphere_body.dispose(gl);
         sphere_head.dispose(gl);
         sphere_lamp.dispose(gl);
+    }
 
+
+    public void startAnimation() {
+        animation = true;
+        startTime = TimeUtils.getCurrentTime() -savedTime;
+    }
+
+    public void stopAnimation() {
+        animation = false;
+        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
+        savedTime = elapsedTime;
     }
 
     public Model getSphere_lamp() {

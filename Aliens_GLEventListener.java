@@ -97,16 +97,14 @@ public class Aliens_GLEventListener implements GLEventListener {
         int[] alienTexture = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
         Material alienMaterial = new Material(new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.3f, 0.3f, 0.3f), 4.0f);
 
-//        Mat4 transition = Mat4Transform.translate(-2,0,0);
         Mat4 transition = Mat4Transform.translate(-2.5f, 0.0f, -1.0f);
         alien_1 = new AlienModel(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
 
-//        transition = Mat4Transform.translate(2,0,0);
         transition = Mat4Transform.translate(2.5f, 0.0f, 0.7f);
         alien_2 = new AlienModel(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
 
         SpotLightShader spotLightShader = new SpotLightShader(gl, "core/shaders/vertex/vs_cube_03.txt", "core/shaders/fragment/fs_cube_033.txt");
-        spotLightModel = new SpotLightModel(gl, camera, light_1, light_2, spotLight, spotLightShader, new Mat4(1), m);
+        spotLightModel = new SpotLightModel(gl, camera, light_1, light_2, spotLight, spotLightShader, new Mat4(1), m, startTime);
     }
 
     @Override
@@ -132,20 +130,17 @@ public class Aliens_GLEventListener implements GLEventListener {
 
     private void render(GL3 gl) {
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+        renderBg(gl);
+        alien_1.render(gl);
+        alien_2.render(gl);
+        spotLightModel.render(gl);
+    }
 
+    private void renderBg(GL3 gl) {
         skybox.render(gl, cubemap_id, camera, startTime);
-
-//        spotLight.setPosition(getLightPosition3());  // changing light position each frame
         spotLight.setPosition(-6.5f, 7.3f, 0.0f);  // changing light position each frame
-//        spotLight.render(gl);
-
-//        light_1.setPosition(new Vec3(-7.0f, 7.0f, 0.0f));  // changing light position each frame
         light_1.setPosition(getLightPosition2());  // changing light position each frame
-//        light_2.setPosition(new Vec3(7.0f, 7.0f, 0.0f));  // changing light position each frame
         light_2.setPosition(getLightPosition1());  // changing light position each frame
-//        light_3.setPosition(new Vec3(1f, -1.25f, 0.0f));  // changing light position each frame
-//        light_1.render(gl);
-//        light_2.render(gl);
 
         plane_1.setModelMatrix(getMforTT1());       // change transform
         plane_1.render(gl);
@@ -153,10 +148,6 @@ public class Aliens_GLEventListener implements GLEventListener {
         plane_2.setModelMatrix(getMforTT2());       // change transform
         plane_2.setElapsedTime(startTime - TimeUtils.getCurrentTime());
         plane_2.render(gl);
-
-        alien_1.render(gl);
-        alien_2.render(gl);
-        spotLightModel.render(gl);
     }
 
     @Override
