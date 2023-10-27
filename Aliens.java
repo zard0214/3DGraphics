@@ -104,6 +104,8 @@ public class Aliens extends JFrame implements ActionListener {
     private void setComponentsListener() {
         rockLeftbody.addActionListener(this);
         rockRightbody.addActionListener(this);
+        rollLeftHead.addActionListener(this);
+        rollRightHead.addActionListener(this);
         turnSpotlightOnOff.addActionListener(this);
         turnGenerallightOnOff.addActionListener(this);
         turnGenerallight2OnOff.addActionListener(this);
@@ -118,14 +120,20 @@ public class Aliens extends JFrame implements ActionListener {
         float intensity = 0;
         switch (e.getActionCommand()){
             case "Rock Left Body":
-                backdropGlEventListener.getSpotLightModel2().startAnimation();
+                System.out.println("Roll Left Body");
+                backdropGlEventListener.getAlien2_1().startRock();
                 break;
             case "Rock Right Body":
-                backdropGlEventListener.getSpotLightModel2().stopAnimation();
+                System.out.println("Roll Right Body");
+                backdropGlEventListener.getAlien2_2().startRock();
                 break;
             case "Roll Left Head":
+                System.out.println("Roll Left Head");
+                backdropGlEventListener.getAlien2_1().startRoll();
                 break;
             case "Roll Right Head":
+                System.out.println("Roll Right Head");
+                backdropGlEventListener.getAlien2_2().startRoll();
                 break;
             case "Turn Spotlight On/Off":
                 intensity = backdropGlEventListener.getSpotLight().getIntensity();

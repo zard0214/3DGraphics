@@ -44,9 +44,9 @@ public class SpotLightModel2 {
 
     public SpotLightModel2(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, SpotLightShader spotLightShader, Mat4 mat4, Mesh m, double startTime) {
 
-//        spotLight = new SpotLight(gl);
-//        spotLight.setCamera(camera);
-//        spotLight.setPosition(-6.5f, 7.3f, 0.0f);  // changing light position each frame
+        spotLight = new SpotLight(gl);
+        spotLight.setCamera(camera);
+        spotLight.setPosition(-6.5f, 7.3f, 0.0f);  // changing light position each frame
 
         this.startTime = startTime;
 
@@ -103,16 +103,6 @@ public class SpotLightModel2 {
         TransformNode lampTransform = new TransformNode("lamp transform", m1);
         ModelNode lampShape = new ModelNode("spotLight(lamp)", sphere_lamp);
 
-//        lightRoot.addChild(lightRootTranslate);
-//                lightRootTranslate.addChild(body);
-//                    body.addChild(bodyTransform);
-//                        bodyTransform.addChild(bodyShape);
-//                    body.addChild(head);
-//                        head.addChild(headTransform);
-//                            headTransform.addChild(headShape);
-//                            head.addChild(lamp);
-//                                lamp.addChild(lampTransform);
-//                                    lampTransform.addChild(lampShape);
         lightRoot.addChild(lightRootTranslate);
         lightRootTranslate.addChild(body);
         body.addChild(bodyTransform);
@@ -133,13 +123,14 @@ public class SpotLightModel2 {
         lightRoot.draw(gl);
     }
 
+
     public void dispose(GL3 gl) {
         sphere_body.dispose(gl);
     }
 
     public void startAnimation() {
         animation = true;
-        startTime = TimeUtils.getCurrentTime()-savedTime;
+        startTime = TimeUtils.getCurrentTime() - savedTime;
     }
 
     private void rotateHead() {

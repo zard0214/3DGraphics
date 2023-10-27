@@ -106,10 +106,10 @@ public class Aliens_GLEventListener implements GLEventListener {
         transition = Mat4Transform.translate(2.5f, 0.0f, 0.7f);
         alien_2 = new AlienModel(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
 
-        transition = Mat4Transform.translate(-2.5f, 0.0f, -1.0f);
+        transition = Mat4Transform.translate(-2.5f, 0.0f, 0.0f);
         alien2_1 = new AlienModel2(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
 
-        transition = Mat4Transform.translate(2.5f, 0.0f, 0.7f);
+        transition = Mat4Transform.translate(2.5f, 0.0f, 0.0f);
         alien2_2 = new AlienModel2(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
 
         SpotLightShader spotLightShader = new SpotLightShader(gl, "core/shaders/vertex/vs_cube_03.txt", "core/shaders/fragment/fs_cube_033.txt");
@@ -118,9 +118,6 @@ public class Aliens_GLEventListener implements GLEventListener {
         SpotLightShader spotLightShader2 = new SpotLightShader(gl, "core/shaders/vertex/vs_cube_03.txt", "core/shaders/fragment/fs_cube_033.txt");
         spotLightModel2 = new SpotLightModel2(gl, camera, light_1, light_2, spotLight, spotLightShader2, new Mat4(1), m, startTime);
 
-
-//        spotLight = spotLightModel2.getSpotLight();
-//        spotLight.setCamera(camera);
     }
 
     @Override
@@ -245,6 +242,22 @@ public class Aliens_GLEventListener implements GLEventListener {
     }
     public SpotLightModel2 getSpotLightModel2() {
         return spotLightModel2;
+    }
+
+    public AlienModel2 getAlien2_1() {
+        return alien2_1;
+    }
+
+    public void setAlien2_1(AlienModel2 alien2_1) {
+        this.alien2_1 = alien2_1;
+    }
+
+    public AlienModel2 getAlien2_2() {
+        return alien2_2;
+    }
+
+    public void setAlien2_2(AlienModel2 alien2_2) {
+        this.alien2_2 = alien2_2;
     }
 
     public void setSpotLightModel(SpotLightModel spotLightModel) {
