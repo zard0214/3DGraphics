@@ -27,7 +27,7 @@ public class Aliens extends JFrame implements ActionListener {
     private Aliens_GLEventListener backdropGlEventListener;
     private FPSAnimator animator;
     private JPanel southPanel;
-    private JButton rockLeftbody, rockRightbody, rollLeftHead, rollRightHead, turnSpotlightOnOff, turnGenerallightOnOff, turnGenerallight2OnOff;
+    private JButton rockLeftbody, rockRightbody, rollLeftHead, rollRightHead, turnSpotlightOnOff, turnGenerallightOnOff, turnGenerallight2OnOff, reset;
     private JSlider light1Slider, light2Slider;
 
     public static void main(String[] args) {
@@ -91,6 +91,7 @@ public class Aliens extends JFrame implements ActionListener {
         turnSpotlightOnOff = new JButton("Turn Spotlight On/Off");
         turnGenerallightOnOff = new JButton("Turn General Light On/Off");
         turnGenerallight2OnOff = new JButton("Turn General Light2 On/Off");
+        reset = new JButton("Reset");
         southPanel.add(rockLeftbody);
         southPanel.add(rockRightbody);
         southPanel.add(rollLeftHead);
@@ -98,6 +99,7 @@ public class Aliens extends JFrame implements ActionListener {
         southPanel.add(turnSpotlightOnOff);
         southPanel.add(turnGenerallightOnOff);
         southPanel.add(turnGenerallight2OnOff);
+        southPanel.add(reset);
         getContentPane().add(southPanel, BorderLayout.SOUTH);
     }
 
@@ -109,6 +111,7 @@ public class Aliens extends JFrame implements ActionListener {
         turnSpotlightOnOff.addActionListener(this);
         turnGenerallightOnOff.addActionListener(this);
         turnGenerallight2OnOff.addActionListener(this);
+        reset.addActionListener(this);
     }
 
     /**
@@ -119,6 +122,11 @@ public class Aliens extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         float intensity = 0;
         switch (e.getActionCommand()){
+            case "Reset":
+                System.out.println("Reset");
+                backdropGlEventListener.getAlien2_1().reset();
+                backdropGlEventListener.getAlien2_1().reset();
+                break;
             case "Rock Left Body":
                 System.out.println("Roll Left Body");
                 backdropGlEventListener.getAlien2_1().startRock();

@@ -343,4 +343,11 @@ public class AlienModel2 {
         double elapsedTime = TimeUtils.getCurrentTime() - startTime;
         savedTime = elapsedTime;
     }
+
+    public void reset() {
+        stopAnimation();
+        stopRock();
+        stopRoll();
+    }
+
 }
