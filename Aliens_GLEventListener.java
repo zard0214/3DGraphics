@@ -33,6 +33,7 @@ public class Aliens_GLEventListener implements GLEventListener {
     private double startTime;
     private Model plane_1, plane_2;
     private AlienModel alien_1, alien_2;
+    private AlienModel2 alien2_1, alien2_2;
     private SpotLightModel spotLightModel;
 
     private SpotLightModel2 spotLightModel2;
@@ -105,11 +106,21 @@ public class Aliens_GLEventListener implements GLEventListener {
         transition = Mat4Transform.translate(2.5f, 0.0f, 0.7f);
         alien_2 = new AlienModel(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
 
+        transition = Mat4Transform.translate(-2.5f, 0.0f, -1.0f);
+        alien2_1 = new AlienModel2(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
+
+        transition = Mat4Transform.translate(2.5f, 0.0f, 0.7f);
+        alien2_2 = new AlienModel2(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
+
         SpotLightShader spotLightShader = new SpotLightShader(gl, "core/shaders/vertex/vs_cube_03.txt", "core/shaders/fragment/fs_cube_033.txt");
         spotLightModel = new SpotLightModel(gl, camera, light_1, light_2, spotLight, spotLightShader, new Mat4(1), m, startTime);
 
         SpotLightShader spotLightShader2 = new SpotLightShader(gl, "core/shaders/vertex/vs_cube_03.txt", "core/shaders/fragment/fs_cube_033.txt");
         spotLightModel2 = new SpotLightModel2(gl, camera, light_1, light_2, spotLight, spotLightShader2, new Mat4(1), m, startTime);
+
+
+//        spotLight = spotLightModel2.getSpotLight();
+//        spotLight.setCamera(camera);
     }
 
     @Override
@@ -124,6 +135,8 @@ public class Aliens_GLEventListener implements GLEventListener {
         plane_2.dispose(gl);
         alien_1.dispose(gl);
         alien_2.dispose(gl);
+        alien2_1.dispose(gl);
+        alien2_2.dispose(gl);
         spotLightModel.dispose(gl);
         spotLightModel2.dispose(gl);
     }
@@ -139,13 +152,17 @@ public class Aliens_GLEventListener implements GLEventListener {
         renderBg(gl);
 //        alien_1.render(gl);
 //        alien_2.render(gl);
+        alien2_1.render(gl);
+        alien2_2.render(gl);
 //        spotLightModel.render(gl);
         spotLightModel2.render(gl);
     }
 
     private void renderBg(GL3 gl) {
         skybox.render(gl, cubemap_id, camera, startTime);
+
         spotLight.setPosition(-6.5f, 7.3f, 0.0f);  // changing light position each frame
+
         light_1.setPosition(getLightPosition2());  // changing light position each frame
         light_2.setPosition(getLightPosition1());  // changing light position each frame
 

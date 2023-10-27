@@ -32,6 +32,8 @@ public class SpotLightModel2 {
 
     private Model sphere_body, sphere_head, sphere_lamp;
 
+    private SpotLight spotLight;
+
     private Mat4 modelMatrix;
 
     private SGNode lightRoot;
@@ -41,6 +43,10 @@ public class SpotLightModel2 {
     private float xPosition = 0;
 
     public SpotLightModel2(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, SpotLightShader spotLightShader, Mat4 mat4, Mesh m, double startTime) {
+
+//        spotLight = new SpotLight(gl);
+//        spotLight.setCamera(camera);
+//        spotLight.setPosition(-6.5f, 7.3f, 0.0f);  // changing light position each frame
 
         this.startTime = startTime;
 
@@ -149,4 +155,11 @@ public class SpotLightModel2 {
         savedTime = elapsedTime;
     }
 
+    public SpotLight getSpotLight() {
+        return spotLight;
+    }
+
+    public void setSpotLight(SpotLight spotLight) {
+        this.spotLight = spotLight;
+    }
 }

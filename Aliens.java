@@ -121,6 +121,7 @@ public class Aliens extends JFrame implements ActionListener {
                 backdropGlEventListener.getSpotLightModel2().startAnimation();
                 break;
             case "Rock Right Body":
+                backdropGlEventListener.getSpotLightModel2().stopAnimation();
                 break;
             case "Roll Left Head":
                 break;
