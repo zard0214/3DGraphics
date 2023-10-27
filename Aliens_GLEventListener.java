@@ -35,6 +35,8 @@ public class Aliens_GLEventListener implements GLEventListener {
     private AlienModel alien_1, alien_2;
     private SpotLightModel spotLightModel;
 
+    private SpotLightModel2 spotLightModel2;
+
     public Aliens_GLEventListener(Camera camera) {
         this.camera = camera;
         this.camera.setPosition(new Vec3(4f, 6f, 15f));
@@ -105,6 +107,9 @@ public class Aliens_GLEventListener implements GLEventListener {
 
         SpotLightShader spotLightShader = new SpotLightShader(gl, "core/shaders/vertex/vs_cube_03.txt", "core/shaders/fragment/fs_cube_033.txt");
         spotLightModel = new SpotLightModel(gl, camera, light_1, light_2, spotLight, spotLightShader, new Mat4(1), m, startTime);
+
+        SpotLightShader spotLightShader2 = new SpotLightShader(gl, "core/shaders/vertex/vs_cube_03.txt", "core/shaders/fragment/fs_cube_033.txt");
+        spotLightModel2 = new SpotLightModel2(gl, camera, light_1, light_2, spotLight, spotLightShader2, new Mat4(1), m, startTime);
     }
 
     @Override
@@ -120,6 +125,7 @@ public class Aliens_GLEventListener implements GLEventListener {
         alien_1.dispose(gl);
         alien_2.dispose(gl);
         spotLightModel.dispose(gl);
+        spotLightModel2.dispose(gl);
     }
 
     @Override
@@ -131,9 +137,10 @@ public class Aliens_GLEventListener implements GLEventListener {
     private void render(GL3 gl) {
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         renderBg(gl);
-        alien_1.render(gl);
-        alien_2.render(gl);
-        spotLightModel.render(gl);
+//        alien_1.render(gl);
+//        alien_2.render(gl);
+//        spotLightModel.render(gl);
+        spotLightModel2.render(gl);
     }
 
     private void renderBg(GL3 gl) {
@@ -218,6 +225,9 @@ public class Aliens_GLEventListener implements GLEventListener {
 
     public SpotLightModel getSpotLightModel() {
         return spotLightModel;
+    }
+    public SpotLightModel2 getSpotLightModel2() {
+        return spotLightModel2;
     }
 
     public void setSpotLightModel(SpotLightModel spotLightModel) {

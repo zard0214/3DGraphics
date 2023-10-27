@@ -118,7 +118,7 @@ public class Aliens extends JFrame implements ActionListener {
         float intensity = 0;
         switch (e.getActionCommand()){
             case "Rock Left Body":
-                backdropGlEventListener.getSpotLightModel();
+                backdropGlEventListener.getSpotLightModel2().startAnimation();
                 break;
             case "Rock Right Body":
                 break;
