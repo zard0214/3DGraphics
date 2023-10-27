@@ -10,6 +10,9 @@ import core.shaders.SpotLightShader;
 import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;
+import model.node.NameNode;
+import model.node.SGNode;
+import model.node.TransformNode;
 import util.Constant;
 import util.TextureLibrary;
 

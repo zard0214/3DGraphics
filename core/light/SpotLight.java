@@ -10,6 +10,7 @@ import core.shaders.SpotLightShader;
 import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;
+import model.Model;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -19,7 +20,7 @@ import java.nio.IntBuffer;
  * @RegistrationNo 220186627
  * @date Created in 25/10/2023 05:45
  */
-public class SpotLight {
+public class SpotLight extends Model {
 
     private Vec3 direction = new Vec3(1.0f, -1.25f, 0.0f);
     private float cutOff = (float) Math.cos(Math.toRadians(0.953));
@@ -40,6 +41,7 @@ public class SpotLight {
     private float intensity;
 
     public SpotLight(GL3 gl) {
+        super(gl);
         material = new Material();
         material.setAmbient(0.3f, 0.3f, 0.3f);
         material.setDiffuse(0.5f, 0.5f, 0.5f);
@@ -53,6 +55,7 @@ public class SpotLight {
     }
 
     public SpotLight(GL3 gl, Material material) {
+        super(gl, material);
         this.material = material;
         position = new Vec3(3f, 2f, 1f);
         model = new Mat4(1);
@@ -255,7 +258,6 @@ public class SpotLight {
     public void turnOnLight(boolean turnon, float intensity) {
         if (turnon) {
             this.intensity = intensity;
-
             this.ambient = new Vec3(intensity * 0.5f, intensity * 0.5f, intensity * 0.5f);
             this.diffuse = new Vec3(intensity, intensity, intensity);
             this.specular = new Vec3(intensity, intensity, intensity);

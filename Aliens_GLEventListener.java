@@ -92,6 +92,7 @@ public class Aliens_GLEventListener implements GLEventListener {
         plane_2 = new Model(gl, camera, light_1, light_2, spotLight, planeShader, planeMaterial, new Mat4(1), m, textureId0, textureId2);
 
         m = new Mesh(gl, Sphere.vertices.clone(), Sphere.indices.clone());
+//        m = new Mesh(gl, Cube.vertices.clone(), Cube.indices.clone());
         AlienShader alienShader = new AlienShader(gl, "core/shaders/vertex/vs_default.glsl", "core/shaders/fragment/fs_texture.glsl");
         int[] alienTexture = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
         Material alienMaterial = new Material(new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.3f, 0.3f, 0.3f), 4.0f);
@@ -187,8 +188,8 @@ public class Aliens_GLEventListener implements GLEventListener {
     // The light's postion is continually being changed, so needs to be calculated for each frame.
     private Vec3 getLightPosition3() {
         double elapsedTime = TimeUtils.getCurrentTime() - startTime;
-        float x = -8.1f * (float) (Math.sin(Math.toRadians(elapsedTime * 25)));
-        float y = 3.8f;
+        float x = -6.5f * (float) (Math.sin(Math.toRadians(elapsedTime * 25)));
+        float y = 7.3f;
         float z = 0.0f * (float) (Math.cos(Math.toRadians(elapsedTime * 25)));
         return new Vec3(x, y, z);
     }

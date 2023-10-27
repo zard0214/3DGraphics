@@ -23,6 +23,12 @@ public class Model {
     private float offset;
     private double elapsedTime;
 
+    public Model(GL3 gl) {
+    }
+
+    public Model(GL3 gl, Material material) {
+        this.material = material;
+    }
     public Model(GL3 gl, Camera camera, Light light, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh) {
         this.mesh = mesh;
         this.material = material;

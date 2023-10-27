@@ -10,6 +10,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * @author Zhecheng Zhao
@@ -50,6 +52,14 @@ public class Aliens extends JFrame implements ActionListener {
     }
 
     private void initAnimator() {
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                animator.stop();
+                remove(canvas);
+                dispose();
+                System.exit(0);
+            }
+        });
         animator = new FPSAnimator(canvas, 60);
         animator.start();
     }
@@ -108,6 +118,7 @@ public class Aliens extends JFrame implements ActionListener {
         float intensity = 0;
         switch (e.getActionCommand()){
             case "Rock Left Body":
+                backdropGlEventListener.getSpotLightModel();
                 break;
             case "Rock Right Body":
                 break;
@@ -119,7 +130,7 @@ public class Aliens extends JFrame implements ActionListener {
                 intensity = backdropGlEventListener.getSpotLight().getIntensity();
                 if(intensity == 0){
                     backdropGlEventListener.getSpotLightModel().getSphere_lamp().getMaterial().setBrightness(1.0f);
-                    backdropGlEventListener.getSpotLight().turnOnLight(true, 0.15f);
+                    backdropGlEventListener.getSpotLight().turnOnLight(true, 0.45f);
                 }else {
                     backdropGlEventListener.getSpotLightModel().getSphere_lamp().getMaterial().setBrightness(0.5f);
                     backdropGlEventListener.getSpotLight().turnOnLight(false, 0);
