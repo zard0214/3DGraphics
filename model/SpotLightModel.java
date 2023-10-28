@@ -74,18 +74,6 @@ public class SpotLightModel {
         sphere_lamp.dispose(gl);
     }
 
-
-    public void startAnimation() {
-        animation = true;
-        startTime = TimeUtils.getCurrentTime() -savedTime;
-    }
-
-    public void stopAnimation() {
-        animation = false;
-        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
-        savedTime = elapsedTime;
-    }
-
     public Model getSphere_lamp() {
         return sphere_lamp;
     }

@@ -78,6 +78,7 @@ public class Aliens extends JFrame implements ActionListener {
         Camera camera = new Camera(Camera.DEFAULT_POSITION, Camera.DEFAULT_TARGET, Camera.DEFAULT_UP);
         backdropGlEventListener = new Aliens_GLEventListener(camera);
         canvas.addGLEventListener(backdropGlEventListener);
+
         canvas.addMouseMotionListener(new MouseAdapter(camera));
         canvas.addKeyListener(new KeyboardAdapter(camera));
     }
@@ -124,24 +125,24 @@ public class Aliens extends JFrame implements ActionListener {
         switch (e.getActionCommand()){
             case "Reset":
                 System.out.println("Reset");
-                backdropGlEventListener.getAlien2_1().reset();
-                backdropGlEventListener.getAlien2_1().reset();
+//                backdropGlEventListener.getAlien2_1().reset();
+//                backdropGlEventListener.getAlien2_1().reset();
                 break;
             case "Rock Left Body":
-                System.out.println("Roll Left Body");
-                backdropGlEventListener.getAlien2_1().startRock();
+//                System.out.println("Roll Left Body");
+                backdropGlEventListener.getAlien2_1().startAnimation();
                 break;
             case "Rock Right Body":
-                System.out.println("Roll Right Body");
-                backdropGlEventListener.getAlien2_2().startRock();
+//                System.out.println("Roll Right Body");
+//                backdropGlEventListener.getAlien2_2().startAnimation();
                 break;
             case "Roll Left Head":
-                System.out.println("Roll Left Head");
-                backdropGlEventListener.getAlien2_1().startRoll();
+//                System.out.println("Roll Left Head");
+//                backdropGlEventListener.getAlien2_1().startAnimation();
                 break;
             case "Roll Right Head":
-                System.out.println("Roll Right Head");
-                backdropGlEventListener.getAlien2_2().startRoll();
+//                System.out.println("Roll Right Head");
+//                backdropGlEventListener.getAlien2_2().startAnimation();
                 break;
             case "Turn Spotlight On/Off":
                 intensity = backdropGlEventListener.getSpotLight().getIntensity();
