@@ -28,18 +28,24 @@ public class AlienModel3 {
     private double savedTimeRock = 0, savedTimeRoll = 0;
     private boolean rock = false;
     private boolean roll = false;
-    private Model floor, sphere, cube, cube2;
+    private Model sphere, cube;
     private SGNode alienRoot;
-    private TransformNode translateX;
+    private TransformNode translateX, translateY;
     private TransformNode bodyMoveTranslate, bodyRotateTranslate, bodyTransform, bodyTranslate, bodyRotate;
     private TransformNode headMoveTranslate, headTransform, headTranslate, headRotate;
-    private TransformNode antennaBottomMoveTranslate, antennaBottomTransform, antennaBottomTranslate, antennaBottomRotate;
-    private TransformNode antennaTopMoveTranslate, antennaTopTransform, antennaTopTranslate, antennaTopRotate;
-    private TransformNode bodyRoll, headRoll, antennaBottomRoll, antennaTopRoll;
+    private TransformNode antennaBottomTransform, antennaBottomTranslate, antennaBottomRotate;
+    private TransformNode antennaTopTransform, antennaTopTranslate, antennaTopRotate;
+    private TransformNode leftEyeTransform, leftEyeTranslate, leftEyeRotate;
+    private TransformNode rightEyeTransform, rightEyeTranslate, rightEyeRotate;
+    private TransformNode leftArmMoveTranslate, leftArmTransform, leftArmTranslate, leftArmRotate;
+    private TransformNode rightArmMoveTranslate, rightArmTransform, rightArmTranslate, rightArmRotate;
+    private TransformNode leftEarMoveTranslate, leftEarTransform, leftEarTranslate, leftEarRotate;
+    private TransformNode rightEarMoveTranslate, rightEarTransform, rightEarTranslate, rightEarRotate;
+    private TransformNode bodyRoll, headRoll, antennaBottomRoll, antennaTopRoll, leftEyeRoll, rightEyeRoll, leftArmRoll, rightArmRoll,  leftEarRoll, rightEarRoll;
     private float xPosition = 0;
 
-    private NameNode body, head, antennaBottom, antennaTop;
-    private ModelNode bodyShape, headShape, antennaBottomShape, antennaTopShape;
+    private NameNode body, head, antennaBottom, antennaTop, leftArm, rightArm, leftEye, rightEye, leftEar, rightEar;
+    private ModelNode bodyShape, headShape, antennaBottomShape, antennaTopShape, leftArmShape, rightArmShape, leftEyeShape, rightEyeShape, leftEarShape, rightEarShape;
     public AlienModel3(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, AlienShader alienShader, Material alienMaterial, Mat4 mat4, Mesh m, int[] alienTexture, Mat4 transition) {
 
         int[] alientextureId0 = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
@@ -62,6 +68,10 @@ public class AlienModel3 {
         float headScale = 1.3f;
         float antennaBottomScale1 = 0.125f;
         float antennaBottomScale2 = 0.5f;
+        float eyeScale = 0.18f;
+        float armScale1 = 0.18f;
+        float armScale2 = 1.0f;
+
         float antennaTopScale2 = 0.18f;
         float legLength = 3.4f;
 
@@ -82,6 +92,38 @@ public class AlienModel3 {
         bodyTransform = new TransformNode("body transform", m2);
         bodyShape = new ModelNode("Alien(body)", cube);
 
+        /***********  leftarm  ***************/
+        leftArm = new NameNode("rightArm");
+        leftArmMoveTranslate = new TransformNode("alien leftArm transform", Mat4Transform.translate(xPosition,0,0));
+        leftArmRoll = new TransformNode("leftArm roll",  Mat4Transform.rotateAroundY(0));
+
+        leftArmTranslate = new TransformNode("alien leftArm transform2",Mat4Transform.translate(0, 0,0));
+        leftArmRotate = new TransformNode("alien leftArm rotate",  Mat4Transform.rotateAroundY(0));
+
+        m2 = new Mat4(1);
+        m2 = Mat4.multiply(m2, Mat4Transform.translate(0, bodyHeight,0));
+        m2 = Mat4.multiply(m2, Mat4Transform.rotateAroundZ(45));
+        m2 = Mat4.multiply(m2, Mat4Transform.scale(armScale1, armScale2, armScale1));
+        m2 = Mat4.multiply(m2, Mat4Transform.translate(-19.00f, -1.80f,0));
+        leftArmTransform = new TransformNode("leftArm transform2", m2);
+        leftArmShape = new ModelNode("Alien(leftArm)", sphere);
+
+        /***********  rightarm  ***************/
+        rightArm = new NameNode("rightArm");
+        rightArmMoveTranslate = new TransformNode("alien rightArm transform", Mat4Transform.translate(xPosition,0,0));
+        rightArmRoll = new TransformNode("rightArm roll",  Mat4Transform.rotateAroundY(0));
+
+        rightArmTranslate = new TransformNode("alien rightArm transform2",Mat4Transform.translate(0, 0,0));
+        rightArmRotate = new TransformNode("alien rightArm rotate",  Mat4Transform.rotateAroundY(0));
+
+        m2 = new Mat4(1);
+        m2 = Mat4.multiply(m2, Mat4Transform.translate(0, bodyHeight,0));
+        m2 = Mat4.multiply(m2, Mat4Transform.rotateAroundZ(-45));
+        m2 = Mat4.multiply(m2, Mat4Transform.scale(armScale1, armScale2, armScale1));
+        m2 = Mat4.multiply(m2, Mat4Transform.translate(19.00f, -1.80f,0));
+        rightArmTransform = new TransformNode("rightArm transform2", m2);
+        rightArmShape = new ModelNode("Alien(rightArm)", sphere);
+
         /***********  head  ***************/
         head = new NameNode("head");
         headMoveTranslate = new TransformNode("alien head transform",Mat4Transform.translate(xPosition,0,0));
@@ -92,14 +134,43 @@ public class AlienModel3 {
 
         m2 = new Mat4(1);
         m2 = Mat4.multiply(m2, Mat4Transform.translate(0, bodyHeight,0));
-        m2 = Mat4.multiply(m2, Mat4Transform.scale(headScale,headScale,headScale));
+        m2 = Mat4.multiply(m2, Mat4Transform.scale(headScale, headScale, headScale));
         m2 = Mat4.multiply(m2, Mat4Transform.translate(0, -2.15f,0));
         headTransform = new TransformNode("head transform2", m2);
         headShape = new ModelNode("Alien(head)", sphere);
 
+        /***********  lefteye  ***************/
+
+        leftEye = new NameNode("leftEye");
+        leftEyeRoll = new TransformNode("leftEye roll",  Mat4Transform.rotateAroundY(0));
+
+        leftEyeTranslate = new TransformNode("alien leftEye transform2",Mat4Transform.translate(0, 0,0));
+        leftEyeRotate = new TransformNode("alien leftEye rotate",  Mat4Transform.rotateAroundY(0));
+
+        m2 = new Mat4(1);
+        m2 = Mat4.multiply(m2, Mat4Transform.translate(0, bodyHeight,0));
+        m2 = Mat4.multiply(m2, Mat4Transform.scale(eyeScale, eyeScale, eyeScale));
+        m2 = Mat4.multiply(m2, Mat4Transform.translate(-1.3f,-14.25f,3.70f));
+        leftEyeTransform = new TransformNode("leftEye transform2", m2);
+        leftEyeShape = new ModelNode("Alien(leftEye)", sphere);
+
+        /***********  righteye  ***************/
+
+        rightEye = new NameNode("rightEye");
+        rightEyeRoll = new TransformNode("rightEye roll",  Mat4Transform.rotateAroundY(0));
+
+        rightEyeTranslate = new TransformNode("alien rightEye transform2",Mat4Transform.translate(0, 0,0));
+        rightEyeRotate = new TransformNode("alien rightEye rotate",  Mat4Transform.rotateAroundY(0));
+
+        m2 = new Mat4(1);
+        m2 = Mat4.multiply(m2, Mat4Transform.translate(0, bodyHeight,0));
+        m2 = Mat4.multiply(m2, Mat4Transform.scale(eyeScale, eyeScale, eyeScale));
+        m2 = Mat4.multiply(m2, Mat4Transform.translate(1.3f,-14.25f,3.70f));
+        rightEyeTransform = new TransformNode("rightEye transform2", m2);
+        rightEyeShape = new ModelNode("Alien(rightEye)", sphere);
+
         /***********  antenna_bottom  ***************/
         antennaBottom = new NameNode("antennaBottom");
-        antennaBottomMoveTranslate = new TransformNode("alien antenna_bottom transform",Mat4Transform.translate(xPosition,0,0));
         antennaBottomRoll = new TransformNode("antennaBottom roll",  Mat4Transform.rotateAroundY(0));
 
         antennaBottomTranslate = new TransformNode("alien antennaBottom transform2",Mat4Transform.translate(0, 0,0));
@@ -114,7 +185,6 @@ public class AlienModel3 {
 
         /***********  antenna_top  ***************/
         antennaTop = new NameNode("antennaTop");
-        antennaTopMoveTranslate = new TransformNode("alien antenna_top transform",Mat4Transform.translate(xPosition,0,0));
         antennaTopRoll = new TransformNode("antennaTop roll",  Mat4Transform.rotateAroundY(0));
 
         antennaTopTranslate = new TransformNode("alien antennaTop transform2",Mat4Transform.translate(0, 0,0));
@@ -127,12 +197,38 @@ public class AlienModel3 {
         antennaTopTransform = new TransformNode("antennaTop transform2", m2);
         antennaTopShape = new ModelNode("Alien(antennaTop)", sphere);
 
-        /***********  lefteye  ***************/
-        /***********  righteye  ***************/
-        /***********  leftarm  ***************/
-        /***********  rightarm  ***************/
         /***********  leftear  ***************/
+
+        leftEar = new NameNode("leftEar");
+        leftEarRoll = new TransformNode("leftEar roll",  Mat4Transform.rotateAroundY(0));
+
+        leftEarTranslate = new TransformNode("alien leftEar transform2",Mat4Transform.translate(0, 0,0));
+        leftEarRotate = new TransformNode("alien leftEar rotate",  Mat4Transform.rotateAroundY(0));
+
+        m2 = new Mat4(1);
+        m2 = Mat4.multiply(m2, Mat4Transform.translate(0, bodyHeight,0));
+        m2 = Mat4.multiply(m2, Mat4Transform.scale(armScale1, armScale2, armScale1));
+        m2 = Mat4.multiply(m2, Mat4Transform.translate(-3.3f,-2.25f,0));
+        leftEarTransform = new TransformNode("leftEar transform2", m2);
+        leftEarShape = new ModelNode("Alien(leftEar)", sphere);
+
         /***********  rightear  ***************/
+
+        rightEar = new NameNode("rightEar");
+        rightEarRoll = new TransformNode("rightEar roll",  Mat4Transform.rotateAroundY(0));
+
+        rightEarTranslate = new TransformNode("alien rightEar transform2",Mat4Transform.translate(0, 0,0));
+        rightEarRotate = new TransformNode("alien rightEar rotate",  Mat4Transform.rotateAroundY(0));
+
+        m2 = new Mat4(1);
+        m2 = Mat4.multiply(m2, Mat4Transform.translate(0, bodyHeight,0));
+        m2 = Mat4.multiply(m2, Mat4Transform.scale(armScale1, armScale2, armScale1));
+        m2 = Mat4.multiply(m2, Mat4Transform.translate(3.3f,-2.25f,0));
+        rightEarTransform = new TransformNode("rightEar transform2", m2);
+        rightEarShape = new ModelNode("Alien(rightEar)", sphere);
+
+
+
         createNode();
         alienRoot.update();
     }
@@ -157,6 +253,27 @@ public class AlienModel3 {
         headTranslate.addChild(headTransform);
         headTransform.addChild(headShape);
 
+        /*****  leftArm  ******/
+        bodyTranslate.addChild(bodyRoll);
+        bodyRoll.addChild(leftArm);
+        leftArm.addChild(leftArmRotate);
+        leftArmRotate.addChild(leftArmMoveTranslate);
+
+        leftArm.addChild(leftArmTranslate);
+        leftArmTranslate.addChild(leftArmTransform);
+        leftArmTransform.addChild(leftArmShape);
+
+        /*****  rightArm  ******/
+
+        bodyTranslate.addChild(bodyRoll);
+        bodyRoll.addChild(rightArm);
+        rightArm.addChild(rightArmRotate);
+        rightArmRotate.addChild(rightArmMoveTranslate);
+
+        rightArm.addChild(rightArmTranslate);
+        rightArmTranslate.addChild(rightArmTransform);
+        rightArmTransform.addChild(rightArmShape);
+
         /*****  antennaBottom  ******/
         headTranslate.addChild(headRoll);
         headRoll.addChild(antennaBottom);
@@ -174,6 +291,36 @@ public class AlienModel3 {
         antennaTopRotate.addChild(antennaTopTranslate);
         antennaTopTranslate.addChild(antennaTopTransform);
         antennaTopTransform.addChild(antennaTopShape);
+
+        /***********  lefteye  ***************/
+        headRoll.addChild(leftEye);
+        leftEye.addChild(leftEyeRotate);
+
+        leftEyeRotate.addChild(leftEyeTranslate);
+        leftEyeTranslate.addChild(leftEyeTransform);
+        leftEyeTransform.addChild(leftEyeShape);
+        /***********  righteye  ***************/
+        headRoll.addChild(rightEye);
+        rightEye.addChild(rightEyeRotate);
+
+        rightEyeRotate.addChild(rightEyeTranslate);
+        rightEyeTranslate.addChild(rightEyeTransform);
+        rightEyeTransform.addChild(rightEyeShape);
+
+        /***********  leftear  ***************/
+        headRoll.addChild(leftEar);
+        leftEar.addChild(leftEarRotate);
+
+        leftEarRotate.addChild(leftEarTranslate);
+        leftEarTranslate.addChild(leftEarTransform);
+        leftEarTransform.addChild(leftEarShape);
+        /***********  rightear  ***************/
+        headRoll.addChild(rightEar);
+        rightEar.addChild(rightEarRotate);
+
+        rightEarRotate.addChild(rightEarTranslate);
+        rightEarTranslate.addChild(rightEarTransform);
+        rightEarTransform.addChild(rightEarShape);
     }
 
     public void render(GL3 gl) {
