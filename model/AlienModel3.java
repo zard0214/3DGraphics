@@ -43,8 +43,6 @@ public class AlienModel3 {
         modelMatrix = Mat4.multiply(Mat4Transform.scale(4,4,4), Mat4Transform.translate(0,0.5f,0));
         cube = new Model(gl, camera, light_1, light_2, spotLight, shader, material, modelMatrix, mesh, alientextureId0, alientextureId0);
 
-        cube2 = new Model(gl, camera, light_1, light_2, spotLight, shader, material, modelMatrix, mesh, alientextureId0, alientextureId0);
-
 
         float bodyHeight = 1.7f;
         float bodyWidth = 1.7f;
@@ -58,13 +56,13 @@ public class AlienModel3 {
         alienRoot = new NameNode("root");
         bodyMoveTranslate = new TransformNode("alien transform",Mat4Transform.translate(xPosition,0,0));
 
-        TransformNode robotTranslate = new TransformNode("alien transform",Mat4Transform.translate(0, legLength,0));
+        TransformNode bodyTranslate = new TransformNode("alien transform2",Mat4Transform.translate(0, legLength,0));
 
         NameNode body = new NameNode("body");
         Mat4 m2 = Mat4Transform.scale(bodyWidth, bodyHeight, bodyDepth);
         m2 = Mat4.multiply(m2, Mat4Transform.translate(0,-1.5f,0));
         TransformNode bodyTransform = new TransformNode("body transform", m2);
-        ModelNode bodyShape = new ModelNode("Cube(body)", cube);
+        ModelNode bodyShape = new ModelNode("Alien(body)", cube);
 
         NameNode head = new NameNode("head");
         headMoveTranslate = new TransformNode("head transform",Mat4Transform.translate(xPosition,0,0));
@@ -73,18 +71,19 @@ public class AlienModel3 {
         m2 = Mat4.multiply(m2, Mat4Transform.translate(0, bodyHeight,0));
         m2 = Mat4.multiply(m2, Mat4Transform.scale(headScale,headScale,headScale));
         m2 = Mat4.multiply(m2, Mat4Transform.translate(0, -2.15f,0));
-        TransformNode headTransform = new TransformNode("head transform", m2);
-        ModelNode headShape = new ModelNode("Sphere(head)", sphere);
+        TransformNode headTransform = new TransformNode("head transform2", m2);
+        ModelNode headShape = new ModelNode("Alien(head)", sphere);
 
 
         alienRoot.addChild(bodyMoveTranslate);
-            bodyMoveTranslate.addChild(robotTranslate);
-                robotTranslate.addChild(body);
+            bodyMoveTranslate.addChild(bodyTranslate);
+                bodyTranslate.addChild(body);
                     body.addChild(bodyTransform);
                         bodyTransform.addChild(bodyShape);
                     body.addChild(head);
                         head.addChild(headTransform);
                         headTransform.addChild(headShape);
+
 
         alienRoot.update();
     }
@@ -106,7 +105,6 @@ public class AlienModel3 {
     public void dispose(GL3 gl) {
         sphere.dispose(gl);
         cube.dispose(gl);
-        cube2.dispose(gl);
     }
 
     private double startTime;
