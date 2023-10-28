@@ -32,11 +32,7 @@ public class Aliens_GLEventListener implements GLEventListener {
     private SpotLight spotLight;
     private double startTime;
     private Model plane_1, plane_2;
-    private AlienModel alien_1, alien_2;
-//    private AlienModel2 alien2_1, alien2_2;
     private AlienModel3 alien3_1, alien3_2;
-    private SpotLightModel spotLightModel;
-
     private SpotLightModel2 spotLightModel2;
 
     public Aliens_GLEventListener(Camera camera) {
@@ -96,31 +92,17 @@ public class Aliens_GLEventListener implements GLEventListener {
         plane_2 = new Model(gl, camera, light_1, light_2, spotLight, planeShader, planeMaterial, new Mat4(1), m, textureId0, textureId2);
 
         m = new Mesh(gl, Sphere.vertices.clone(), Sphere.indices.clone());
-//        m = new Mesh(gl, Cube.vertices.clone(), Cube.indices.clone());
         AlienShader alienShader = new AlienShader(gl, "core/shaders/vertex/vs_default.glsl", "core/shaders/fragment/fs_texture.glsl");
         int[] alienTexture = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
         Material alienMaterial = new Material(new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.3f, 0.3f, 0.3f), 4.0f);
 
-        Mat4 transition = Mat4Transform.translate(-2.5f, 0.0f, -1.0f);
-        alien_1 = new AlienModel(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
-
-        transition = Mat4Transform.translate(2.5f, 0.0f, 0.7f);
-        alien_2 = new AlienModel(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
-//
-//        transition = Mat4Transform.translate(-2.5f, 0.0f, 0.0f);
-//        alien2_1 = new AlienModel2(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
-//
-//        transition = Mat4Transform.translate(2.5f, 0.0f, 0.0f);
-//        alien2_2 = new AlienModel2(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
-
-        transition = Mat4Transform.translate(-2.5f, 0.0f, 0.0f);
+        Mat4 transition = Mat4Transform.translate(-2.5f, 0.0f, 0.0f);
         alien3_1 = new AlienModel3(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
+//        alien3_1.transition(-5.5f, 0, 1);
 
         transition = Mat4Transform.translate(2.5f, 0.0f, 0.0f);
         alien3_2 = new AlienModel3(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
-
-        SpotLightShader spotLightShader = new SpotLightShader(gl, "core/shaders/vertex/vs_cube_03.txt", "core/shaders/fragment/fs_cube_033.txt");
-        spotLightModel = new SpotLightModel(gl, camera, light_1, light_2, spotLight, spotLightShader, new Mat4(1), m, startTime);
+//        alien3_2.transition(5.5f, 0, 1.0f);
 
         SpotLightShader spotLightShader2 = new SpotLightShader(gl, "core/shaders/vertex/vs_cube_03.txt", "core/shaders/fragment/fs_cube_033.txt");
         spotLightModel2 = new SpotLightModel2(gl, camera, light_1, light_2, spotLight, spotLightShader2, new Mat4(1), m, startTime);
@@ -137,13 +119,8 @@ public class Aliens_GLEventListener implements GLEventListener {
         light_3.dispose(gl);
         plane_1.dispose(gl);
         plane_2.dispose(gl);
-        alien_1.dispose(gl);
-        alien_2.dispose(gl);
-//        alien2_1.dispose(gl);
-//        alien2_2.dispose(gl);
         alien3_1.dispose(gl);
         alien3_2.dispose(gl);
-        spotLightModel.dispose(gl);
         spotLightModel2.dispose(gl);
     }
 
@@ -156,13 +133,8 @@ public class Aliens_GLEventListener implements GLEventListener {
     private void render(GL3 gl) {
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         renderBg(gl);
-//        alien_1.render(gl);
-//        alien_2.render(gl);
-//        alien2_1.render(gl);
-//        alien2_2.render(gl);
         alien3_1.render(gl);
-//        alien3_2.render(gl);
-//        spotLightModel.render(gl);
+        alien3_2.render(gl);
         spotLightModel2.render(gl);
     }
 
@@ -249,34 +221,18 @@ public class Aliens_GLEventListener implements GLEventListener {
         return spotLight;
     }
 
-    public SpotLightModel getSpotLightModel() {
-        return spotLightModel;
-    }
     public SpotLightModel2 getSpotLightModel2() {
         return spotLightModel2;
-    }
-//
-//    public AlienModel2 getAlien2_1() {
-//        return alien2_1;
-//    }
-//
-//    public void setAlien2_1(AlienModel2 alien2_1) {
-//        this.alien2_1 = alien2_1;
-//    }
-//
-//    public AlienModel2 getAlien2_2() {
-//        return alien2_2;
-//    }
-//
-//    public void setAlien2_2(AlienModel2 alien2_2) {
-//        this.alien2_2 = alien2_2;
-//    }
-
-    public void setSpotLightModel(SpotLightModel spotLightModel) {
-        this.spotLightModel = spotLightModel;
     }
 
     public AlienModel3 getAlien2_1() {
         return alien3_1;
+    }
+    public AlienModel3 getAlien2_2() {
+        return alien3_2;
+    }
+
+    public SpotLightModel2 getSpotLightModel() {
+        return spotLightModel2;
     }
 }

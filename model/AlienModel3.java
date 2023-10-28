@@ -244,10 +244,9 @@ public class AlienModel3 {
         bodyTransform.addChild(bodyShape);
 
         /*****  head  ******/
-        bodyTranslate.addChild(bodyRoll);
-        bodyRoll.addChild(head);
-        head.addChild(headRotate);
-        headRotate.addChild(headMoveTranslate);
+        bodyTranslate.addChild(headRotate);
+        headRotate.addChild(head);
+        head.addChild(headMoveTranslate);
 
         head.addChild(headTranslate);
         headTranslate.addChild(headTransform);
@@ -264,7 +263,6 @@ public class AlienModel3 {
         leftArmTransform.addChild(leftArmShape);
 
         /*****  rightArm  ******/
-
         bodyTranslate.addChild(bodyRoll);
         bodyRoll.addChild(rightArm);
         rightArm.addChild(rightArmRotate);
@@ -275,8 +273,7 @@ public class AlienModel3 {
         rightArmTransform.addChild(rightArmShape);
 
         /*****  antennaBottom  ******/
-        headTranslate.addChild(headRoll);
-        headRoll.addChild(antennaBottom);
+        headRotate.addChild(antennaBottom);
         antennaBottom.addChild(antennaBottomRotate);
 
         antennaBottomRotate.addChild(antennaBottomTranslate);
@@ -284,8 +281,7 @@ public class AlienModel3 {
         antennaBottomTransform.addChild(antennaBottomShape);
 
         /*****  antennaTop  ******/
-        antennaBottomTranslate.addChild(antennaBottomRoll);
-        antennaBottomRoll.addChild(antennaTop);
+        headRotate.addChild(antennaTop);
         antennaTop.addChild(antennaTopRotate);
 
         antennaTopRotate.addChild(antennaTopTranslate);
@@ -293,14 +289,14 @@ public class AlienModel3 {
         antennaTopTransform.addChild(antennaTopShape);
 
         /***********  lefteye  ***************/
-        headRoll.addChild(leftEye);
+        headRotate.addChild(leftEye);
         leftEye.addChild(leftEyeRotate);
 
         leftEyeRotate.addChild(leftEyeTranslate);
         leftEyeTranslate.addChild(leftEyeTransform);
         leftEyeTransform.addChild(leftEyeShape);
         /***********  righteye  ***************/
-        headRoll.addChild(rightEye);
+        headRotate.addChild(rightEye);
         rightEye.addChild(rightEyeRotate);
 
         rightEyeRotate.addChild(rightEyeTranslate);
@@ -308,14 +304,14 @@ public class AlienModel3 {
         rightEyeTransform.addChild(rightEyeShape);
 
         /***********  leftear  ***************/
-        headRoll.addChild(leftEar);
+        headRotate.addChild(leftEar);
         leftEar.addChild(leftEarRotate);
 
         leftEarRotate.addChild(leftEarTranslate);
         leftEarTranslate.addChild(leftEarTransform);
         leftEarTransform.addChild(leftEarShape);
         /***********  rightear  ***************/
-        headRoll.addChild(rightEar);
+        headRotate.addChild(rightEar);
         rightEar.addChild(rightEarRotate);
 
         rightEarRotate.addChild(rightEarTranslate);
@@ -338,10 +334,19 @@ public class AlienModel3 {
 
     private void roll() {
         double elapsedTime = getSeconds() - rockStartTime;
-        float rotateAngle = 25f * (float)Math.sin(elapsedTime);
+        float rotateAngleZ = 45f * (float)Math.sin(elapsedTime + 90f);
+        float rotateAngleX = 45f * (float)Math.cos(elapsedTime + 90f);
 
-        bodyMoveTranslate.setTransform(Mat4Transform.rotateAroundY(rotateAngle));
-        bodyMoveTranslate.update();
+        Mat4 snowmanRollMat = Mat4Transform.rotateAroundZ(rotateAngleZ);
+        snowmanRollMat = Mat4.multiply(snowmanRollMat, Mat4Transform.rotateAroundX(rotateAngleX));
+        bodyRotateTranslate.setTransform(snowmanRollMat);
+        bodyRotateTranslate.update();
+
+        Mat4 headRotateMat = Mat4Transform.rotateAroundZ(rotateAngleZ * (1 / 5.1f));
+        headRotateMat = Mat4.multiply(headRotateMat, Mat4Transform.rotateAroundX(rotateAngleX * (1 / 5.1f)));
+        headRotate.setTransform(headRotateMat);
+        headRotate.update();
+
     }
 
 

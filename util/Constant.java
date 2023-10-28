@@ -29,6 +29,9 @@ public class Constant {
     public static final String BG_GLSL_FS = "core/shaders/glsl/fragment/fs_background_1.glsl";
     public static final String LIGHT_GLSL_VS = "core/shaders/vertex/vs_light_01.glsl";
     public static final String LIGHT_GLSL_FS = "core/shaders/fragment/fs_light_01.glsl";
+
+    public static final String DEFAULT_GLSL_VS = "core/shaders/vertex/vs_default.glsl";
+    public static final String DEFAULT_GLSL_FS = "core/shaders/fragment/fs_texture.glsl";
     public static final String LIGHT_GLSL_FS_2 = "core/shaders/fragment/fs_light_02.glsl";
     public static final String FLOOR_TEXTURE_1 = "textures/snow.jpg";
     public static final String FLOOR_TEXTURE_2 = "textures/snow_specular.jpg";

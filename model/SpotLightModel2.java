@@ -134,10 +134,27 @@ public class SpotLightModel2 {
     }
 
     private void rotateHead() {
-        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
-        float rotateAngle = 45f * (float)Math.sin(elapsedTime);
-        lightRootTranslate.setTransform(Mat4Transform.rotateAroundX(rotateAngle));
+        double elapsedTime = getSeconds() - startTime;
+        float rotateAngle = 20f * (float)Math.sin(elapsedTime);
+        lightRootTranslate.setTransform(Mat4Transform.rotateAroundZ(rotateAngle));
         lightRootTranslate.update();
+
+        float rotateAngleZ = 50f * (float)Math.sin(elapsedTime + 180f);
+        float rotateAngleX = 50f * (float)Math.cos(elapsedTime + 90f);
+
+        Mat4 rollMat = Mat4Transform.rotateAroundZ(rotateAngleZ);
+        rollMat = Mat4.multiply(rollMat, Mat4Transform.rotateAroundX(rotateAngleX));
+        lightHeadTranslate.setTransform(rollMat);
+        lightHeadTranslate.update();
+
+        Mat4 headRotateMat = Mat4Transform.rotateAroundZ(rotateAngleZ * (1 / 5.5f));
+        headRotateMat = Mat4.multiply(headRotateMat, Mat4Transform.rotateAroundX(rotateAngleX * (1 / 5.5f)));
+        lightHeadTranslate.setTransform(headRotateMat);
+        lightHeadTranslate.update();
+    }
+
+    private double getSeconds() {
+        return System.currentTimeMillis()/1000.0;
     }
 
     public void stopAnimation() {
@@ -152,5 +169,13 @@ public class SpotLightModel2 {
 
     public void setSpotLight(SpotLight spotLight) {
         this.spotLight = spotLight;
+    }
+
+    public Model getSphere_lamp() {
+        return sphere_lamp;
+    }
+
+    public void setSphere_lamp(Model sphere_lamp) {
+        this.sphere_lamp = sphere_lamp;
     }
 }

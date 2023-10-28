@@ -85,18 +85,18 @@ public class Aliens extends JFrame implements ActionListener {
 
     private void addComponents() {
         southPanel = new JPanel();
-        rockLeftbody = new JButton("Rock Left Body");
-        rockRightbody = new JButton("Rock Right Body");
-        rollLeftHead = new JButton("Roll Left Head");
-        rollRightHead = new JButton("Roll Right Head");
+        rockLeftbody = new JButton("Rock");
+        rockRightbody = new JButton("Roll");
+//        rollLeftHead = new JButton("Roll Left Head");
+//        rollRightHead = new JButton("Roll Right Head");
         turnSpotlightOnOff = new JButton("Turn Spotlight On/Off");
         turnGenerallightOnOff = new JButton("Turn General Light On/Off");
         turnGenerallight2OnOff = new JButton("Turn General Light2 On/Off");
         reset = new JButton("Reset");
         southPanel.add(rockLeftbody);
         southPanel.add(rockRightbody);
-        southPanel.add(rollLeftHead);
-        southPanel.add(rollRightHead);
+//        southPanel.add(rollLeftHead);
+//        southPanel.add(rollRightHead);
         southPanel.add(turnSpotlightOnOff);
         southPanel.add(turnGenerallightOnOff);
         southPanel.add(turnGenerallight2OnOff);
@@ -107,8 +107,8 @@ public class Aliens extends JFrame implements ActionListener {
     private void setComponentsListener() {
         rockLeftbody.addActionListener(this);
         rockRightbody.addActionListener(this);
-        rollLeftHead.addActionListener(this);
-        rollRightHead.addActionListener(this);
+//        rollLeftHead.addActionListener(this);
+//        rollRightHead.addActionListener(this);
         turnSpotlightOnOff.addActionListener(this);
         turnGenerallightOnOff.addActionListener(this);
         turnGenerallight2OnOff.addActionListener(this);
@@ -125,32 +125,23 @@ public class Aliens extends JFrame implements ActionListener {
         switch (e.getActionCommand()){
             case "Reset":
                 System.out.println("Reset");
-//                backdropGlEventListener.getAlien2_1().reset();
-//                backdropGlEventListener.getAlien2_1().reset();
+                backdropGlEventListener.getSpotLightModel2().startAnimation();
                 break;
-            case "Rock Left Body":
-//                System.out.println("Roll Left Body");
+            case "Rock":
                 backdropGlEventListener.getAlien2_1().startRock();
+                backdropGlEventListener.getAlien2_2().startRock();
                 break;
-            case "Rock Right Body":
-//                System.out.println("Roll Right Body");
-//                backdropGlEventListener.getAlien2_2().startAnimation();
-                break;
-            case "Roll Left Head":
-//                System.out.println("Roll Left Head");
-//                backdropGlEventListener.getAlien2_1().startAnimation();
-                break;
-            case "Roll Right Head":
-//                System.out.println("Roll Right Head");
-//                backdropGlEventListener.getAlien2_2().startAnimation();
+            case "Roll":
+                backdropGlEventListener.getAlien2_1().startRoll();
+                backdropGlEventListener.getAlien2_2().startRoll();
                 break;
             case "Turn Spotlight On/Off":
                 intensity = backdropGlEventListener.getSpotLight().getIntensity();
                 if(intensity == 0){
-                    backdropGlEventListener.getSpotLightModel().getSphere_lamp().getMaterial().setBrightness(1.0f);
+                    backdropGlEventListener.getSpotLightModel2().getSphere_lamp().getMaterial().setBrightness(1.0f);
                     backdropGlEventListener.getSpotLight().turnOnLight(true, 0.45f);
                 }else {
-                    backdropGlEventListener.getSpotLightModel().getSphere_lamp().getMaterial().setBrightness(0.5f);
+                    backdropGlEventListener.getSpotLightModel2().getSphere_lamp().getMaterial().setBrightness(0.5f);
                     backdropGlEventListener.getSpotLight().turnOnLight(false, 0);
                 }
                 break;
