@@ -130,7 +130,7 @@ public class Aliens extends JFrame implements ActionListener {
                 break;
             case "Rock Left Body":
 //                System.out.println("Roll Left Body");
-                backdropGlEventListener.getAlien2_1().startAnimation();
+                backdropGlEventListener.getAlien2_1().startRock();
                 break;
             case "Rock Right Body":
 //                System.out.println("Roll Right Body");
