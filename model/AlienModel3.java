@@ -26,7 +26,7 @@ public class AlienModel3 {
 
     private Model floor, sphere, cube, cube2;
     private SGNode alienRoot;
-    private TransformNode translateX, bodyMoveTranslate, headMoveTranslate, leftArmRotate, rightArmRotate;
+    private TransformNode translateX, bodyMoveTranslate, headMoveTranslate, leftArmRotate, rightArmRotate, bodyTranslate, headTranslate;
     private float xPosition = 0;
     public AlienModel3(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, AlienShader alienShader, Material alienMaterial, Mat4 mat4, Mesh m, int[] alienTexture, Mat4 transition) {
 
@@ -56,7 +56,7 @@ public class AlienModel3 {
         alienRoot = new NameNode("root");
         bodyMoveTranslate = new TransformNode("alien transform",Mat4Transform.translate(xPosition,0,0));
 
-        TransformNode bodyTranslate = new TransformNode("alien transform2",Mat4Transform.translate(0, legLength,0));
+        bodyTranslate = new TransformNode("alien transform2",Mat4Transform.translate(0, legLength,0));
 
         NameNode body = new NameNode("body");
         Mat4 m2 = Mat4Transform.scale(bodyWidth, bodyHeight, bodyDepth);
@@ -66,6 +66,8 @@ public class AlienModel3 {
 
         NameNode head = new NameNode("head");
         headMoveTranslate = new TransformNode("head transform",Mat4Transform.translate(xPosition,0,0));
+
+        headTranslate = new TransformNode("head transform2",Mat4Transform.translate(0, legLength,0));
 
         m2 = new Mat4(1);
         m2 = Mat4.multiply(m2, Mat4Transform.translate(0, bodyHeight,0));
@@ -84,7 +86,16 @@ public class AlienModel3 {
                         head.addChild(headTransform);
                         headTransform.addChild(headShape);
 
-
+//        body.addChild(headMoveTranslate);
+//
+////        head.addChild(headMoveTranslate);
+//            headMoveTranslate.addChild(headTranslate);
+//                headTranslate.addChild(head);
+//                    head.addChild(headTransform);
+//                        headTransform.addChild(headShape);
+////                    body.addChild(head);
+////                        head.addChild(headTransform);
+////                        headTransform.addChild(headShape);
         alienRoot.update();
     }
 
@@ -100,6 +111,8 @@ public class AlienModel3 {
 
         bodyMoveTranslate.setTransform(Mat4Transform.rotateAroundZ(rotateAngle));
         bodyMoveTranslate.update();
+//        headMoveTranslate.setTransform(Mat4Transform.rotateAroundZ(rotateAngle));
+//        headMoveTranslate.update();
     }
 
     public void dispose(GL3 gl) {
