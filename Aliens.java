@@ -85,18 +85,18 @@ public class Aliens extends JFrame implements ActionListener {
 
     private void addComponents() {
         southPanel = new JPanel();
-        rockLeftbody = new JButton("Rock");
-        rockRightbody = new JButton("Roll");
-//        rollLeftHead = new JButton("Roll Left Head");
-//        rollRightHead = new JButton("Roll Right Head");
+        rockLeftbody = new JButton("Rock Left Alien");
+        rockRightbody = new JButton("Roll Left Alien");
+        rollLeftHead = new JButton("Rock Right Alien");
+        rollRightHead = new JButton("Roll Right Alien");
         turnSpotlightOnOff = new JButton("Turn Spotlight On/Off");
         turnGenerallightOnOff = new JButton("Turn General Light On/Off");
         turnGenerallight2OnOff = new JButton("Turn General Light2 On/Off");
         reset = new JButton("Reset");
         southPanel.add(rockLeftbody);
         southPanel.add(rockRightbody);
-//        southPanel.add(rollLeftHead);
-//        southPanel.add(rollRightHead);
+        southPanel.add(rollLeftHead);
+        southPanel.add(rollRightHead);
         southPanel.add(turnSpotlightOnOff);
         southPanel.add(turnGenerallightOnOff);
         southPanel.add(turnGenerallight2OnOff);
@@ -107,8 +107,8 @@ public class Aliens extends JFrame implements ActionListener {
     private void setComponentsListener() {
         rockLeftbody.addActionListener(this);
         rockRightbody.addActionListener(this);
-//        rollLeftHead.addActionListener(this);
-//        rollRightHead.addActionListener(this);
+        rollLeftHead.addActionListener(this);
+        rollRightHead.addActionListener(this);
         turnSpotlightOnOff.addActionListener(this);
         turnGenerallightOnOff.addActionListener(this);
         turnGenerallight2OnOff.addActionListener(this);
@@ -127,13 +127,21 @@ public class Aliens extends JFrame implements ActionListener {
                 System.out.println("Reset");
                 backdropGlEventListener.getSpotLightModel2().startAnimation();
                 break;
-            case "Rock":
+            case "Rock Left Alien":
                 backdropGlEventListener.getAlien2_1().startRock();
-                backdropGlEventListener.getAlien2_2().startRock();
+//                backdropGlEventListener.getAlien2_2().startRock();
                 break;
-            case "Roll":
+            case "Roll Left Alien":
                 backdropGlEventListener.getAlien2_1().startRoll();
+//                backdropGlEventListener.getAlien2_2().startRoll();
+                break;
+            case "Rock Right Alien":
+                backdropGlEventListener.getAlien2_2().startRock();
+//                backdropGlEventListener.getAlien2_2().startRock();
+                break;
+            case "Roll Right Alien":
                 backdropGlEventListener.getAlien2_2().startRoll();
+//                backdropGlEventListener.getAlien2_2().startRoll();
                 break;
             case "Turn Spotlight On/Off":
                 intensity = backdropGlEventListener.getSpotLight().getIntensity();
