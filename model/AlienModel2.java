@@ -296,8 +296,6 @@ public class AlienModel2 {
 
 
     public void render(GL3 gl) {
-//        alienRootTranslate.setTransform(Mat4Transform.translate(-2.5f, 0.0f, 0.0f));
-//        alienRootTranslate.update();
         if (rock) rockBody();
         if (roll) rollHeadX();
         alienRoot.draw(gl);
@@ -327,11 +325,6 @@ public class AlienModel2 {
         alienRootTranslate.setTransform(mat4);
         alienRootTranslate.update();
     }
-    public void translateBody(Mat4 mat4) {
-        alienBodyTranslate.setTransform(mat4);
-        alienBodyTranslate.update();
-    }
-
 
     public void dispose(GL3 gl) {
         sphere_body.dispose(gl);

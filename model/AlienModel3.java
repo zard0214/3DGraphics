@@ -407,14 +407,14 @@ public class AlienModel3 {
         float rotateAngleZ = 45f * (float)Math.sin(elapsedTime + 90f);
         float rotateAngleX = 45f * (float)Math.cos(elapsedTime + 90f);
 
-        Mat4 snowmanRollMat = Mat4Transform.rotateAroundZ(rotateAngleZ);
-        snowmanRollMat = Mat4.multiply(snowmanRollMat, Mat4Transform.rotateAroundX(rotateAngleX));
-        bodyRoll.setTransform(snowmanRollMat);
+        Mat4 rollMat = Mat4Transform.rotateAroundZ(rotateAngleZ);
+        rollMat = Mat4.multiply(rollMat, Mat4Transform.rotateAroundX(rotateAngleX));
+        bodyRoll.setTransform(rollMat);
         bodyRoll.update();
 
-        Mat4 headRotateMat = Mat4Transform.rotateAroundZ(rotateAngleZ * (1 / 5.1f));
-        headRotateMat = Mat4.multiply(headRotateMat, Mat4Transform.rotateAroundX(rotateAngleX * (1 / 5.1f)));
-        headRoll.setTransform(headRotateMat);
+        rollMat = Mat4Transform.rotateAroundZ(rotateAngleZ * (1 / 5.1f));
+        rollMat = Mat4.multiply(rollMat, Mat4Transform.rotateAroundX(rotateAngleX * (1 / 5.1f)));
+        headRoll.setTransform(rollMat);
         headRoll.update();
 
     }
