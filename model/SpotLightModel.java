@@ -2,7 +2,7 @@ package model;
 
 import com.jogamp.opengl.GL3;
 import core.camera.Camera;
-import core.camera.Material;
+import core.Material;
 import core.light.Light;
 import core.light.SpotLight;
 import core.shaders.LampShader;
@@ -12,7 +12,6 @@ import gmaths.Mat4Transform;
 import gmaths.Vec3;
 import util.Constant;
 import util.TextureLibrary;
-import util.TimeUtils;
 
 /**
  * @author Zhecheng Zhao

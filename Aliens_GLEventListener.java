@@ -3,7 +3,7 @@ import com.jogamp.opengl.GL3;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLEventListener;
 import core.camera.Camera;
-import core.camera.Material;
+import core.Material;
 import core.light.Light;
 import core.light.SpotLight;
 import core.shaders.AlienShader;

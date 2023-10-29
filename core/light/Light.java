@@ -5,7 +5,7 @@ import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL3;
 import core.Shader;
 import core.camera.Camera;
-import core.camera.Material;
+import core.Material;
 import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;
