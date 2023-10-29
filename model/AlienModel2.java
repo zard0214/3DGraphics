@@ -308,11 +308,11 @@ public class AlienModel2 {
         double elapsedTime = TimeUtils.getCurrentTime() - startTime;
         float rotateAngleX = 25f * (float)Math.cos(elapsedTime + 90f);
 
-        Mat4 rollMat = Mat4Transform.rotateAroundX(rotateAngleX);
+        Mat4 rollMat = Mat4Transform.rotateAroundY(rotateAngleX);
         alienRoll.setTransform(rollMat);
         alienRoll.update();
 
-        rollMat = Mat4Transform.rotateAroundX(rotateAngleX * 0.8f);
+        rollMat = Mat4Transform.rotateAroundY(rotateAngleX * 0.8f);
         alienHeadRotate.setTransform(rollMat);
         alienHeadRotate.update();
     }
