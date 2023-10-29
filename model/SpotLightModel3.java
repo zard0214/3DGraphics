@@ -22,7 +22,7 @@ import util.TimeUtils;
  * @RegistrationNo 220186627
  * @date Created in 25/10/2023 08:20
  */
-public class SpotLightModel2 {
+public class SpotLightModel3 {
 
     private boolean animation = false;
 
@@ -38,11 +38,11 @@ public class SpotLightModel2 {
 
     private SGNode lightRoot;
 
-    private TransformNode lightRock, lightRoll;
+    private TransformNode lightRootTranslate, lightBodyTranslate, lightHeadTranslate, lightLampTranslate, lightHeadRotate, lightHeadRoll, lightHeadRock;
 
     private float xPosition = 0;
 
-    public SpotLightModel2(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, SpotLightShader spotLightShader, Mat4 mat4, Mesh m, double startTime) {
+    public SpotLightModel3(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, SpotLightShader spotLightShader, Mat4 mat4, Mesh m, double startTime) {
 
         spotLight = new SpotLight(gl);
         spotLight.setCamera(camera);
@@ -71,51 +71,58 @@ public class SpotLightModel2 {
 
 
         /***********  TransformNode  ***************/
-        lightRoot = new NameNode("root");
 
-        lightRock = new TransformNode("alienRoot transform",Mat4Transform.rotateAroundY(0));
-        lightRoll = new TransformNode("alienRoot transform",Mat4Transform.rotateAroundY(0));
+        lightRoot = new NameNode("lightRoot");
+        lightRootTranslate = new TransformNode("lightRoot transform",Mat4Transform.translate(xPosition,0,0));
+        lightHeadRock = new TransformNode("lightRoot transform",Mat4Transform.translate(xPosition,0,0));
+        lightBodyTranslate = new TransformNode("lightRoot transform",Mat4Transform.translate(xPosition,0,0));
+        lightHeadTranslate = new TransformNode("lightHead transform",Mat4Transform.translate(xPosition,0,0));
+        lightLampTranslate = new TransformNode("lightLamp transform",Mat4Transform.translate(xPosition,0,0));
+        lightHeadRotate = new TransformNode("lightHead transform",Mat4Transform.rotateAroundY(0));
+        lightHeadRoll = new TransformNode("lightHead transform",Mat4Transform.rotateAroundY(0));
 
-        TransformNode lightTranslate = new TransformNode("robot transform", Mat4Transform.translate(-7.5f, 4f, 0));
+        /***********  body  ***************/
         NameNode body = new NameNode("body");
-        Mat4 m1 = Mat4Transform.scale(0.3f, 8.0f, 0.3f);
-        m1 = Mat4.multiply(m1, Mat4Transform.translate(0f, 0, 0));
+        Mat4 m1 = Mat4Transform.translate(-7.5f, 4.0f, 0f);
+        m1 = Mat4.multiply(m1, Mat4Transform.translate(0f, 0.0f, 0.0f));
+        m1 = Mat4.multiply(m1, Mat4Transform.scale(0.30f, 8, 0.30f));
         TransformNode bodyTransform = new TransformNode("body transform", m1);
-        ModelNode bodyShape = new ModelNode("Cube(body)", sphere_body);
+        ModelNode bodyShape = new ModelNode("spotLight(body)", sphere_body);
 
+        /***********  head  ***************/
         NameNode head = new NameNode("head");
-        m1 = new Mat4(1);
-        m1 = Mat4.multiply(m1, Mat4Transform.translate(0.65f, 4.0f, 0.0f));
-        m1 = Mat4.multiply(m1, Mat4Transform.rotateAroundZ(90));
-        m1 = Mat4.multiply(m1, Mat4Transform.rotateAroundY(45));
-        m1 = Mat4.multiply(m1, Mat4Transform.scale(0.4f, 1.1f, 0.4f));
-        m1 = Mat4.multiply(m1, Mat4Transform.translate(0, 0.5f, 0));
+        m1 = Mat4Transform.translate(-7.5f, 8.0f, 0f);
+        m1 = Mat4.multiply(m1, Mat4Transform.translate(0f, 0.0f, 0.0f));
+        m1 = Mat4.multiply(m1, Mat4Transform.rotateAroundZ(60));
+        m1 = Mat4.multiply(m1, Mat4Transform.scale(0.5f, 1.2f, 0.5f));
         TransformNode headTransform = new TransformNode("head transform", m1);
-        ModelNode headShape = new ModelNode("Sphere(head)", sphere_head);
+        ModelNode headShape = new ModelNode("spotLight(head)", sphere_head);
 
-        NameNode lamp = new NameNode("head");
-        m1 = new Mat4(1);
-        m1 = Mat4.multiply(m1, Mat4Transform.translate(0.95f, 4.0f, 0.0f));
-        m1 = Mat4.multiply(m1, Mat4Transform.rotateAroundZ(90));
-        m1 = Mat4.multiply(m1, Mat4Transform.scale(0.20f, 0.40f, 0.20f));
-        m1 = Mat4.multiply(m1, Mat4Transform.translate(0, 0.5f, 0));
-        TransformNode lampTransform = new TransformNode("lamp scale", m1);
-        ModelNode lampShape = new ModelNode("Cube(left arm)", sphere_lamp);
+        /***********  sphere_lamp  ***************/
+        NameNode lamp = new NameNode("lamp");
+        m1 = Mat4Transform.translate(-6.7f, 7.5f, 0f);
+        m1 = Mat4.multiply(m1, Mat4Transform.translate(0f, 0.0f, 0.0f));
+        m1 = Mat4.multiply(m1, Mat4Transform.rotateAroundZ(60));
+        m1 = Mat4.multiply(m1, Mat4Transform.scale(0.3f, 0.70f, 0.3f));
+        TransformNode lampTransform = new TransformNode("lamp transform", m1);
+        ModelNode lampShape = new ModelNode("spotLight(lamp)", sphere_lamp);
 
+        lightRoot.addChild(lightRootTranslate);
+        lightRootTranslate.addChild(lightHeadRock);
+        lightHeadRock.addChild(body);
 
-        lightRoot.addChild(lightTranslate);
-        lightTranslate.addChild(body);
-        body.addChild(bodyTransform);
+        body.addChild(lightBodyTranslate);
+        lightBodyTranslate.addChild(bodyTransform);
         bodyTransform.addChild(bodyShape);
 
-        lightTranslate.addChild(lightRoll);
-        lightRoll.addChild(head);
-
-        head.addChild(headTransform);
+        lightBodyTranslate.addChild(lightHeadRoll);
+        lightHeadRoll.addChild(head);
+        head.addChild(lightHeadTranslate);
+        lightHeadTranslate.addChild(lightHeadRotate);
+        lightHeadRotate.addChild(headTransform);
         headTransform.addChild(headShape);
 
-        lightRoll.addChild(lamp);
-
+        lightHeadRotate.addChild(lamp);
         lamp.addChild(lampTransform);
         lampTransform.addChild(lampShape);
 
@@ -123,16 +130,17 @@ public class SpotLightModel2 {
     }
 
     public void render(GL3 gl) {
-//        if (animation)
-            rotateHead();
+        if (animation) rotateHead();
         lightRoot.draw(gl);
     }
 
     private void rotateHead() {
-        double elapsedTime = getSeconds() - startTime;
-        float rotateAngle = 45f * (float) Math.sin(elapsedTime);
-        lightRoll.setTransform(Mat4Transform.rotateAroundY(rotateAngle));
-        lightRoll.update();
+        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
+        float rotateAngleX = 25f * (float)Math.sin(elapsedTime + 90f);
+
+        Mat4 rollMat = Mat4Transform.rotateAroundY(rotateAngleX * 0.8f);
+        lightHeadRotate.setTransform(rollMat);
+        lightHeadRotate.update();
     }
 
 

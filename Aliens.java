@@ -129,19 +129,15 @@ public class Aliens extends JFrame implements ActionListener {
                 break;
             case "Rock Left Alien":
                 backdropGlEventListener.getAlien2_1().startRock();
-//                backdropGlEventListener.getAlien2_2().startRock();
                 break;
             case "Roll Left Alien":
                 backdropGlEventListener.getAlien2_1().startRoll();
-//                backdropGlEventListener.getAlien2_2().startRoll();
                 break;
             case "Rock Right Alien":
                 backdropGlEventListener.getAlien2_2().startRock();
-//                backdropGlEventListener.getAlien2_2().startRock();
                 break;
             case "Roll Right Alien":
                 backdropGlEventListener.getAlien2_2().startRoll();
-//                backdropGlEventListener.getAlien2_2().startRoll();
                 break;
             case "Turn Spotlight On/Off":
                 intensity = backdropGlEventListener.getSpotLight().getIntensity();

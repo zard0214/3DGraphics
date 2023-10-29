@@ -32,8 +32,9 @@ public class Aliens_GLEventListener implements GLEventListener {
     private SpotLight spotLight;
     private double startTime;
     private Model plane_1, plane_2;
-    private AlienModel2 alien2_1, alien2_2;
+    private AlienModel2 alien2_1, alien2_2, alien2_3;
     private AlienModel3 alien3_1, alien3_2;
+//    private SpotLightModel3 spotLightModel3;
     private SpotLightModel2 spotLightModel2;
 
     public Aliens_GLEventListener(Camera camera) {
@@ -104,12 +105,6 @@ public class Aliens_GLEventListener implements GLEventListener {
         transition = Mat4Transform.translate(0f, 0.0f, 0.0f);
         alien2_2 = new AlienModel2(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition,2.5f);
         alien2_2.translateRoot(Mat4Transform.translate(2.5f, 0.0f, 0.0f));
-//
-//        transition = Mat4Transform.translate(-2.5f, 0.0f, 0.0f);
-//        alien3_1 = new AlienModel3(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
-//
-//        transition = Mat4Transform.translate(2.5f, 0.0f, 0.0f);
-//        alien3_2 = new AlienModel3(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition);
 
         SpotLightShader spotLightShader2 = new SpotLightShader(gl, "core/shaders/vertex/vs_cube_03.txt", "core/shaders/fragment/fs_cube_033.txt");
         spotLightModel2 = new SpotLightModel2(gl, camera, light_1, light_2, spotLight, spotLightShader2, new Mat4(1), m, startTime);
@@ -126,8 +121,6 @@ public class Aliens_GLEventListener implements GLEventListener {
         light_3.dispose(gl);
         plane_1.dispose(gl);
         plane_2.dispose(gl);
-//        alien3_1.dispose(gl);
-//        alien3_2.dispose(gl);
         alien2_1.dispose(gl);
         alien2_2.dispose(gl);
         spotLightModel2.dispose(gl);
@@ -142,8 +135,6 @@ public class Aliens_GLEventListener implements GLEventListener {
     private void render(GL3 gl) {
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         renderBg(gl);
-//        alien3_1.render(gl);
-//        alien3_2.render(gl);
         alien2_1.render(gl);
         alien2_2.render(gl);
         spotLightModel2.render(gl);
@@ -195,9 +186,9 @@ public class Aliens_GLEventListener implements GLEventListener {
     // The light's postion is continually being changed, so needs to be calculated for each frame.
     private Vec3 getLightPosition3() {
         double elapsedTime = TimeUtils.getCurrentTime() - startTime;
-        float x = -6.5f * (float) (Math.sin(Math.toRadians(elapsedTime * 25)));
+        float x = -6.5f  * (float) (Math.sin(Math.toRadians(elapsedTime * 30)));
         float y = 7.3f;
-        float z = 0.0f * (float) (Math.cos(Math.toRadians(elapsedTime * 25)));
+        float z = 0.0f;
         return new Vec3(x, y, z);
     }
 
@@ -232,9 +223,6 @@ public class Aliens_GLEventListener implements GLEventListener {
         return spotLight;
     }
 
-    public SpotLightModel2 getSpotLightModel2() {
-        return spotLightModel2;
-    }
 
     public AlienModel3 getAlien3_1() {
         return alien3_1;
@@ -249,8 +237,11 @@ public class Aliens_GLEventListener implements GLEventListener {
     public AlienModel2 getAlien2_2() {
         return alien2_2;
     }
+    public AlienModel2 getAlien2_3() {
+        return alien2_3;
+    }
 
-    public SpotLightModel2 getSpotLightModel() {
+    public SpotLightModel2 getSpotLightModel2() {
         return spotLightModel2;
     }
 }
