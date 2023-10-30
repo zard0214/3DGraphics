@@ -10,6 +10,7 @@ import core.shaders.SpotLightShader;
 import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;
+import gmaths.Vec4;
 import model.node.NameNode;
 import model.node.SGNode;
 import model.node.TransformNode;
@@ -44,9 +45,9 @@ public class SpotLightModel2 {
 
     public SpotLightModel2(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, SpotLightShader spotLightShader, Mat4 mat4, Mesh m, double startTime) {
 
-        spotLight = new SpotLight(gl);
-        spotLight.setCamera(camera);
-        spotLight.setPosition(-6.5f, 7.3f, 0.0f);  // changing light position each frame
+        this.spotLight = new SpotLight(gl, new Vec3(-6.5f, 7.3f, 0.0f));
+        this.spotLight.setCamera(camera);
+        spotLight = this.spotLight;
 
         this.startTime = startTime;
 
@@ -126,6 +127,7 @@ public class SpotLightModel2 {
 //        if (animation)
             rotateHead();
         lightRoot.draw(gl);
+        this.spotLight.render(gl);
     }
 
     private void rotateHead() {
@@ -133,8 +135,14 @@ public class SpotLightModel2 {
         float rotateAngle = 45f * (float) Math.sin(elapsedTime);
         lightRoll.setTransform(Mat4Transform.rotateAroundY(rotateAngle));
         lightRoll.update();
+
+//        spotLight.setPosition(getLightDirection());
     }
 
+    public Vec3 getLightDirection() {
+        Vec3 result = null;
+        return result;
+    }
 
     public void dispose(GL3 gl) {
         sphere_body.dispose(gl);
@@ -149,12 +157,6 @@ public class SpotLightModel2 {
         return System.currentTimeMillis()/1000.0;
     }
 
-    public void stopAnimation() {
-        animation = false;
-        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
-        savedTime = elapsedTime;
-    }
-
     public SpotLight getSpotLight() {
         return spotLight;
     }
@@ -167,7 +169,5 @@ public class SpotLightModel2 {
         return sphere_lamp;
     }
 
-    public void setSphere_lamp(Model sphere_lamp) {
-        this.sphere_lamp = sphere_lamp;
-    }
+
 }

@@ -69,20 +69,26 @@ public class Aliens_GLEventListener implements GLEventListener {
         light_2.setIntensity(0.3f);
         light_2.turnOnLight(true, 0.3f);
 
-        light_3 = new Light(gl);
-        light_3.setCamera(camera);
-        light_3.setIntensity(0.3f);
-        light_3.turnOnLight(false, 0.3f);
-
-        spotLight = new SpotLight(gl);
-        spotLight.setCamera(camera);
+//        light_3 = new Light(gl);
+//        light_3.setCamera(camera);
+//        light_3.setIntensity(0.3f);
+//        light_3.turnOnLight(false, 0.3f);
 
         skybox = new BackdropSkybox(gl);
         cubemap_id = skybox.loadCubemap(Constant.SKYBOX_TEXTURE_PX, Constant.SKYBOX_TEXTURE_NY,
                 Constant.SKYBOX_TEXTURE_PZ, Constant.SKYBOX_TEXTURE_NX,
                 Constant.SKYBOX_TEXTURE_PY, Constant.SKYBOX_TEXTURE_NZ);
 
-        Mesh m = new Mesh(gl, TwoTriangles.vertices.clone(), TwoTriangles.indices.clone());
+//        spotLight = new SpotLight(gl, new Vec3(-6.5f, 7.3f, 0.0f));
+//        spotLight.setCamera(camera);
+
+        Mesh m = new Mesh(gl, Sphere.vertices.clone(), Sphere.indices.clone());
+        SpotLightShader spotLightShader2 = new SpotLightShader(gl, "core/shaders/vertex/vs_cube_03.txt", "core/shaders/fragment/fs_cube_033.txt");
+        spotLightModel2 = new SpotLightModel2(gl, camera, light_1, light_2, spotLight, spotLightShader2, new Mat4(1), m, startTime);
+
+        spotLight = spotLightModel2.getSpotLight();
+
+        m = new Mesh(gl, TwoTriangles.vertices.clone(), TwoTriangles.indices.clone());
         PlaneShader planeShader = new PlaneShader(gl, "core/shaders/vertex/vs_texture.glsl", "core/shaders/fragment/fs_texture.glsl");
         int[] textureId1 = TextureLibrary.loadTexture(gl, "textures/snow_floor2.jpg");
         Material planeMaterial = new Material(new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.3f, 0.3f, 0.3f), 4.0f);
@@ -106,8 +112,6 @@ public class Aliens_GLEventListener implements GLEventListener {
         alien2_2 = new AlienModel2(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, alienTexture, transition,2.5f);
         alien2_2.translateRoot(Mat4Transform.translate(2.5f, 0.0f, 0.0f));
 
-        SpotLightShader spotLightShader2 = new SpotLightShader(gl, "core/shaders/vertex/vs_cube_03.txt", "core/shaders/fragment/fs_cube_033.txt");
-        spotLightModel2 = new SpotLightModel2(gl, camera, light_1, light_2, spotLight, spotLightShader2, new Mat4(1), m, startTime);
 
     }
 
@@ -118,7 +122,7 @@ public class Aliens_GLEventListener implements GLEventListener {
         spotLight.dispose(gl);
         light_1.dispose(gl);
         light_2.dispose(gl);
-        light_3.dispose(gl);
+//        light_3.dispose(gl);
         plane_1.dispose(gl);
         plane_2.dispose(gl);
         alien2_1.dispose(gl);
@@ -142,9 +146,6 @@ public class Aliens_GLEventListener implements GLEventListener {
 
     private void renderBg(GL3 gl) {
         skybox.render(gl, cubemap_id, camera, startTime);
-
-        spotLight.setPosition(-6.5f, 7.3f, 0.0f);  // changing light position each frame
-        spotLight.setPosition(getLightPosition3());  // changing light position each frame
 
         light_1.setPosition(getLightPosition2());  // changing light position each frame
         light_2.setPosition(getLightPosition1());  // changing light position each frame

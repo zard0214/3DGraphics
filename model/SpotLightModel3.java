@@ -44,9 +44,9 @@ public class SpotLightModel3 {
 
     public SpotLightModel3(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, SpotLightShader spotLightShader, Mat4 mat4, Mesh m, double startTime) {
 
-        spotLight = new SpotLight(gl);
-        spotLight.setCamera(camera);
-        spotLight.setPosition(-6.5f, 7.3f, 0.0f);  // changing light position each frame
+//        spotLight = new SpotLight(gl);
+//        spotLight.setCamera(camera);
+//        spotLight.setPosition(-6.5f, 7.3f, 0.0f);  // changing light position each frame
 
         this.startTime = startTime;
 

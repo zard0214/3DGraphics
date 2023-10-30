@@ -40,7 +40,7 @@ public class SpotLight extends Model {
 
     private float intensity;
 
-    public SpotLight(GL3 gl) {
+    public SpotLight(GL3 gl, Vec3 position) {
         super(gl);
         material = new Material();
         material.setAmbient(0.3f, 0.3f, 0.3f);
@@ -48,10 +48,10 @@ public class SpotLight extends Model {
         material.setSpecular(0.7f, 0.7f, 0.7f);
 
         turnOnLight(true, 0.80f);
-        position = new Vec3(3f, 2f, 1f);
+        this.position = position;
         model = new Mat4(1);
         shader = new SpotLightShader(gl, "core/shaders/vertex/vs_texture.glsl", "core/shaders/fragment/fs_texture.glsl");
-        fillBuffers(gl);
+//        fillBuffers(gl);
     }
 
     public SpotLight(GL3 gl, Material material) {
@@ -60,7 +60,7 @@ public class SpotLight extends Model {
         position = new Vec3(3f, 2f, 1f);
         model = new Mat4(1);
         shader = new SpotLightShader(gl, "core/shaders/vertex/vs_texture.glsl", "core/shaders/fragment/fs_texture.glsl");
-        fillBuffers(gl);
+//        fillBuffers(gl);
     }
 
     public void setPosition(Vec3 v) {
@@ -98,8 +98,8 @@ public class SpotLight extends Model {
 
         Mat4 mvpMatrix = Mat4.multiply(camera.getPerspectiveMatrix(), Mat4.multiply(camera.getViewMatrix(), model));
 
-        shader.use(gl);
-        shader.setFloatArray(gl, "mvpMatrix", mvpMatrix.toFloatArrayForGLSL());
+//        shader.use(gl);
+//        shader.setFloatArray(gl, "mvpMatrix", mvpMatrix.toFloatArrayForGLSL());
 
         gl.glBindVertexArray(vertexArrayId[0]);
         gl.glDrawElements(GL.GL_TRIANGLES, indices.length, GL.GL_UNSIGNED_INT, 0);
