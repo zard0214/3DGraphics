@@ -124,24 +124,27 @@ public class SpotLightModel2 {
     }
 
     public void render(GL3 gl) {
-//        if (animation)
-            rotateHead();
+        rotateHead();
         lightRoot.draw(gl);
         this.spotLight.render(gl);
     }
 
     private void rotateHead() {
-        double elapsedTime = getSeconds() - startTime;
-        float rotateAngle = 45f * (float) Math.sin(elapsedTime);
+        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
+        float rotateAngle = 48f * (float) Math.sin(elapsedTime);
         lightRoll.setTransform(Mat4Transform.rotateAroundY(rotateAngle));
         lightRoll.update();
 
-//        spotLight.setPosition(getLightDirection());
+        spotLight.setPosition(getLightDirection());
     }
 
+
     public Vec3 getLightDirection() {
-        Vec3 result = null;
-        return result;
+        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
+        float x = -6.5f;
+        float y = 7.3f;
+        float z = 3.8f * (float) (Math.sin(Math.toRadians(elapsedTime * 58))) * -1;
+        return new Vec3(x, y, z);
     }
 
     public void dispose(GL3 gl) {
@@ -151,10 +154,6 @@ public class SpotLightModel2 {
     public void startAnimation() {
         animation = true;
         startTime = TimeUtils.getCurrentTime() - savedTime;
-    }
-
-    private double getSeconds() {
-        return System.currentTimeMillis()/1000.0;
     }
 
     public SpotLight getSpotLight() {

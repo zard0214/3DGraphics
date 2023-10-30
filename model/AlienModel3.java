@@ -323,10 +323,13 @@ public class AlienModel3 {
         headTransform.addChild(headShape);
 
         /*****  leftArm  ******/
+
         bodyTranslate.addChild(bodyRoll);
         bodyRoll.addChild(leftArm);
         leftArm.addChild(leftArmRotate);
         leftArmRotate.addChild(leftArmMoveTranslate);
+
+//        headRotate.addChild(leftArm);
 
         leftArm.addChild(leftArmTranslate);
         leftArmTranslate.addChild(leftArmTransform);
