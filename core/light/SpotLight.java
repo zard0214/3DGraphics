@@ -23,7 +23,8 @@ import java.nio.IntBuffer;
  */
 public class SpotLight extends Model {
 
-    private Vec3 direction = new Vec3(1.0f, -1.25f, 0.0f);
+    private Vec3 direction = new Vec3(1.0f, -1.25f, 0.5f);
+//    private Vec3 direction = new Vec3(1.0f, -1.25f, 0f);
     private float cutOff = (float) Math.cos(Math.toRadians(0.953));
     private float outerCutOff = (float) Math.cos(Math.toRadians(17.5));
     private float constant = 1.0f;
@@ -68,6 +69,12 @@ public class SpotLight extends Model {
         position.z = v.z;
     }
 
+    public void setDirection(float x, float y, float z) {
+        direction.x = x;
+        direction.y = y;
+        direction.z = z;
+    }
+
     public void setPosition(float x, float y, float z) {
         position.x = x;
         position.y = y;
@@ -97,8 +104,8 @@ public class SpotLight extends Model {
 
         Mat4 mvpMatrix = Mat4.multiply(camera.getPerspectiveMatrix(), Mat4.multiply(camera.getViewMatrix(), model));
 
-//        shader.use(gl);
-//        shader.setFloatArray(gl, "mvpMatrix", mvpMatrix.toFloatArrayForGLSL());
+        shader.use(gl);
+        shader.setFloatArray(gl, "mvpMatrix", mvpMatrix.toFloatArrayForGLSL());
 
         gl.glBindVertexArray(vertexArrayId[0]);
         gl.glDrawElements(GL.GL_TRIANGLES, indices.length, GL.GL_UNSIGNED_INT, 0);

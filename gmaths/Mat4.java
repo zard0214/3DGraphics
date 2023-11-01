@@ -72,6 +72,25 @@ public class Mat4 {   // row column formulation
         return a;
     }
 
+
+    public static Vec4 multiply(Mat4 a, Vec4 b) {
+        Vec4 result = new Vec4();
+        result.x += a.values[0][0]*b.x;
+        result.x += a.values[0][1]*b.y;
+        result.x += a.values[0][2]*b.z;
+        result.x += a.values[0][3]*b.w;
+        result.y += a.values[1][0]*b.x;
+        result.y += a.values[1][1]*b.y;
+        result.y += a.values[1][2]*b.z;
+        result.y += a.values[1][3]*b.w;
+        result.z += a.values[2][0]*b.x;
+        result.z += a.values[2][1]*b.y;
+        result.z += a.values[2][2]*b.z;
+        result.z += a.values[2][3]*b.w;
+        result.w = 1;
+        return result;
+    }
+
     public static Mat4 multiply(Mat4 a, Mat4 b) {
         Mat4 result = new Mat4();
         for (int i = 0; i < 4; ++i) {

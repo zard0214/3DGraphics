@@ -10,6 +10,7 @@ import core.shaders.SpotLightShader;
 import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;
+import gmaths.Vec4;
 import model.node.NameNode;
 import model.node.SGNode;
 import model.node.TransformNode;
@@ -22,9 +23,9 @@ import util.TimeUtils;
  * @RegistrationNo 220186627
  * @date Created in 25/10/2023 08:20
  */
-public class SpotLightModel2 {
+public class SpotLightModel2 extends Model{
 
-    private boolean animation = false;
+    private boolean animation = true;
 
     private double startTime;
 
@@ -38,11 +39,13 @@ public class SpotLightModel2 {
 
     private SGNode lightRoot;
 
-    private TransformNode lightRock, lightRoll, lightTranslate;
+    private TransformNode lightRock, lightRoll, lightTranslate, lampTransform;
 
     private float xPosition = 0;
 
-    public SpotLightModel2(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, SpotLightShader spotLightShader, Mat4 mat4, Mesh m, double startTime) {
+
+    public SpotLightModel2(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, SpotLightShader spotLightShader, Mat4 modelMatrix, Mesh m, double startTime) {
+        super(gl, modelMatrix);
 
         this.spotLight = new SpotLight(gl, new Vec3(-6.5f, 7.3f, 0.0f));
         this.spotLight.setCamera(camera);
@@ -99,7 +102,7 @@ public class SpotLightModel2 {
         m1 = Mat4.multiply(m1, Mat4Transform.rotateAroundZ(60));
         m1 = Mat4.multiply(m1, Mat4Transform.scale(0.20f, 0.40f, 0.20f));
         m1 = Mat4.multiply(m1, Mat4Transform.translate(0, 0.5f, 0));
-        TransformNode lampTransform = new TransformNode("lamp scale", m1);
+        lampTransform = new TransformNode("lamp scale", m1);
         ModelNode lampShape = new ModelNode("Cube(left arm)", sphere_lamp);
 
 
@@ -123,7 +126,7 @@ public class SpotLightModel2 {
     }
 
     public void render(GL3 gl) {
-        rotateHead();
+        if(animation) rotateHead();
         lightRoot.draw(gl);
         this.spotLight.render(gl);
     }
@@ -131,11 +134,22 @@ public class SpotLightModel2 {
     private void rotateHead() {
         double elapsedTime = TimeUtils.getCurrentTime() - startTime;
         float rotateAngle = 48f * (float) Math.sin(elapsedTime);
+        Mat4 lampTrans = lampTransform.getTransform();
+
         lightRoll.setTransform(Mat4Transform.rotateAroundY(rotateAngle));
         lightRoll.update();
 
-        spotLight.setPosition(getLightPosition());
+        Mat4 newLampTrans = Mat4.multiply(Mat4Transform.translate(-7.2f, 3.7f, 3.8f), lampTrans);
+        newLampTrans = Mat4.multiply(lightRoll.getTransform(), newLampTrans);
+        Vec4 vector1 = Mat4.multiply(newLampTrans, new Vec4(0,0,0,1));
+
+        spotLight.setPosition(vector1.x, vector1.y, -vector1.z);
+
+//        x:-1.2249227  -6.5f;
+//        y:3.0929232  7.3f;
+//        z:0.76  3.8f
     }
+
 
     public Vec3 getLightPosition() {
         double elapsedTime = TimeUtils.getCurrentTime() - startTime;
@@ -171,6 +185,12 @@ public class SpotLightModel2 {
         startTime = TimeUtils.getCurrentTime() - savedTime;
     }
 
+    public void stopAnimation() {
+        animation = false;
+        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
+        savedTime = elapsedTime;
+    }
+
     public SpotLight getSpotLight() {
         return spotLight;
     }
@@ -183,5 +203,7 @@ public class SpotLightModel2 {
         return sphere_lamp;
     }
 
-
+    public boolean isAnimation() {
+        return animation;
+    }
 }

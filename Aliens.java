@@ -27,7 +27,7 @@ public class Aliens extends JFrame implements ActionListener {
     private Aliens_GLEventListener backdropGlEventListener;
     private FPSAnimator animator;
     private JPanel southPanel;
-    private JButton rockLeftbody, rockRightbody, rollLeftHead, rollRightHead, turnSpotlightOnOff, turnGenerallightOnOff, turnGenerallight2OnOff, reset;
+    private JButton rockLeftbody, rockRightbody, rollLeftHead, rollRightHead, rotateSpotlightOnOff, turnSpotlightOnOff, turnGenerallightOnOff, turnGenerallight2OnOff, reset;
     private JSlider light1Slider, light2Slider;
 
     public static void main(String[] args) {
@@ -89,6 +89,7 @@ public class Aliens extends JFrame implements ActionListener {
         rockRightbody = new JButton("Roll Left Alien");
         rollLeftHead = new JButton("Rock Right Alien");
         rollRightHead = new JButton("Roll Right Alien");
+        rotateSpotlightOnOff = new JButton("Rotate/Stop Spotlight");
         turnSpotlightOnOff = new JButton("Turn Spotlight On/Off");
         turnGenerallightOnOff = new JButton("Turn General Light On/Off");
         turnGenerallight2OnOff = new JButton("Turn General Light2 On/Off");
@@ -97,6 +98,7 @@ public class Aliens extends JFrame implements ActionListener {
         southPanel.add(rockRightbody);
         southPanel.add(rollLeftHead);
         southPanel.add(rollRightHead);
+        southPanel.add(rotateSpotlightOnOff);
         southPanel.add(turnSpotlightOnOff);
         southPanel.add(turnGenerallightOnOff);
         southPanel.add(turnGenerallight2OnOff);
@@ -109,6 +111,7 @@ public class Aliens extends JFrame implements ActionListener {
         rockRightbody.addActionListener(this);
         rollLeftHead.addActionListener(this);
         rollRightHead.addActionListener(this);
+        rotateSpotlightOnOff.addActionListener(this);
         turnSpotlightOnOff.addActionListener(this);
         turnGenerallightOnOff.addActionListener(this);
         turnGenerallight2OnOff.addActionListener(this);
@@ -139,6 +142,13 @@ public class Aliens extends JFrame implements ActionListener {
             case "Roll Right Alien":
                 backdropGlEventListener.getAlien2_2().startRoll();
                 break;
+            case "Rotate/Stop Spotlight":
+                if(!backdropGlEventListener.getSpotLightModel2().isAnimation()){
+                    backdropGlEventListener.getSpotLightModel2().startAnimation();
+                }else{
+                    backdropGlEventListener.getSpotLightModel2().stopAnimation();
+                }
+                break;
             case "Turn Spotlight On/Off":
                 intensity = backdropGlEventListener.getSpotLight().getIntensity();
                 if(intensity == 0){
@@ -147,6 +157,7 @@ public class Aliens extends JFrame implements ActionListener {
                 }else {
                     backdropGlEventListener.getSpotLightModel2().getSphere_lamp().getMaterial().setBrightness(0.5f);
                     backdropGlEventListener.getSpotLight().turnOnLight(false, 0);
+                    backdropGlEventListener.getSpotLightModel2().stopAnimation();
                 }
                 break;
             case "Turn General Light On/Off":

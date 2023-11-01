@@ -26,6 +26,10 @@ public class Model {
     public Model(GL3 gl) {
     }
 
+    public Model(GL3 gl, Mat4 modelMatrix) {
+        this.modelMatrix = modelMatrix;
+    }
+
     public Model(GL3 gl, Material material) {
         this.material = material;
     }
