@@ -70,25 +70,22 @@ vec3 calcLight(Light light, vec3 textureVec)
 vec3 calcSpotLight(SpotLight spotLight, vec3 textureVec)
 {
   vec3 lightDir = normalize(spotLight.position - aPos);
-  // diffuse shading
+
   float diff = max(dot(aNormal, lightDir), 0.0);
-  // specular shading
+
   vec3 reflectDir = reflect(-lightDir, aNormal);
   float spec = pow(max(dot(lightDir, reflectDir), 0.0), material.shininess);
-  // attenuation
+
   float distance = length(spotLight.position - aPos);
   float attenuation = 1.0 / (spotLight.constant + spotLight.linear * distance + spotLight.quadratic * distance * distance);
-  // spotlight intensity
+
   float theta = dot(lightDir, normalize(-spotLight.direction));
   float epsilon = spotLight.cutOff - spotLight.outerCutOff;
   float intensity = clamp((theta - spotLight.outerCutOff) / epsilon, 0.0, 1.0);
-  // combine results
-  vec3 ambient = spotLight.ambient * textureVec;
-  vec3 diffuse = spotLight.diffuse * diff * textureVec;
-  vec3 specular = spotLight.specular * spec * textureVec;
-  ambient *= attenuation * intensity;
-  diffuse *= attenuation * intensity;
-  specular *= attenuation * intensity;
+
+  vec3 ambient = spotLight.ambient * textureVec * (attenuation * intensity);
+  vec3 diffuse = spotLight.diffuse * diff * textureVec * (attenuation * intensity);
+  vec3 specular = spotLight.specular * spec * textureVec * (attenuation * intensity);
 
   vec3 result = ambient + diffuse + specular;
   return result;

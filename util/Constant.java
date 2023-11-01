@@ -20,6 +20,7 @@ public class Constant {
     public static final String SKYBOX_TEXTURE_NZ = "textures/negz.jpg";
 
     public static final String ALIEN_TEXTURE_GRAY = "textures/gray.jpg";
+    public static final String ALIEN_BODY_TEXTURE = "textures/alien_body_texture.jpg";
     public static final String ALIEN_TEXTURE_GRAY_2 = "textures/gray_2.jpg";
     public static final String ALIEN_TEXTURE_1 = "textures/snow.jpg";
     public static final String ALIEN_TEXTURE_2 = "textures/snow_specular.jpg";
@@ -37,7 +38,7 @@ public class Constant {
     public static final String FLOOR_TEXTURE_2 = "textures/snow_specular.jpg";
     public static final String SPOTLIGHT_TEXTURE_1 = "textures/snow.jpg";
     public static final String SPOTLIGHT_TEXTURE_2 = "textures/snow_specular.jpg";
-    public static final String SPOTLIGHT_TEXTURE_3 = "textures/yellow.jpg";
+    public static final String TEXTURE_YELLOW = "textures/yellow.jpg";
     public static final String FLOOR_GLSL_VS = "core/shaders/vertex/vs_tt_06.glsl";
     public static final String FLOOR_GLSL_FS = "core/shaders/fragment/fs_tt_06.glsl";
     public static final String SKYBOX_GLSL_VS = "core/shaders/vertex/vs_skybox_1.glsl";

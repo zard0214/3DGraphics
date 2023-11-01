@@ -84,6 +84,7 @@ public class Mat4 {   // row column formulation
         return result;
     }
 
+
     // See https://www.geometrictools.com/Documentation/LaplaceExpansionTheorem.pdf
     public static Mat4 inverse(Mat4 m) {
         float s0 = m.values[0][0] * m.values[1][1] - m.values[1][0] * m.values[0][1];

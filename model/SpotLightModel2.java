@@ -10,7 +10,6 @@ import core.shaders.SpotLightShader;
 import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;
-import gmaths.Vec4;
 import model.node.NameNode;
 import model.node.SGNode;
 import model.node.TransformNode;
@@ -39,7 +38,7 @@ public class SpotLightModel2 {
 
     private SGNode lightRoot;
 
-    private TransformNode lightRock, lightRoll;
+    private TransformNode lightRock, lightRoll, lightTranslate;
 
     private float xPosition = 0;
 
@@ -52,7 +51,7 @@ public class SpotLightModel2 {
         this.startTime = startTime;
 
         int[] textureId0 = TextureLibrary.loadTexture(gl, Constant.SPOTLIGHT_TEXTURE_1);
-        int[] textureId1 = TextureLibrary.loadTexture(gl, Constant.SPOTLIGHT_TEXTURE_3);
+        int[] textureId1 = TextureLibrary.loadTexture(gl, Constant.TEXTURE_YELLOW);
 
         /***********  sphere_body  ***************/
         Material bodyMaterial = new Material(new Vec3(0.5f, 0.5f, 0.5f), new Vec3(0.8f, 0.8f, 0.8f), new Vec3(0.8f, 0.8f, 0.8f), 32.0f);
@@ -77,7 +76,7 @@ public class SpotLightModel2 {
         lightRock = new TransformNode("alienRoot transform",Mat4Transform.rotateAroundY(0));
         lightRoll = new TransformNode("alienRoot transform",Mat4Transform.rotateAroundY(0));
 
-        TransformNode lightTranslate = new TransformNode("robot transform", Mat4Transform.translate(-7.5f, 4f, 0));
+        lightTranslate = new TransformNode("robot transform", Mat4Transform.translate(-7.5f, 4f, 0));
         NameNode body = new NameNode("body");
         Mat4 m1 = Mat4Transform.scale(0.3f, 8.0f, 0.3f);
         m1 = Mat4.multiply(m1, Mat4Transform.translate(0f, 0, 0));
@@ -86,18 +85,18 @@ public class SpotLightModel2 {
 
         NameNode head = new NameNode("head");
         m1 = new Mat4(1);
-        m1 = Mat4.multiply(m1, Mat4Transform.translate(0.65f, 4.0f, 0.0f));
-        m1 = Mat4.multiply(m1, Mat4Transform.rotateAroundZ(90));
+        m1 = Mat4.multiply(m1, Mat4Transform.translate(0.65f, 3.7f, 0.0f));
+        m1 = Mat4.multiply(m1, Mat4Transform.rotateAroundZ(60));
         m1 = Mat4.multiply(m1, Mat4Transform.rotateAroundY(45));
         m1 = Mat4.multiply(m1, Mat4Transform.scale(0.4f, 1.1f, 0.4f));
         m1 = Mat4.multiply(m1, Mat4Transform.translate(0, 0.5f, 0));
         TransformNode headTransform = new TransformNode("head transform", m1);
         ModelNode headShape = new ModelNode("Sphere(head)", sphere_head);
 
-        NameNode lamp = new NameNode("head");
+        NameNode lamp = new NameNode("lamp");
         m1 = new Mat4(1);
-        m1 = Mat4.multiply(m1, Mat4Transform.translate(0.95f, 4.0f, 0.0f));
-        m1 = Mat4.multiply(m1, Mat4Transform.rotateAroundZ(90));
+        m1 = Mat4.multiply(m1, Mat4Transform.translate(0.95f, 3.5f, 0.0f));
+        m1 = Mat4.multiply(m1, Mat4Transform.rotateAroundZ(60));
         m1 = Mat4.multiply(m1, Mat4Transform.scale(0.20f, 0.40f, 0.20f));
         m1 = Mat4.multiply(m1, Mat4Transform.translate(0, 0.5f, 0));
         TransformNode lampTransform = new TransformNode("lamp scale", m1);
@@ -135,17 +134,33 @@ public class SpotLightModel2 {
         lightRoll.setTransform(Mat4Transform.rotateAroundY(rotateAngle));
         lightRoll.update();
 
-        spotLight.setPosition(getLightDirection());
+        spotLight.setPosition(getLightPosition());
     }
 
-
-    public Vec3 getLightDirection() {
+    public Vec3 getLightPosition() {
         double elapsedTime = TimeUtils.getCurrentTime() - startTime;
         float x = -6.5f;
         float y = 7.3f;
         float z = 3.8f * (float) (Math.sin(Math.toRadians(elapsedTime * 58))) * -1;
         return new Vec3(x, y, z);
     }
+
+//    private void rotateHead() {
+//        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
+//        float rotateAngle = 48f * (float) Math.sin(elapsedTime);
+//        lightRoll.setTransform(Mat4Transform.rotateAroundY(rotateAngle));
+//        lightRoll.update();
+//
+//        spotLight.setPosition(getLightPosition());
+//    }
+//
+//    public Vec3 getLightPosition() {
+//        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
+//        float x = -6.5f;
+//        float y = 7.3f;
+//        float z = 3.8f * (float) (Math.sin(Math.toRadians(elapsedTime * 58))) * -1;
+//        return new Vec3(x, y, z);
+//    }
 
     public void dispose(GL3 gl) {
         sphere_body.dispose(gl);
