@@ -23,7 +23,7 @@ import util.TimeUtils;
  * @RegistrationNo 220186627
  * @date Created in 25/10/2023 08:20
  */
-public class SpotLightModel2 extends Model{
+public class SpotLightModel extends Model{
 
     private boolean animation = true;
 
@@ -44,7 +44,7 @@ public class SpotLightModel2 extends Model{
     private float xPosition = 0;
 
 
-    public SpotLightModel2(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, SpotLightShader spotLightShader, Mat4 modelMatrix, Mesh m, double startTime) {
+    public SpotLightModel(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, SpotLightShader spotLightShader, Mat4 modelMatrix, Mesh m, double startTime) {
         super(gl, modelMatrix);
 
         this.spotLight = new SpotLight(gl, new Vec3(-6.5f, 7.3f, 0.0f));

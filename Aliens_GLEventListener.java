@@ -31,9 +31,9 @@ public class Aliens_GLEventListener implements GLEventListener {
     private Light light_1, light_2;
     private SpotLight spotLight;
     private double startTime;
-    private Model plane_1, plane_2, plane_3, plane_4;
-    private AlienModel2 alien2_1, alien2_2, alien2_3;
-    private SpotLightModel2 spotLightModel2;
+    private Model plane_1, plane_2;
+    private AlienModel alien2_1, alien2_2;
+    private SpotLightModel spotLightModel2;
 
     public Aliens_GLEventListener(Camera camera) {
         this.camera = camera;
@@ -48,9 +48,9 @@ public class Aliens_GLEventListener implements GLEventListener {
         gl.glClearDepth(1.0f);
         gl.glEnable(GL.GL_DEPTH_TEST);
         gl.glDepthFunc(GL.GL_LESS);
-        gl.glFrontFace(GL.GL_CCW);    // default is 'CCW'
-        gl.glEnable(GL.GL_CULL_FACE); // default is 'not enabled'
-        gl.glCullFace(GL.GL_BACK);   // default is 'back', assuming CCW
+        gl.glFrontFace(GL.GL_CCW);
+        gl.glEnable(GL.GL_CULL_FACE);
+        gl.glCullFace(GL.GL_BACK);
         this.startTime = TimeUtils.getCurrentTime();
         initialise(gl);
     }
@@ -73,44 +73,42 @@ public class Aliens_GLEventListener implements GLEventListener {
                 Constant.SKYBOX_TEXTURE_PY, Constant.SKYBOX_TEXTURE_NZ);
 
         Mesh m = new Mesh(gl, Sphere.vertices.clone(), Sphere.indices.clone());
-        SpotLightShader spotLightShader2 = new SpotLightShader(gl, "core/shaders/vertex/vs_cube_03.txt", "core/shaders/fragment/fs_cube_033.txt");
-        spotLightModel2 = new SpotLightModel2(gl, camera, light_1, light_2, spotLight, spotLightShader2, new Mat4(1), m, startTime);
+        SpotLightShader spotLightShader2 = new SpotLightShader(gl, Constant.ALIEN_BODY_VS, Constant.ALIEN_BODY_FS);
+        spotLightModel2 = new SpotLightModel(gl, camera, light_1, light_2, spotLight, spotLightShader2, new Mat4(1), m, startTime);
 
         spotLight = spotLightModel2.getSpotLight();
 
         m = new Mesh(gl, TwoTriangles.vertices.clone(), TwoTriangles.indices.clone());
-        PlaneShader planeShader = new PlaneShader(gl, "core/shaders/vertex/vs_texture.glsl", "core/shaders/fragment/fs_texture.glsl");
-        int[] textureId1 = TextureLibrary.loadTexture(gl, "textures/snow_floor2.jpg");
+        PlaneShader planeShader = new PlaneShader(gl, Constant.SPOTLIGHT_GLSL_VS, Constant.SPOTLIGHT_GLSL_FS);
+        int[] textureId1 = TextureLibrary.loadTexture(gl, Constant.FLOOR_TEXTURE_3);
         Material planeMaterial = new Material(new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.3f, 0.3f, 0.3f), 4.0f);
         plane_1 = new Model(gl, camera, light_1, light_2, spotLight, planeShader, planeMaterial, new Mat4(1), m, textureId1);
 
 
-        planeShader = new PlaneShader(gl, "core/shaders/vertex/vs_background_1.glsl", "core/shaders/fragment/fs_background_1.glsl");
-        int[] textureId0 = TextureLibrary.loadTexture(gl, "textures/snow3.jpg");
-        int[] textureId2 = TextureLibrary.loadTexture(gl, "textures/snowing.jpg");
+        planeShader = new PlaneShader(gl, Constant.FLOOR_GLSL_VS, Constant.FLOOR_GLSL_FS);
+        int[] textureId0 = TextureLibrary.loadTexture(gl, Constant.TEXTURE_SNOW);
+        int[] textureId2 = TextureLibrary.loadTexture(gl, Constant.TEXTURE_SNOWING);
         plane_2 = new Model(gl, camera, light_1, light_2, spotLight, planeShader, planeMaterial, new Mat4(1), m, textureId0, textureId2);
-        plane_3 = new Model(gl, camera, light_1, light_2, spotLight, planeShader, planeMaterial, new Mat4(1), m, textureId0, textureId2);
-        plane_4 = new Model(gl, camera, light_1, light_2, spotLight, planeShader, planeMaterial, new Mat4(1), m, textureId0, textureId2);
 
         m = new Mesh(gl, Sphere.vertices.clone(), Sphere.indices.clone());
         AlienShader alienShader = new AlienShader(gl, Constant.DEFAULT_GLSL_VS, Constant.DEFAULT_GLSL_FS);
 
         int[] bodyTexture = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
-        int[] limbTexture = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
-        int[] otherTexture = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
+        int[] limbTexture = TextureLibrary.loadTexture(gl, Constant.TEXTURE_YELLOW);
+        int[] otherTexture = TextureLibrary.loadTexture(gl, Constant.TEXTURE_YELLOW);
         Material alienMaterial = new Material(new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.3f, 0.3f, 0.3f), 4.0f);
 
         Mat4 transition = Mat4Transform.translate(0f, 0.0f, 0.0f);
-        alien2_1 = new AlienModel2(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, bodyTexture, limbTexture, otherTexture, transition, -2.5f);
+        alien2_1 = new AlienModel(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, bodyTexture, limbTexture, otherTexture, transition, -2.5f);
         alien2_1.translateRoot(Mat4Transform.translate(-2.5f, 0.0f, 0.0f));
 
         transition = Mat4Transform.translate(0f, 0.0f, 0.0f);
 
         bodyTexture = TextureLibrary.loadTexture(gl, Constant.TEXTURE_YELLOW);
-        limbTexture = TextureLibrary.loadTexture(gl, Constant.TEXTURE_YELLOW);
-        otherTexture = TextureLibrary.loadTexture(gl, Constant.TEXTURE_YELLOW);
+        limbTexture = TextureLibrary.loadTexture(gl, Constant.WATER_TEXTURE);
+        otherTexture = TextureLibrary.loadTexture(gl, Constant.WATER_TEXTURE);
 
-        alien2_2 = new AlienModel2(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, bodyTexture, limbTexture, otherTexture, transition,2.5f);
+        alien2_2 = new AlienModel(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, bodyTexture, limbTexture, otherTexture, transition,2.5f);
         alien2_2.translateRoot(Mat4Transform.translate(2.5f, 0.0f, 0.0f));
 
 
@@ -123,11 +121,8 @@ public class Aliens_GLEventListener implements GLEventListener {
         spotLight.dispose(gl);
         light_1.dispose(gl);
         light_2.dispose(gl);
-//        light_3.dispose(gl);
         plane_1.dispose(gl);
         plane_2.dispose(gl);
-//        plane_3.dispose(gl);
-//        plane_4.dispose(gl);
         alien2_1.dispose(gl);
         alien2_2.dispose(gl);
         spotLightModel2.dispose(gl);
@@ -150,22 +145,15 @@ public class Aliens_GLEventListener implements GLEventListener {
     private void renderBg(GL3 gl) {
         skybox.render(gl, cubemap_id, camera, startTime);
 
-        light_1.setPosition(getLightPosition2());  // changing light position each frame
-        light_2.setPosition(getLightPosition1());  // changing light position each frame
+        light_1.setPosition(getLightPosition2());
+        light_2.setPosition(getLightPosition1());
 
-        plane_1.setModelMatrix(getMforTT1());       // change transform
+        plane_1.setModelMatrix(getMforTT1());
         plane_1.render(gl);
 
-        plane_2.setModelMatrix(getMforTT2());       // change transform
+        plane_2.setModelMatrix(getMforTT2());
         plane_2.setElapsedTime(startTime - TimeUtils.getCurrentTime());
         plane_2.render(gl);
-
-//        plane_3.setModelMatrix(getMforTT3());       // change transform
-//        plane_3.setElapsedTime(startTime - TimeUtils.getCurrentTime());
-//        plane_4.setModelMatrix(getMforTT4());       // change transform
-//        plane_4.setElapsedTime(startTime - TimeUtils.getCurrentTime());
-//        plane_3.render(gl);
-//        plane_4.render(gl);
     }
 
     @Override
@@ -176,7 +164,6 @@ public class Aliens_GLEventListener implements GLEventListener {
         camera.setPerspectiveMatrix(Mat4Transform.perspective(45, aspect));
     }
 
-    // The light's postion is continually being changed, so needs to be calculated for each frame.
     private Vec3 getLightPosition1() {
         double elapsedTime = TimeUtils.getCurrentTime() - startTime;
         float x = -6.1f * (float) (Math.sin(Math.toRadians(elapsedTime * 30)));
@@ -185,7 +172,6 @@ public class Aliens_GLEventListener implements GLEventListener {
         return new Vec3(x, y, z);
     }
 
-    // The light's postion is continually being changed, so needs to be calculated for each frame.
     private Vec3 getLightPosition2() {
         double elapsedTime = TimeUtils.getCurrentTime() - startTime;
         float x = -8.1f * (float) (Math.sin(Math.toRadians(elapsedTime * 50)));
@@ -194,17 +180,6 @@ public class Aliens_GLEventListener implements GLEventListener {
         return new Vec3(x, y, z);
     }
 
-    // The light's postion is continually being changed, so needs to be calculated for each frame.
-    private Vec3 getLightPosition3() {
-        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
-        float x = -6.5f  * (float) (Math.sin(Math.toRadians(elapsedTime * 30)));
-        float y = 7.3f;
-        float z = 0.0f;
-        return new Vec3(x, y, z);
-    }
-
-
-    // As the transforms do not change over time for this object, they could be stored once rather than continually being calculated
     private Mat4 getMforTT1() {
         float size = 16f;
         Mat4 modelMatrix = new Mat4(1);
@@ -212,7 +187,6 @@ public class Aliens_GLEventListener implements GLEventListener {
         return modelMatrix;
     }
 
-    // As the transforms do not change over time for this object, they could be stored once rather than continually being calculated
     private Mat4 getMforTT2() {
         float size = 16f;
         Mat4 modelMatrix = new Mat4(1);
@@ -221,28 +195,6 @@ public class Aliens_GLEventListener implements GLEventListener {
         modelMatrix = Mat4.multiply(Mat4Transform.translate(0,size*0.5f,-size*0.5f), modelMatrix);
         return modelMatrix;
     }
-
-    // As the transforms do not change over time for this object, they could be stored once rather than continually being calculated
-    private Mat4 getMforTT3() {
-        float size = 16f;
-        Mat4 modelMatrix = new Mat4(1);
-        modelMatrix = Mat4.multiply(Mat4Transform.scale(size,1f,size), modelMatrix);
-        modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundY(90), modelMatrix);
-        modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(-90), modelMatrix);
-        modelMatrix = Mat4.multiply(Mat4Transform.translate(-size*0.5f,size*0.5f,0), modelMatrix);
-        return modelMatrix;
-    }
-
-    // As the transforms do not change over time for this object, they could be stored once rather than continually being calculated
-//    private Mat4 getMforTT4() {
-//        float size = 16f;
-//        Mat4 modelMatrix = new Mat4(1);
-//        modelMatrix = Mat4.multiply(Mat4Transform.scale(size,1f,size), modelMatrix);
-//        modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundY(90), modelMatrix);
-//        modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(-90), modelMatrix);
-//        modelMatrix = Mat4.multiply(Mat4Transform.translate(size*0.5f,size*0.5f,0), modelMatrix);
-//        return modelMatrix;
-//    }
 
     public Light getLight_1() {
         return light_1;
@@ -257,15 +209,15 @@ public class Aliens_GLEventListener implements GLEventListener {
         return spotLight;
     }
 
-    public AlienModel2 getAlien2_1() {
+    public AlienModel getAlien2_1() {
         return alien2_1;
     }
 
-    public AlienModel2 getAlien2_2() {
+    public AlienModel getAlien2_2() {
         return alien2_2;
     }
 
-    public SpotLightModel2 getSpotLightModel2() {
+    public SpotLightModel getSpotLightModel2() {
         return spotLightModel2;
     }
 }

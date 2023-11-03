@@ -9,6 +9,7 @@ import core.Material;
 import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;
+import util.Constant;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -29,7 +30,7 @@ public class Light {
         material.setSpecular(0.7f, 0.7f, 0.7f);
         position = new Vec3(3f, 2f, 1f);
         model = new Mat4(1);
-        shader = new Shader(gl, "core/shaders/vertex/vs_light_01.txt", "core/shaders/fragment/fs_light_01.txt");
+        shader = new Shader(gl, Constant.LIGHT_GLSL_VS, Constant.LIGHT_GLSL_FS);
         fillBuffers(gl);
     }
 

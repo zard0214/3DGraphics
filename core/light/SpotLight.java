@@ -11,6 +11,7 @@ import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;
 import model.Model;
+import util.Constant;
 import util.TimeUtils;
 
 import java.nio.FloatBuffer;
@@ -52,7 +53,7 @@ public class SpotLight extends Model {
         turnOnLight(true, 0.80f);
         this.position = position;
         model = new Mat4(1);
-        shader = new SpotLightShader(gl, "core/shaders/vertex/vs_texture.glsl", "core/shaders/fragment/fs_texture.glsl");
+        shader = new SpotLightShader(gl, Constant.SPOTLIGHT_GLSL_VS, Constant.SPOTLIGHT_GLSL_FS);
     }
 
     public SpotLight(GL3 gl, Material material) {
@@ -60,7 +61,7 @@ public class SpotLight extends Model {
         this.material = material;
         position = new Vec3(3f, 2f, 1f);
         model = new Mat4(1);
-        shader = new SpotLightShader(gl, "core/shaders/vertex/vs_texture.glsl", "core/shaders/fragment/fs_texture.glsl");
+        shader = new SpotLightShader(gl, Constant.SPOTLIGHT_GLSL_VS, Constant.SPOTLIGHT_GLSL_FS);
     }
 
     public void setPosition(Vec3 v) {

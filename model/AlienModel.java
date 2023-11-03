@@ -21,7 +21,7 @@ import util.TimeUtils;
  *
  *  an alien might have a matte and shiny pattern on its body or face?
  */
-public class AlienModel2 {
+public class AlienModel {
 
     private boolean animation = false;
     private boolean rock = false;
@@ -46,7 +46,7 @@ public class AlienModel2 {
             alienRightArmTranslate, alienRightArmMoveTranslate, alienRightArmRotate,
             alienHeadTranslate, alienHeadMoveTranslate, alienHeadRotate;
 //    private float xPosition = 0;
-    public AlienModel2(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, AlienShader alienShader, Material alienMaterial, Mat4 mat4, Mesh m, int[] bodyTexture, int[] limbTexture, int[] otherTexture, Mat4 transition, float xPosition) {
+    public AlienModel(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, AlienShader alienShader, Material alienMaterial, Mat4 mat4, Mesh m, int[] bodyTexture, int[] limbTexture, int[] otherTexture, Mat4 transition, float xPosition) {
 
         generateModelMatrix(gl, camera, light_1, light_2, spotLight, alienShader, m, bodyTexture, limbTexture, otherTexture, transition);
 

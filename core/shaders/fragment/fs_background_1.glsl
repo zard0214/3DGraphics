@@ -58,5 +58,5 @@ void main() {
 
   vec3 result = calcLight(light) + calcLight(light2);
   fragColor = vec4(mix(first,
-                         second, 1.0f).rgb  + result, 1.0f);
+                         second, 1.0f).rgb  + result, 1.0);
 }

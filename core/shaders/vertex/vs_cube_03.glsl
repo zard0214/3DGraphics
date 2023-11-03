@@ -13,8 +13,7 @@ uniform mat4 mvpMatrix;
 
 void main() {
   gl_Position = mvpMatrix * vec4(position, 1.0);
-  aPos = vec3(model*vec4(position, 1.0f));
-  mat4 normalMatrix = transpose(inverse(model));
-  aNormal = mat3(normalMatrix) * normal;
+  aPos = vec3(model*vec4(position, 1.0));
+  aNormal = mat3(transpose(inverse(model))) * normal;  
   aTexCoord = texCoord;
 }

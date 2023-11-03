@@ -99,8 +99,8 @@ void main() {
   vec4 first = texture(first_texture, aTexCoord);
   vec4 second = texture(second_texture,  aOffsetTexCoord * -1);
 
-  vec3 result = calcLight(light, vec3(mix(first, second, 1.0f).rgb));
-  result = result + calcLight(light2, vec3(mix(first, second, 1.0f).rgb));
+  vec3 result = calcLight(light, vec3(mix(first, second, 1.0).rgb));
+  result = result + calcLight(light2, vec3(mix(first, second, 1.0).rgb));
 
   fragColor = vec4(result, 1.0);
 

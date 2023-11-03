@@ -65,6 +65,9 @@ void main() {
   vec4 first = texture(first_texture, aTexCoord);
   vec4 second = texture(second_texture,  aOffsetTexCoord * -1);
 
+  vec3 result_light1 = ambient + diffuse + specular;
+  vec3 result_light2 = ambient_2 + diffuse_2 + specular_2;
+
   fragColor = vec4(mix(first,
-                       second, 1.0f).rgb  + ambient + diffuse + specular + ambient_2 + diffuse_2 + specular_2, 1.0f);
+                       second, 1.0f).rgb  + result_light1 + result_light2, 1.0);
 }
