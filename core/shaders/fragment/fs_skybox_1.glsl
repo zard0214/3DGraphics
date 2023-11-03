@@ -6,7 +6,6 @@ out vec4 color;
 
 uniform samplerCube skybox;
 
-void main()
-{
+void main() {
     color = texture(skybox, texCoords);
 }
