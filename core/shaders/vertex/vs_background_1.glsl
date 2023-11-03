@@ -14,14 +14,14 @@ uniform mat4 mvpMatrix;
 uniform vec2 offset;
 
 void main() {
-  gl_Position = mvpMatrix * vec4(position, 1);
-  aPos = vec3(model*vec4(position, 1.0));
-  mat4 normalMatrix = transpose(inverse(model));
-  vec3 norm = normalize(normal);
-  aNormal = mat3(normalMatrix) * norm;
+    gl_Position = mvpMatrix * vec4(position, 1);
+    aPos = vec3(model*vec4(position, 1.0));
+    mat4 normalMatrix = transpose(inverse(model));
+    vec3 norm = normalize(normal);
+    aNormal = mat3(normalMatrix) * norm;
 
-  aTexCoord = texCoord;
+    aTexCoord = texCoord;
 
-  aOffsetTexCoord = texCoord - offset;
+    aOffsetTexCoord = texCoord - offset;
 
 }
