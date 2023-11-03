@@ -45,14 +45,12 @@ public class AlienModel {
             alienLeftArmTranslate, alienLeftArmMoveTranslate, alienLeftArmRotate,
             alienRightArmTranslate, alienRightArmMoveTranslate, alienRightArmRotate,
             alienHeadTranslate, alienHeadMoveTranslate, alienHeadRotate;
-//    private float xPosition = 0;
-    public AlienModel(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, AlienShader alienShader, Material alienMaterial, Mat4 mat4, Mesh m, int[] bodyTexture, int[] limbTexture, int[] otherTexture, Mat4 transition, float xPosition) {
+
+    public AlienModel(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, AlienShader alienShader, Mesh m, int[] bodyTexture, int[] limbTexture, int[] otherTexture, Mat4 transition, float xPosition) {
 
         generateModelMatrix(gl, camera, light_1, light_2, spotLight, alienShader, m, bodyTexture, limbTexture, otherTexture, transition);
 
-
         initTransformNode(xPosition);
-
 
         assembleModelNode(transition);
 
@@ -307,7 +305,7 @@ public class AlienModel {
 
         modelMatrix = Mat4.multiply(transition, modelMatrix);
         sphere_leftear = new Model(gl, camera, light_1, light_2, spotLight, alienShader, material, modelMatrix, m, limbTexture);
-//        /***********  sphere_rightear  ***************/
+        /***********  sphere_rightear  ***************/
         modelMatrix = Mat4Transform.scale(0.18f, 1.0f, 0.18f);
         modelMatrix = Mat4.multiply(Mat4Transform.rotateAroundZ(0), modelMatrix);
         modelMatrix = Mat4.multiply(Mat4Transform.translate(0.65f, 3.0f, 0.0f), modelMatrix);
@@ -421,12 +419,6 @@ public class AlienModel {
         roll = false;
         double elapsedTime = TimeUtils.getCurrentTime() - startTime;
         savedTime = elapsedTime;
-    }
-
-    public void reset() {
-        stopAnimation();
-        stopRock();
-        stopRoll();
     }
 
 }

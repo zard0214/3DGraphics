@@ -47,6 +47,7 @@ public class SpotLightModel extends Model{
     public SpotLightModel(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, SpotLightShader spotLightShader, Mat4 modelMatrix, Mesh m, double startTime) {
         super(gl, modelMatrix);
 
+        /***********  spotLight  ***************/
         this.spotLight = new SpotLight(gl, new Vec3(-6.5f, 7.3f, 0.0f));
         this.spotLight.setCamera(camera);
         spotLight = this.spotLight;
@@ -139,6 +140,8 @@ public class SpotLightModel extends Model{
         lightRoll.setTransform(Mat4Transform.rotateAroundY(rotateAngle));
         lightRoll.update();
 
+        //do not know how to calculate the specific spotlight position using matrix.
+        //use experimental methods to obtain the translate value
         Mat4 newLampTrans = Mat4.multiply(Mat4Transform.translate(-7.2f, 3.7f, 3.8f), lampTrans);
         newLampTrans = Mat4.multiply(lightRoll.getTransform(), newLampTrans);
         Vec4 vector1 = Mat4.multiply(newLampTrans, new Vec4(0,0,0,1));
@@ -149,32 +152,6 @@ public class SpotLightModel extends Model{
 //        y:3.0929232  7.3f;
 //        z:0.76  3.8f
     }
-
-
-    public Vec3 getLightPosition() {
-        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
-        float x = -6.5f;
-        float y = 7.3f;
-        float z = 3.8f * (float) (Math.sin(Math.toRadians(elapsedTime * 58))) * -1;
-        return new Vec3(x, y, z);
-    }
-
-//    private void rotateHead() {
-//        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
-//        float rotateAngle = 48f * (float) Math.sin(elapsedTime);
-//        lightRoll.setTransform(Mat4Transform.rotateAroundY(rotateAngle));
-//        lightRoll.update();
-//
-//        spotLight.setPosition(getLightPosition());
-//    }
-//
-//    public Vec3 getLightPosition() {
-//        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
-//        float x = -6.5f;
-//        float y = 7.3f;
-//        float z = 3.8f * (float) (Math.sin(Math.toRadians(elapsedTime * 58))) * -1;
-//        return new Vec3(x, y, z);
-//    }
 
     public void dispose(GL3 gl) {
         sphere_body.dispose(gl);
