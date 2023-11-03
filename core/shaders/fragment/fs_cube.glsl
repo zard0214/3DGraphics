@@ -15,9 +15,6 @@ struct Light {
     vec3 specular;
 };
 
-uniform Light light;
-uniform Light light2;
-
 struct SpotLight {
     vec3 position;
     vec3 ambient;
@@ -33,8 +30,6 @@ struct SpotLight {
     float quadratic;
 };
 
-uniform SpotLight spotLight;
-
 struct Material {
     vec3 ambient;
     vec3 diffuse;
@@ -42,6 +37,9 @@ struct Material {
     float shininess;
 };
 
+uniform Light light;
+uniform Light light2;
+uniform SpotLight spotLight;
 uniform Material material;
 
 vec3 calcLight(Light light, vec3 textureVec)

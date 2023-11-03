@@ -33,8 +33,8 @@ public class Constant {
 
     public static final String ALIEN_GLSL_VS = "core/shaders/glsl/vertex/vs_sphere_04.glsl";
     public static final String ALIEN_GLSL_FS = "core/shaders/glsl/fragment/fs_sphere_04.glsl";
-    public static final String BG_GLSL_VS = "core/shaders/glsl/vertex/vs_background_1.glsl";
-    public static final String BG_GLSL_FS = "core/shaders/glsl/fragment/fs_background_1.glsl";
+    public static final String BG_GLSL_VS = "core/shaders/glsl/vertex/vs_floor.glsl";
+    public static final String BG_GLSL_FS = "core/shaders/glsl/fragment/fs_floor.glsl";
     public static final String LIGHT_GLSL_VS = "core/shaders/vertex/vs_light_01.glsl";
     public static final String LIGHT_GLSL_FS = "core/shaders/fragment/fs_light_01.glsl";
     public static final String SPOTLIGHT_GLSL_VS = "core/shaders/vertex/vs_texture.glsl";
@@ -43,12 +43,10 @@ public class Constant {
     public static final String DEFAULT_GLSL_FS = "core/shaders/fragment/fs_texture.glsl";
     public static final String LIGHT_GLSL_FS_2 = "core/shaders/fragment/fs_light_02.glsl";
 
-    public static final String ALIEN_BODY_VS = "core/shaders/vertex/vs_cube_03.glsl";
-    public static final String ALIEN_BODY_FS = "core/shaders/fragment/fs_cube_033.glsl";
-    public static final String TEXTURE_FLOOR_1 = "core/shaders/vertex/vs_background_1.glsl";
-    public static final String TEXTURE_FLOOR_2 = "core/shaders/fragment/fs_background_1.glsl";
-    public static final String FLOOR_GLSL_VS = "core/shaders/vertex/vs_background_1.glsl";
-    public static final String FLOOR_GLSL_FS = "core/shaders/fragment/fs_background_1.glsl";
+    public static final String ALIEN_BODY_VS = "core/shaders/vertex/vs_cube.glsl";
+    public static final String ALIEN_BODY_FS = "core/shaders/fragment/fs_cube.glsl";
+    public static final String FLOOR_GLSL_VS = "core/shaders/vertex/vs_floor.glsl";
+    public static final String FLOOR_GLSL_FS = "core/shaders/fragment/fs_floor.glsl";
     public static final String SKYBOX_GLSL_VS = "core/shaders/vertex/vs_skybox_1.glsl";
     public static final String SKYBOX_GLSL_FS = "core/shaders/fragment/fs_skybox_1.glsl";
 

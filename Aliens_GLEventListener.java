@@ -93,9 +93,9 @@ public class Aliens_GLEventListener implements GLEventListener {
         m = new Mesh(gl, Sphere.vertices.clone(), Sphere.indices.clone());
         AlienShader alienShader = new AlienShader(gl, Constant.DEFAULT_GLSL_VS, Constant.DEFAULT_GLSL_FS);
 
-        int[] bodyTexture = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
-        int[] limbTexture = TextureLibrary.loadTexture(gl, Constant.TEXTURE_YELLOW);
-        int[] otherTexture = TextureLibrary.loadTexture(gl, Constant.TEXTURE_YELLOW);
+        int[] bodyTexture = TextureLibrary.loadTexture(gl, Constant.WATER_TEXTURE);
+        int[] limbTexture = TextureLibrary.loadTexture(gl, Constant.WATER_TEXTURE);
+        int[] otherTexture = TextureLibrary.loadTexture(gl, Constant.WATER_TEXTURE);
         Material alienMaterial = new Material(new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.1f, 0.5f, 0.91f), new Vec3(0.3f, 0.3f, 0.3f), 4.0f);
 
         Mat4 transition = Mat4Transform.translate(0f, 0.0f, 0.0f);
@@ -105,9 +105,8 @@ public class Aliens_GLEventListener implements GLEventListener {
         transition = Mat4Transform.translate(0f, 0.0f, 0.0f);
 
         bodyTexture = TextureLibrary.loadTexture(gl, Constant.TEXTURE_YELLOW);
-        limbTexture = TextureLibrary.loadTexture(gl, Constant.WATER_TEXTURE);
-        otherTexture = TextureLibrary.loadTexture(gl, Constant.WATER_TEXTURE);
-
+        limbTexture = TextureLibrary.loadTexture(gl, Constant.TEXTURE_YELLOW);
+        otherTexture = TextureLibrary.loadTexture(gl, Constant.TEXTURE_YELLOW);
         alien2_2 = new AlienModel(gl, camera, light_1, light_2, spotLight, alienShader, alienMaterial, new Mat4(1), m, bodyTexture, limbTexture, otherTexture, transition,2.5f);
         alien2_2.translateRoot(Mat4Transform.translate(2.5f, 0.0f, 0.0f));
 
