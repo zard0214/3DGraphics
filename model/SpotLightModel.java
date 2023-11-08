@@ -11,6 +11,9 @@ import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;
 import gmaths.Vec4;
+import model.basic.Mesh;
+import model.basic.Model;
+import model.node.ModelNode;
 import model.node.NameNode;
 import model.node.SGNode;
 import model.node.TransformNode;
@@ -23,7 +26,7 @@ import util.TimeUtils;
  * @RegistrationNo 220186627
  * @date Created in 25/10/2023 08:20
  */
-public class SpotLightModel extends Model{
+public class SpotLightModel extends Model {
 
     private boolean animation = true;
 

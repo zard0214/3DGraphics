@@ -10,9 +10,8 @@ import core.shaders.SpotLightShader;
 import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;
-import model.Model;
+import model.basic.Model;
 import util.Constant;
-import util.TimeUtils;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -34,7 +33,6 @@ public class SpotLight extends Model {
     private Vec3 ambient = new Vec3(0.1f, 0.1f, 0.1f);
     private Vec3 diffuse = new Vec3(0.2f, 0.2f, 0.2f);
     private Vec3 specular = new Vec3(0.3f, 0.3f, 0.3f);
-
     private Material material;
     private Vec3 position;
     private Mat4 model;

@@ -13,6 +13,9 @@ import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;
 import model.*;
+import model.basic.Mesh;
+import model.basic.Model;
+import model.basic.Sphere;
 import util.Constant;
 import util.TextureLibrary;
 import util.TimeUtils;
@@ -98,15 +101,16 @@ public class Aliens_GLEventListener implements GLEventListener {
         AlienShader alienShader = new AlienShader(gl, Constant.DEFAULT_GLSL_VS, Constant.DEFAULT_GLSL_FS);
 
         int[] bodyTexture = TextureLibrary.loadTexture(gl, Constant.WATER_TEXTURE);
-        int[] limbTexture = TextureLibrary.loadTexture(gl, Constant.WATER_TEXTURE);
-        int[] otherTexture = TextureLibrary.loadTexture(gl, Constant.WATER_TEXTURE);
+        int[] limbTexture = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
+        int[] otherTexture = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
         Mat4 transition = Mat4Transform.translate(0f, 0.0f, 0.0f);
         alien2_1 = new AlienModel(gl, camera, light_1, light_2, spotLight, alienShader, m, bodyTexture, limbTexture, otherTexture, transition, -2.5f);
         alien2_1.translateRoot(Mat4Transform.translate(-2.5f, 0.0f, 0.0f));
 
         bodyTexture = TextureLibrary.loadTexture(gl, Constant.TEXTURE_YELLOW);
-        limbTexture = TextureLibrary.loadTexture(gl, Constant.TEXTURE_YELLOW);
-        otherTexture = TextureLibrary.loadTexture(gl, Constant.TEXTURE_YELLOW);
+        limbTexture = TextureLibrary.loadTexture(gl, Constant.TEXTURE_ORANGE);
+//        otherTexture = TextureLibrary.loadTexture(gl, Constant.WATER_TEXTURE);
+        otherTexture = TextureLibrary.loadTexture(gl, Constant.TEXTURE_ORANGE);
         transition = Mat4Transform.translate(0f, 0.0f, 0.0f);
         alien2_2 = new AlienModel(gl, camera, light_1, light_2, spotLight, alienShader, m, bodyTexture, limbTexture, otherTexture, transition,2.5f);
         alien2_2.translateRoot(Mat4Transform.translate(2.5f, 0.0f, 0.0f));
@@ -117,7 +121,6 @@ public class Aliens_GLEventListener implements GLEventListener {
     @Override
     public void dispose(GLAutoDrawable drawable) {
         GL3 gl = drawable.getGL().getGL3();
-
         spotLight.dispose(gl);
         light_1.dispose(gl);
         light_2.dispose(gl);

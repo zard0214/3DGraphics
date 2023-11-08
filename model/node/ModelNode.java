@@ -1,7 +1,7 @@
 package model.node;
 
 import com.jogamp.opengl.GL3;
-import model.Model;
+import model.basic.Model;
 
 public class ModelNode extends SGNode {
 

@@ -33,14 +33,7 @@ public class BackdropSkybox {
 
     public int loadCubemap(String px, String py, String pz, String nx, String ny,
                            String nz) {
-        String[] filePath = new String[6];
-
-        filePath[0] = px;
-        filePath[1] = py;
-        filePath[2] = pz;
-        filePath[3] = nx;
-        filePath[4] = ny;
-        filePath[5] = nz;
+        String[] filePath = getFilePath(px, py, pz, nx, ny, nz);
 
         //Generate a texture for cubemap.
         int[] targets = new int[]{GL_TEXTURE_CUBE_MAP_POSITIVE_X, GL_TEXTURE_CUBE_MAP_POSITIVE_Y,
@@ -76,6 +69,17 @@ public class BackdropSkybox {
         return cubemap_id;
     }
 
+    private static String[] getFilePath(String px, String py, String pz, String nx, String ny, String nz) {
+        String[] filePath = new String[6];
+        filePath[0] = px;
+        filePath[1] = py;
+        filePath[2] = pz;
+        filePath[3] = nx;
+        filePath[4] = ny;
+        filePath[5] = nz;
+        return filePath;
+    }
+
     public void render(GL3 gl, int cubemap_id, Camera camera, double startTime) {
 
         gl.glGenVertexArrays(1, vertexArrayId, 0);
@@ -88,6 +92,7 @@ public class BackdropSkybox {
         gl.glVertexAttribPointer(0, 3, GL.GL_FLOAT, false, 3 * Float.BYTES, 0);
 
         gl.glDepthMask(false);
+
         skyboxshader = new SkyboxShader(gl);
         Mat4 view = Mat4.noTranslation(camera.getViewMatrix());
         Mat4 projection = camera.getPerspectiveMatrix();
@@ -99,6 +104,7 @@ public class BackdropSkybox {
         gl.glBindTexture(GL.GL_TEXTURE_CUBE_MAP, cubemap_id);
 
         gl.glDrawArrays(GL.GL_TRIANGLES, 0, 36);
+
         gl.glDepthMask(true);
     }
 

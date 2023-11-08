@@ -30,6 +30,9 @@ public class Constant {
     public static final String SPOTLIGHT_TEXTURE_1 = "textures/snow.jpg";
     public static final String SPOTLIGHT_TEXTURE_2 = "textures/snow_specular.jpg";
     public static final String TEXTURE_YELLOW = "textures/yellow.jpg";
+    public static final String TEXTURE_TINGET = "textures/tingey.jpg";
+    public static final String TEXTURE_ORANGE = "textures/orange-texture.jpg";
+    public static final String TEXTURE_SPRATT = "textures/spratt.jpg";
 
     public static final String ALIEN_GLSL_VS = "core/shaders/glsl/vertex/vs_sphere_04.glsl";
     public static final String ALIEN_GLSL_FS = "core/shaders/glsl/fragment/fs_sphere_04.glsl";

@@ -8,11 +8,7 @@ public class Camera {
 
     public enum CameraType {X, Z}
 
-    ;
-
     public enum Movement {NO_MOVEMENT, LEFT, RIGHT, UP, DOWN, FORWARD, BACK}
-
-    ;
 
     private static final float DEFAULT_RADIUS = 25;
     public static final Vec3 DEFAULT_POSITION = new Vec3(0, 0, 25);
