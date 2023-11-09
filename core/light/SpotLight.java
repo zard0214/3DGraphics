@@ -268,7 +268,6 @@ public class SpotLight extends Model {
             this.specular = new Vec3(intensity, intensity, intensity);
         } else {
             this.intensity = 0;
-
             this.ambient = new Vec3(0f, 0f, 0f);
             this.diffuse = new Vec3(0f, 0f, 0f);
             this.specular = new Vec3(0f, 0f, 0f);

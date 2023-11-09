@@ -172,8 +172,8 @@ public class Light {
         } else {
             this.intensity = 0;
             material.setAmbient(intensity * 0.5f, intensity * 0.5f, intensity * 0.5f);
-            material.setDiffuse(intensity, intensity, intensity);
-            material.setSpecular(intensity, intensity, intensity);
+            material.setDiffuse(0, 0, 0);
+            material.setSpecular(0, 0, 0);
         }
     }
 

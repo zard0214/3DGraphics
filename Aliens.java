@@ -163,7 +163,7 @@ public class Aliens extends JFrame implements ActionListener {
             case "Turn General Light On/Off":
                 intensity = backdropGlEventListener.getLight_1().getIntensity();
                 if(intensity == 0){
-                    backdropGlEventListener.getLight_1().turnOnLight(true, 0.40f);
+                    backdropGlEventListener.getLight_1().turnOnLight(true, 0.25f);
                 }else {
                     backdropGlEventListener.getLight_1().turnOnLight(false, 0);
                 }
@@ -171,7 +171,7 @@ public class Aliens extends JFrame implements ActionListener {
             case "Turn General Light2 On/Off":
                 intensity = backdropGlEventListener.getLight_2().getIntensity();
                 if(intensity == 0){
-                    backdropGlEventListener.getLight_2().turnOnLight(true, 0.80f);
+                    backdropGlEventListener.getLight_2().turnOnLight(true, 0.40f);
                 }else {
                     backdropGlEventListener.getLight_2().turnOnLight(false, 0);
                 }

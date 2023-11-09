@@ -64,12 +64,12 @@ public class Aliens_GLEventListener implements GLEventListener {
         light_1 = new Light(gl);
         light_1.setCamera(camera);
         light_1.setIntensity(0.15f);
-        light_1.turnOnLight(true, 0.15f);
+        light_1.turnOnLight(true, 0.25f);
 
         light_2 = new Light(gl);
         light_2.setCamera(camera);
         light_2.setIntensity(0.3f);
-        light_2.turnOnLight(true, 0.3f);
+        light_2.turnOnLight(true, 0.40f);
 
         /***********  Skybox  ***************/
         skybox = new BackdropSkybox(gl);
