@@ -29,7 +29,7 @@ import util.TwoTriangles;
 public class Aliens_GLEventListener implements GLEventListener {
 
     private BackdropSkybox skybox;
-    private int cubemap_id;
+    private int cubemapId;
     private Camera camera;
     private Light light_1, light_2;
     private SpotLight spotLight;
@@ -73,7 +73,7 @@ public class Aliens_GLEventListener implements GLEventListener {
 
         /***********  Skybox  ***************/
         skybox = new BackdropSkybox(gl);
-        cubemap_id = skybox.loadCubemap(Constant.SKYBOX_TEXTURE_PX, Constant.SKYBOX_TEXTURE_NY,
+        cubemapId = skybox.loadCubemap(Constant.SKYBOX_TEXTURE_PX, Constant.SKYBOX_TEXTURE_NY,
                 Constant.SKYBOX_TEXTURE_PZ, Constant.SKYBOX_TEXTURE_NX,
                 Constant.SKYBOX_TEXTURE_PY, Constant.SKYBOX_TEXTURE_NZ);
 
@@ -146,7 +146,7 @@ public class Aliens_GLEventListener implements GLEventListener {
     }
 
     private void renderBg(GL3 gl) {
-        skybox.render(gl, cubemap_id, camera, startTime);
+        skybox.render(gl, cubemapId, camera, startTime);
 
         light_1.setPosition(getLightPosition2());
         light_2.setPosition(getLightPosition1());

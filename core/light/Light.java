@@ -14,6 +14,10 @@ import util.Constant;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
+/**
+ * @author Dr Steve Maddock
+ * @version 1.0
+ */
 public class Light {
 
     public Material material;

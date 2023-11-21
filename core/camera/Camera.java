@@ -4,6 +4,10 @@ import gmaths.Mat4;
 import gmaths.Mat4Transform;
 import gmaths.Vec3;
 
+/**
+ * @author Dr Steve Maddock
+ * @version 1.0
+ */
 public class Camera {
 
     public enum CameraType {X, Z}

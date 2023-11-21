@@ -5,9 +5,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
 /**
- * @author Zhecheng Zhao
- * @RegistrationNo 220186627
- * @date Created in 20/10/2023 16:26
+ * @author Dr Steve Maddock
+ * @version 1.0
  */
 public class MouseAdapter extends MouseMotionAdapter {
 

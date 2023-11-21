@@ -51,6 +51,9 @@ public class Aliens extends JFrame implements ActionListener {
         initAnimator();
     }
 
+    /**
+     * init fps animator
+     */
     private void initAnimator() {
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -64,6 +67,9 @@ public class Aliens extends JFrame implements ActionListener {
         animator.start();
     }
 
+    /**
+     * add quit button
+     */
     private void addMenuBar() {
         JMenuBar menuBar = new JMenuBar();
         this.setJMenuBar(menuBar);
@@ -74,6 +80,9 @@ public class Aliens extends JFrame implements ActionListener {
         menuBar.add(fileMenu);
     }
 
+    /**
+     * generate camera
+     */
     private void createCamera() {
         Camera camera = new Camera(Camera.DEFAULT_POSITION, Camera.DEFAULT_TARGET, Camera.DEFAULT_UP);
         backdropGlEventListener = new Aliens_GLEventListener(camera);
@@ -83,6 +92,9 @@ public class Aliens extends JFrame implements ActionListener {
         canvas.addKeyListener(new KeyboardAdapter(camera));
     }
 
+    /**
+     * add bottom buttom
+     */
     private void addComponents() {
         southPanel = new JPanel();
         rockLeftbody = new JButton("Rock Left Alien");
@@ -106,6 +118,9 @@ public class Aliens extends JFrame implements ActionListener {
         getContentPane().add(southPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * add button listener
+     */
     private void setComponentsListener() {
         rockLeftbody.addActionListener(this);
         rockRightbody.addActionListener(this);

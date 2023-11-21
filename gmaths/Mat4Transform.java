@@ -8,7 +8,6 @@ package gmaths;
  * @author Dr Steve Maddock
  * @version 1.0 (01/10/2017)
  */
-
 public final class Mat4Transform {   // row column formulation
 
     private final static float DEFAULT_NEAR_CLIP = 0.1f;

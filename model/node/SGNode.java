@@ -5,6 +5,10 @@ import gmaths.Mat4;
 
 import java.util.ArrayList;
 
+/**
+ * @author Dr Steve Maddock
+ * @version 1.0
+ */
 public class SGNode {
 
   protected String name;

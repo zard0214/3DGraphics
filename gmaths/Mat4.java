@@ -1,5 +1,9 @@
 package gmaths;
 
+/**
+ * @author Dr Steve Maddock
+ * @version 1.0
+ */
 public class Mat4 {   // row column formulation
 
     private float[][] values;

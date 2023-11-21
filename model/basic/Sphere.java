@@ -1,5 +1,9 @@
 package model.basic;
 
+/**
+ * @author Dr Steve Maddock
+ * @version 1.0
+ */
 public final class Sphere {
 
     // ***************************************************

@@ -1,5 +1,9 @@
 package gmaths;
 
+/**
+ * @author Dr Steve Maddock
+ * @version 1.0
+ */
 public final class Vec3 {
     public float x;
     public float y;

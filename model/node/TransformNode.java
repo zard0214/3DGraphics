@@ -2,6 +2,10 @@ package model.node;
 
 import gmaths.Mat4;
 
+/**
+ * @author Dr Steve Maddock
+ * @version 1.0
+ */
 public class TransformNode extends SGNode {
 
     private Mat4 transform;

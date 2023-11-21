@@ -8,8 +8,11 @@ import core.Material;
 import core.light.Light;
 import core.light.SpotLight;
 import gmaths.Mat4;
-import model.basic.Mesh;
 
+/**
+ * @author Dr Steve Maddock
+ * @version 1.0
+ */
 public class Model {
 
     private Mesh mesh;
