@@ -19,7 +19,7 @@ public final class TextureLibrary {
         Texture t = null;
         try {
             File f = new File(filename);
-            t = (Texture) TextureIO.newTexture(f, true);
+            t = TextureIO.newTexture(f, false);
             t.bind(gl3);
             t.setTexParameteri(gl3, GL3.GL_TEXTURE_MIN_FILTER, GL3.GL_LINEAR);
             t.setTexParameteri(gl3, GL3.GL_TEXTURE_MAG_FILTER, GL3.GL_LINEAR);
@@ -50,15 +50,19 @@ public final class TextureLibrary {
             File f = new File(filename);
             JPEGImage img = JPEGImage.read(new FileInputStream(f));
             gl.glGenTextures(1, textureId, 0);
-            gl.glBindTexture(GL.GL_TEXTURE_2D, textureId[0]);
-            gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, wrappingS);
-            gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, wrappingT);
-            gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, filterS);
-            gl.glTexParameteri(GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, filterT);
-            gl.glTexImage2D(GL.GL_TEXTURE_2D, 0, GL.GL_RGB, img.getWidth(), img.getHeight(), 0, GL.GL_RGB, GL.GL_UNSIGNED_BYTE, img.getData());
-            gl.glGenerateMipmap(GL.GL_TEXTURE_2D);
+            gl.glBindTexture(GL3.GL_TEXTURE_2D, textureId[0]);
+            gl.glTexParameteri(GL3.GL_TEXTURE_2D, GL3.GL_TEXTURE_WRAP_S, wrappingS);
+            gl.glTexParameteri(GL3.GL_TEXTURE_2D, GL3.GL_TEXTURE_WRAP_T, wrappingT);
+            gl.glTexParameteri(GL3.GL_TEXTURE_2D, GL3.GL_TEXTURE_MIN_FILTER, filterS);
+            gl.glTexParameteri(GL3.GL_TEXTURE_2D, GL3.GL_TEXTURE_MAG_FILTER, filterT);
+            gl.glTexImage2D(GL3.GL_TEXTURE_2D, 0, GL3.GL_RGB, img.getWidth(), img.getHeight(), 0, GL3.GL_RGB, GL3.GL_UNSIGNED_BYTE, img.getData());
+            //using mipmap
+            gl.glGenerateMipmap(GL3.GL_TEXTURE_2D);
+            gl.glTexParameteri(GL3.GL_TEXTURE_2D, GL3.GL_TEXTURE_BASE_LEVEL, 0);
+            gl.glTexParameteri(GL3.GL_TEXTURE_2D, GL3.GL_TEXTURE_MAX_LEVEL, 4);
             gl.glTexParameteri(GL.GL_TEXTURE_2D, GL2.GL_TEXTURE_MIN_FILTER, GL2.GL_LINEAR_MIPMAP_LINEAR);
-            gl.glBindTexture(GL.GL_TEXTURE_2D, 0);
+
+            gl.glBindTexture(GL3.GL_TEXTURE_2D, 0);
         } catch (Exception e) {
             System.out.println("Error loading texture " + filename);
         }
@@ -85,22 +89,6 @@ public final class TextureLibrary {
             System.out.println("Error loading texture " + filename);
         }
         return textureId;
-    }
-
-    public static Texture loadTextures(GL3 gl3, String filename) {
-        Texture texture = null;
-        try {
-            File f = new File(filename);
-            texture = TextureIO.newTexture(f, true);
-            texture.bind(gl3);
-            texture.setTexParameteri(gl3, GL3.GL_TEXTURE_WRAP_S, GL3.GL_REPEAT);
-            texture.setTexParameteri(gl3, GL3.GL_TEXTURE_WRAP_T, GL3.GL_REPEAT);
-            texture.setTexParameteri(gl3, GL3.GL_TEXTURE_MIN_FILTER, GL3.GL_LINEAR);
-            texture.setTexParameteri(gl3, GL3.GL_TEXTURE_MAG_FILTER, GL3.GL_LINEAR);
-        } catch (IOException e) {
-            System.out.println("Error loading texture " + filename);
-        }
-        return texture;
     }
 
     public static ByteBuffer getTextureImageData(String image) {

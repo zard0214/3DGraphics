@@ -8,6 +8,7 @@ import core.Material;
 import core.light.Light;
 import core.light.SpotLight;
 import gmaths.Mat4;
+import util.TextureLibrary;
 
 /**
  * @author Dr Steve Maddock
@@ -26,6 +27,7 @@ public class Model {
     private int[] textureId2;
     private float offset;
     private double elapsedTime;
+    private boolean rust = false;
 
     public Model(GL3 gl) {
     }
@@ -67,6 +69,19 @@ public class Model {
         this.light2 = light2;
         this.spotLight = spotLight;
         this.textureId1 = textureId1;
+    }
+
+    public Model(GL3 gl, Camera camera, Light light, Light light2, SpotLight spotLight, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh, int[] textureId1, boolean rust) {
+        this.mesh = mesh;
+        this.material = material;
+        this.modelMatrix = modelMatrix;
+        this.shader = shader;
+        this.camera = camera;
+        this.light = light;
+        this.light2 = light2;
+        this.spotLight = spotLight;
+        this.textureId1 = textureId1;
+        this.rust = rust;
     }
 
     public Model(GL3 gl, Camera camera, Light light, Light light2, SpotLight spotLight, Shader shader, Material material, Mat4 modelMatrix, Mesh mesh, int[] textureId1, int[] textureId2) {
@@ -161,16 +176,40 @@ public class Model {
         shader.setFloat(gl, "material.shininess", material.getShininess());
         shader.setFloat(gl, "material.brightness", material.getBrightness());
 
-        if (textureId1 != null) {
-            shader.setInt(gl, "first_texture", 0);  // be careful to match these with GL_TEXTURE0 and GL_TEXTURE1
+        if(rust){
+            shader.setInt(gl, "albedoMap", 0);
             gl.glActiveTexture(GL.GL_TEXTURE0);
-            gl.glBindTexture(GL.GL_TEXTURE_2D, textureId1[0]);
-        }
-        if (textureId2 != null) {
-            shader.setInt(gl, "second_texture", 1);
+            gl.glBindTexture(GL.GL_TEXTURE_2D, TextureLibrary.loadTexture(gl, "textures/pbr/rusted_iron/albedo.jpg")[0]);
+
+            shader.setInt(gl, "normalMap", 1);
             gl.glActiveTexture(GL.GL_TEXTURE1);
-            gl.glBindTexture(GL.GL_TEXTURE_2D, textureId2[0]);
+            gl.glBindTexture(GL.GL_TEXTURE_2D, TextureLibrary.loadTexture(gl, "textures/pbr/rusted_iron/normal.jpg")[0]);
+
+            shader.setInt(gl, "metallicMap", 2);
+            gl.glActiveTexture(GL.GL_TEXTURE2);
+            gl.glBindTexture(GL.GL_TEXTURE_2D, TextureLibrary.loadTexture(gl, "textures/pbr/rusted_iron/metallic.jpg")[0]);
+
+            shader.setInt(gl, "roughnessMap", 3);
+            gl.glActiveTexture(GL.GL_TEXTURE3);
+            gl.glBindTexture(GL.GL_TEXTURE_2D, TextureLibrary.loadTexture(gl, "textures/pbr/rusted_iron/roughness.jpg")[0]);
+
+            shader.setInt(gl, "aoMap", 4);
+            gl.glActiveTexture(GL.GL_TEXTURE4);
+            gl.glBindTexture(GL.GL_TEXTURE_2D, TextureLibrary.loadTexture(gl, "textures/pbr/rusted_iron/ao.jpg")[0]);
+        }else{
+
+            if (textureId1 != null) {
+                shader.setInt(gl, "first_texture", 0);  // be careful to match these with GL_TEXTURE0 and GL_TEXTURE1
+                gl.glActiveTexture(GL.GL_TEXTURE0);
+                gl.glBindTexture(GL.GL_TEXTURE_2D, textureId1[0]);
+            }
+            if (textureId2 != null) {
+                shader.setInt(gl, "second_texture", 1);
+                gl.glActiveTexture(GL.GL_TEXTURE1);
+                gl.glBindTexture(GL.GL_TEXTURE_2D, textureId2[0]);
+            }
         }
+
         if (offset != 0) {
             shader.setFloat(gl, "offset", 0, offset);
         }

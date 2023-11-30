@@ -46,10 +46,16 @@ public class SpotLightModel extends Model {
 
     private float xPosition = 0;
 
+    private boolean rust = false;
 
-    public SpotLightModel(GL3 gl, Camera camera, Light light_1, Light light_2, SpotLight spotLight, SpotLightShader spotLightShader, Mat4 modelMatrix, Mesh m, double startTime) {
+    public SpotLightModel(GL3 gl, Camera camera, Light light_1, Light light_2, Mat4 modelMatrix, Mesh m, double startTime) {
         super(gl, modelMatrix);
-
+        SpotLightShader spotLightShader;
+        if(rust)
+            spotLightShader = new SpotLightShader(gl, Constant.SPOTLIGHT_GLSL_VS2, Constant.SPOTLIGHT_GLSL_FS2);
+        else
+//            spotLightShader = new SpotLightShader(gl, Constant.ALIEN_BODY_VS, Constant.ALIEN_BODY_FS);
+            spotLightShader = new SpotLightShader(gl, Constant.DEFAULT_GLSL_VS, Constant.DEFAULT_GLSL_FS);
         /***********  spotLight  ***************/
         this.spotLight = new SpotLight(gl, new Vec3(-6.5f, 7.3f, 0.0f));
         this.spotLight.setCamera(camera);
@@ -57,17 +63,17 @@ public class SpotLightModel extends Model {
 
         this.startTime = startTime;
 
-        int[] textureId0 = TextureLibrary.loadTexture(gl, Constant.SPOTLIGHT_TEXTURE_1);
+        int[] textureId0 = TextureLibrary.loadTexture(gl, Constant.ALIEN_TEXTURE_GRAY);
+//        textureId0 = TextureLibrary.loadTexture(gl, "textures/pbr/rusted_iron/albedo.jpg");
         int[] textureId1 = TextureLibrary.loadTexture(gl, Constant.TEXTURE_YELLOW);
-
         /***********  sphere_body  ***************/
         Material bodyMaterial = new Material(new Vec3(0.5f, 0.5f, 0.5f), new Vec3(0.8f, 0.8f, 0.8f), new Vec3(0.8f, 0.8f, 0.8f), 32.0f);
-        sphere_body = new Model(gl, camera, light_1, light_2, spotLight, spotLightShader, bodyMaterial, modelMatrix, m, textureId0);
+        sphere_body = new Model(gl, camera, light_1, light_2, spotLight, spotLightShader, bodyMaterial, modelMatrix, m, textureId0, rust);
 
         /***********  sphere_head  ***************/
 
         Material headMaterial = new Material(new Vec3(0.5f, 0.5f, 0.5f), new Vec3(0.8f, 0.8f, 0.8f), new Vec3(0.8f, 0.8f, 0.8f), 32.0f);
-        sphere_head = new Model(gl, camera, light_1, light_2, spotLight, spotLightShader, headMaterial, modelMatrix, m, textureId0);
+        sphere_head = new Model(gl, camera, light_1, light_2, spotLight, spotLightShader, headMaterial, modelMatrix, m, textureId0, rust);
 
         /***********  sphere_lamp  ***************/
 

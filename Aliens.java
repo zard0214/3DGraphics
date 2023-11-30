@@ -29,6 +29,7 @@ public class Aliens extends JFrame implements ActionListener {
     private JPanel southPanel;
     private JButton rockLeftbody, rockRightbody, rollLeftHead, rollRightHead, rotateSpotlightOnOff, turnSpotlightOnOff, turnGenerallightOnOff, turnGenerallight2OnOff, reset;
     private JSlider light1Slider, light2Slider;
+    private boolean anti_aliasing = false;
 
     public static void main(String[] args) {
         Aliens aliens = new Aliens("COM6503 assignment1");
@@ -105,7 +106,7 @@ public class Aliens extends JFrame implements ActionListener {
         turnSpotlightOnOff = new JButton("Turn Spotlight On/Off");
         turnGenerallightOnOff = new JButton("Turn General Light On/Off");
         turnGenerallight2OnOff = new JButton("Turn General Light2 On/Off");
-        reset = new JButton("Reset");
+//        reset = new JButton("Turn Anti-aliasing On/Off");
         southPanel.add(rockLeftbody);
         southPanel.add(rockRightbody);
         southPanel.add(rollLeftHead);
@@ -114,7 +115,7 @@ public class Aliens extends JFrame implements ActionListener {
         southPanel.add(turnSpotlightOnOff);
         southPanel.add(turnGenerallightOnOff);
         southPanel.add(turnGenerallight2OnOff);
-        southPanel.add(reset);
+//        southPanel.add(reset);
         getContentPane().add(southPanel, BorderLayout.SOUTH);
     }
 
@@ -130,7 +131,7 @@ public class Aliens extends JFrame implements ActionListener {
         turnSpotlightOnOff.addActionListener(this);
         turnGenerallightOnOff.addActionListener(this);
         turnGenerallight2OnOff.addActionListener(this);
-        reset.addActionListener(this);
+//        reset.addActionListener(this);
     }
 
     /**
@@ -191,6 +192,13 @@ public class Aliens extends JFrame implements ActionListener {
                     backdropGlEventListener.getLight_2().turnOnLight(false, 0);
                 }
                 break;
+//            case "Turn Anti-aliasing On/Off":
+//                if(anti_aliasing){
+//
+//                }else {
+//
+//                }
+//                break;
             case "Quit":
                 System.exit(0);
                 break;

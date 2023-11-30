@@ -41,7 +41,9 @@ public class Constant {
     public static final String LIGHT_GLSL_VS = "core/shaders/vertex/vs_light_01.glsl";
     public static final String LIGHT_GLSL_FS = "core/shaders/fragment/fs_light_01.glsl";
     public static final String SPOTLIGHT_GLSL_VS = "core/shaders/vertex/vs_texture.glsl";
+    public static final String SPOTLIGHT_GLSL_VS2 = "core/shaders/vertex/vs_pbr.glsl";
     public static final String SPOTLIGHT_GLSL_FS = "core/shaders/fragment/fs_texture.glsl";
+    public static final String SPOTLIGHT_GLSL_FS2 = "core/shaders/fragment/fs_pbr.glsl";
     public static final String DEFAULT_GLSL_VS = "core/shaders/vertex/vs_default.glsl";
     public static final String DEFAULT_GLSL_FS = "core/shaders/fragment/fs_texture.glsl";
     public static final String LIGHT_GLSL_FS_2 = "core/shaders/fragment/fs_light_02.glsl";

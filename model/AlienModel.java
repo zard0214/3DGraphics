@@ -394,34 +394,4 @@ public class AlienModel {
         }
     }
 
-    private void rotateRoot() {
-        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
-        float rotateAngle = 45f * (float)Math.sin(elapsedTime);
-        alienRootRotate.setTransform(Mat4Transform.rotateAroundY(rotateAngle));
-        alienRootRotate.update();
-    }
-
-    public void translateBody(Vec3 v) {
-        alienRootTranslate.setTransform(Mat4Transform.translate(v));
-        alienRootTranslate.update();
-    }
-
-    public void stopAnimation() {
-        animation = false;
-        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
-        savedTime = elapsedTime;
-    }
-
-    public void stopRock() {
-        rock = false;
-        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
-        savedTime = elapsedTime;
-    }
-
-    public void stopRoll() {
-        roll = false;
-        double elapsedTime = TimeUtils.getCurrentTime() - startTime;
-        savedTime = elapsedTime;
-    }
-
 }

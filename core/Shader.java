@@ -10,6 +10,11 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ *
+ * @author Dr Steve Maddock
+ * @version 1.0 (15/10/2017)
+ */
 public class Shader {
 
     private static final boolean DISPLAY_SHADERS = false;

@@ -41,7 +41,6 @@ public class Material {
      * @param ambient   vector of 3 values: red, green and blue, in the range 0.0..1.0.
      * @param diffuse   vector of 3 values: red, green and blue, in the range 0.0..1.0.
      * @param specular  vector of 3 values: red, green and blue, in the range 0.0..1.0.
-     * @param emission  vector of 3 values: red, green and blue, in the range 0.0..1.0.
      * @param shininess float value in the range 0.0..1.0.
      */
 

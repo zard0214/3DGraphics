@@ -81,18 +81,6 @@ vec3 calcSpotLight(SpotLight spotLight, vec3 textureVec)
     float epsilon = spotLight.cutOff - spotLight.outerCutOff;
     float intensity = clamp((theta - spotLight.outerCutOff) / epsilon, 0.0, 1.0);
 
-//    if(theta > spotLight.cutOff)
-//    {
-//        // do lighting calculations
-//        ambient = spotLight.ambient * textureVec * (attenuation * intensity);
-//        spotLight.diffuse * diff * textureVec * (attenuation * intensity);
-//        specular = spotLight.specular * spec * textureVec * (attenuation * intensity);
-//    }
-//    else  // else, use ambient light so scene isn't completely dark outside the spotlight.
-//    {
-//
-//    }
-
     vec3 ambient = spotLight.ambient * textureVec * attenuation * intensity;
     vec3 diffuse = spotLight.diffuse * textureVec * diff * attenuation * intensity;
     vec3 specular = spotLight.specular * textureVec * spec * attenuation * intensity;
